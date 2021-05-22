@@ -1,0 +1,33 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        },
+        "modules": false,
+        "useBuiltIns": "entry",
+        "corejs": "3.0.0"
+      }
+    ],
+    ["@babel/preset-react"]
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    [
+      "module-resolver", {
+        "root": ["./client"],
+        "alias": {
+          "@App": "./client/app/Ui/App",
+          "@Context": "./client/app/Context",
+          "@Layouts": "./client/app/Layouts",
+          "@Reducer": "./client/app/Reducer",
+          "@Helpers": "./client/app/Helpers",
+          "@Utils": "./client/app/Utils",
+          "@Router": "./client/app/Router"
+        }
+      }
+    ]
+  ]
+}

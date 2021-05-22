@@ -1,0 +1,50 @@
+.header {
+  min-width: 360px;
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+
+  .wrapper {
+    width: 100%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > * {
+      width: 100%;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        font-weight: 500;
+        font-size: 1.75rem;
+        letter-spacing: 1.3px;
+        text-decoration: none;
+        color: inherit;
+        margin-right: 20px;
+      }
+    }
+    .middle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .right {
+      display: flex;
+      justify-content: flex-end;
+
+      svg.bulb {
+        cursor: pointer;
+        width: 2em;
+        height: 2em;
+      }
+    }
+  }
+}
