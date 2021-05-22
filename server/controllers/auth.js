@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
-const { production, secretKey } = require('../config/keys')
+const { production, secretKey, secretKey2 } = require('../config/keys')
 
 const authController = {
   register: async (req, res) => {
@@ -23,13 +23,25 @@ const authController = {
       }
 
       const user = await User.create(req.body)
-
+      
+      const accessToken = createAccessToken({ id: user._id })
+      const refreshToken = createRefreshToken({ id: user._id })
+      
+      res.cookie('mern_session', refreshToken, {
+        httpOnly: true,
+        path: '/',
+        maxAge: 30*24*60*60*1000,
+        secure: production
+      })
+      
+      
       return res.status(201).json({
         success: true,
         data: {
-          username: user.username,
-          email: user.email,
-        }
+          ...user._doc,
+          password: ''
+        },
+        access: accessToken
       })
     } catch (error) {
       if (error.name === 'ValidationError') {
@@ -51,6 +63,7 @@ const authController = {
     try {
       const { email, password } = req.body
       const user = await User.findOne({ email })
+        .populate('followers following', '-password')
 
       if (!user) {
         return res.status(401).json({
@@ -60,34 +73,26 @@ const authController = {
       }
 
       if (user && (await user.matchPassword(password))) {
-        const payload = {
-          id: user._id,
-          name: user.username
-        }
+        const accessToken = createAccessToken({ id: user._id })
+        const refreshToken = createRefreshToken({ id: user._id })
 
-        jwt.sign(payload, secretKey, {
-          expiresIn: 31556926
-        }, (err, token) => {
+        res.cookie('mern_session', refreshToken, {
+          httpOnly: true,
+          path: '/',
+          maxAge: 30*24*60*60*1000,
+          secure: production
+        })
 
-          res.cookie('mern_session', token, {
-            httpOnly: true,
-            path: '/',
-            maxAge: 7*24*60*60*100,
-            secure: production,
-            sameSite: production
-          })
-
-          return res.status(201).json({
-            success: true,
-            data: {
-              user: user.username,
-              email: user.email
-            }
-          })
+        return res.status(200).json({
+          success: true,
+          data: {
+            ...user._doc,
+          },
+          access: accessToken
         })
 
       } else {
-        return res.status(403).json({
+        return res.status(401).json({
           success: false,
           error: 'Incorrect Password'
         })
@@ -117,13 +122,13 @@ const authController = {
       })
     }
   },
-  getToken: (req, res) => {
+  generateToken: (req, res) => {
     try {
       const token = req.cookies
 
       const { mern_session } = token
 
-      jwt.verify(mern_session, secretKey, (err, user) => {
+      jwt.verify(mern_session, secretKey2, (err, user) => {
         if (err) {
           res.status(401).json({
             success: false,
@@ -159,7 +164,11 @@ const authController = {
 }
 
 const createAccessToken = user => {
-  return jwt.sign(user, secretKey, { expiresIn: '11m' })
+  return jwt.sign(user, secretKey, { expiresIn: '1d' })
+}
+
+const createRefreshToken = user => {
+  return jwt.sign(user, secretKey2, { expiresIn: '1d' })
 }
 
 module.exports = authController

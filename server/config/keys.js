@@ -10,5 +10,6 @@ module.exports = {
     url: process.env.MONGO_URI
   },
   production: process.env.NODE_ENV === 'production',
-  secretKey: process.env.JWTOKEN
+  secretKey: process.env.AJWTOKEN,
+  secretKey2: process.env.RJWTOKEN
 }

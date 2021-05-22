@@ -1,17 +1,27 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const { ObjectId } = mongoose.Types
 
 const UserSchema = new mongoose.Schema({
+  fullname: {
+    type: String,
+    required: [true, 'Please add your fullname'],
+    trim: true,
+    maxLength: [50, 'Maximum at least 50 characters.']
+  },
   username: {
     type: String,
     required: [true, 'Please add your username.'],
     minLength: [3, 'Minimum at least 3 characters.'],
-    maxLength: [20, 'Maximum at least 20 characters.'],
+    maxLength: [25, 'Maximum at least 25 characters.'],
+    lowercase: true,
+    trim: true,
     unique: true
   },
   email: {
     type: String,
     required: [true, 'Please add your email.'],
+    trim: true,
     unique: true
   },
   password: {
@@ -19,10 +29,47 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Please add your password.'],
     minLength: [6, 'Minimum at least 6 characters.']
   },
+  avatar: {
+    type: String,
+    default: ''
+  },
   role: {
-    type: Number,
-    default: 0
-  }
+    type: String,
+    default: 'user'
+  },
+  gender: {
+    type: String,
+    default: 'male'
+  },
+  mobile: {
+    type: String,
+    default: ''
+  },
+  address: {
+    type: String,
+    default: ''
+  },
+  story: {
+    type: String,
+    default: '',
+    maxLength: [200, 'Maximum at least 200 characters.']
+  },
+  website: {
+    type: String,
+    default: ''
+  },
+  followers: [
+    {
+      type: ObjectId,
+      ref: 'User'
+    }
+  ],
+  following: [
+    {
+      type: ObjectId,
+      ref: 'User'
+    }
+  ]
 }, { timestamps: true })
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
