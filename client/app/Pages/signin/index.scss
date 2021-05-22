@@ -1,0 +1,19 @@
+.signin {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+
+  svg.avatar {
+    width: 4em;
+    height: 4em;
+  }
+
+  svg.visible {
+    &.active {
+      fill: #fafafa;
+    }
+  }
+}

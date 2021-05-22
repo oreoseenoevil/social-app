@@ -87,6 +87,7 @@ const authController = {
           success: true,
           data: {
             ...user._doc,
+            password: ''
           },
           access: accessToken
         })

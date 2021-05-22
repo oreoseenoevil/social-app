@@ -22,10 +22,13 @@
           "@App": "./client/app/Ui/App",
           "@Context": "./client/app/Context",
           "@Layouts": "./client/app/Layouts",
-          "@Reducer": "./client/app/Reducer",
+          "@Redux": "./client/app/Redux",
+          "@Reducers": "./client/app/Redux/Reducers",
+          "@Actions": "./client/app/Redux/Actions",
           "@Helpers": "./client/app/Helpers",
           "@Utils": "./client/app/Utils",
-          "@Router": "./client/app/Router"
+          "@Router": "./client/app/Router",
+          "@Pages": "./client/app/Pages"
         }
       }
     ]
