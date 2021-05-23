@@ -4,11 +4,13 @@
   right: 5px;
   padding: 10px;
   min-width: 200px;
+  max-width: 360px;
   border: 1px solid #eee;
 
   .toast-wrapper {
     display: flex;
     align-items: center;
+    width: 100%;
     gap: 1em;
 
     svg.toast-success {

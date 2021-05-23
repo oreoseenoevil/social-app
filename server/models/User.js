@@ -12,8 +12,8 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Please add your username.'],
-    minLength: [3, 'Minimum at least 3 characters.'],
-    maxLength: [25, 'Maximum at least 25 characters.'],
+    minLength: [3, 'Username minimum at least 3 characters.'],
+    maxLength: [25, 'Username maximum at least 25 characters.'],
     lowercase: true,
     trim: true,
     unique: true
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please add your password.'],
-    minLength: [6, 'Minimum at least 6 characters.']
+    minLength: [6, 'Password minimum at least 6 characters.']
   },
   avatar: {
     type: String,

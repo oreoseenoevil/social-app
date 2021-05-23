@@ -1,5 +1,6 @@
 import { postDataAPI, getDataAPI } from '@Helpers/fetchData'
 import { TYPES } from '@Actions/global'
+import { validate } from '@Utils'
 
 const { AUTH, ALERT } = TYPES
 
@@ -72,8 +73,36 @@ export const refreshToken = () => async dispatch => {
 }
 
 export const register = data => async dispatch => {
+  const check = validate(data)
+  if (check.errorLength > 0) {
+    return dispatch({
+      type: ALERT,
+      payload: check.message
+    })
+  }
+
   try {
-    console.log(data)
+    dispatch({
+      type: ALERT,
+      payload: {loading: true}
+    })
+
+    const res = await postDataAPI('/auth/register', data)
+    dispatch({
+      type: AUTH,
+      payload: {
+        token: res.data.access,
+        user: res.data.data
+      }
+    })
+
+    localStorage.setItem('mern_session', true)
+    dispatch({
+      type: ALERT,
+      payload: {
+        success: res.data.message
+      }
+    })
   } catch (error) {
     dispatch({
       type: ALERT,
