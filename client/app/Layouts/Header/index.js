@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { RiContrastFill } from 'react-icons/ri'
+import { GiCaptainHatProfile } from 'react-icons/gi'
 import '@Layouts/Header/index.scss'
 
 export const Header = ({ active, toggleDarkMode }) => {
@@ -9,7 +10,7 @@ export const Header = ({ active, toggleDarkMode }) => {
       <div className="wrapper">
         <div className="left">
           <Link to="/" className="logo" replace>
-            Social
+            <GiCaptainHatProfile />
           </Link>
         </div>
         <div className="middle">
