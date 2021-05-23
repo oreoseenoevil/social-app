@@ -16,6 +16,8 @@ import { useDispatch } from 'react-redux'
 import { login } from '@Actions/auth'
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core'
 
+import { useSelector } from 'react-redux'
+
 import { LayoutContext } from '@Context/Layout'
 
 function Copyright() {
@@ -81,6 +83,9 @@ export default function SignIn() {
     password: ''
   }
 
+  
+  const { alert } = useSelector(state => state)
+
   const [showPassword, setShowPassword] = useState(false)
   const [userData, setUserData] = useState(initialState)
 
@@ -93,7 +98,6 @@ export default function SignIn() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log(userData)
     dispatch(login(userData))
   }
 
@@ -164,8 +168,9 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={alert.loading}
             >
-              Sign In
+              {alert.loading ? 'Signing in...' : 'Sign in'}
             </Button>
             <Grid container>
               <Grid item xs>

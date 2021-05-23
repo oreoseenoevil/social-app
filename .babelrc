@@ -21,6 +21,7 @@
         "alias": {
           "@App": "./client/app/Ui/App",
           "@Context": "./client/app/Context",
+          "@Components": "./client/app/Components",
           "@Layouts": "./client/app/Layouts",
           "@Redux": "./client/app/Redux",
           "@Reducers": "./client/app/Redux/Reducers",

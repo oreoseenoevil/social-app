@@ -41,6 +41,7 @@ const authController = {
           ...user._doc,
           password: ''
         },
+        message: 'Successfully Registered.',
         access: accessToken
       })
     } catch (error) {
@@ -89,6 +90,7 @@ const authController = {
             ...user._doc,
             password: ''
           },
+          message: 'Successfully Login.',
           access: accessToken
         })
 
@@ -125,41 +127,40 @@ const authController = {
   },
   generateToken: (req, res) => {
     try {
-      const token = req.cookies
+      const token = req.cookies.mern_session
 
-      const { mern_session } = token
-
-      jwt.verify(mern_session, secretKey2, (err, user) => {
+      jwt.verify(token, secretKey2, async (err, result) => {
         if (err) {
-          res.status(401).json({
+          return res.status(401).json({
             success: false,
-            error: 'Please login to continue'
+            error: 'Please login to continue.'
           })
         }
 
-        const accesstoken = createAccessToken({ id: user.id })
+        const user = await User.findById(result.id).select('-password')
+          .populate('followers following', 'avatar username fullname followers following')
+
+        if (!user) {
+          return res.status(400).json({
+            success: false,
+            error: 'User does not exist.'
+          })
+        }
+
+        const accessToken = createAccessToken({ id: result.id })
 
         return res.status(200).json({
           success: true,
-          user: user,
-          token: accesstoken
+          data: user,
+          access: accessToken
         })
       })
 
     } catch (error) {
-      if (error.name === 'ValidationError') {
-        const messages = Object.values(error.errors).map(val => val.message)
-
-        return res.status(400).json({
-          success: false,
-          error: messages
-        })
-      } else {
-        return res.status(500).json({
-          success: false,
-          error: 'Server Error'
-        })
-      }
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
     }
   }
 }

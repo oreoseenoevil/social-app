@@ -1,0 +1,26 @@
+.loading {
+  background: #fafafa;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  min-width: 360px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  svg.loading-icon {
+    width: 5em;
+    height: 5em;
+    fill: #000000;
+    animation: spin 1000ms linear infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -6,6 +6,7 @@ import '@App/index.scss'
 import { Header } from '@Layouts/Header'
 import { Main } from '@Layouts/Main'
 import { LayoutContext } from '@Context/Layout'
+import { Notification } from '@Components/Notifications'
 
 const App = () => {
   const { active, toggleDarkMode } = useContext(LayoutContext)
@@ -16,6 +17,7 @@ const App = () => {
         <div className={`app ${active && 'dark'}`}>
           <Header active={active} toggleDarkMode={toggleDarkMode} />
           <div className="main">
+            <Notification />
             <Main />
           </div>
         </div>

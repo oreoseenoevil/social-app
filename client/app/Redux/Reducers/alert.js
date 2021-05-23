@@ -1,16 +1,16 @@
 import { TYPES } from '@Actions/global'
 
-const { AUTH } = TYPES
+const { ALERT } = TYPES
 
 const initialState = {}
 
-const authReducer = (state = initialState, action) => {
+const alertReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH:
+    case ALERT:
       return action.payload
     default:
       return state
   }
 }
 
-export default authReducer
+export default alertReducer
