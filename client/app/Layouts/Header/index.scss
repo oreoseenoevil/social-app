@@ -4,7 +4,11 @@
   min-height: 60px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eeeeee;
+  background: #fafafa;
+
+  &.active {
+    background: #2e2e2e;
+  }
 
   .wrapper {
     width: 100%;
@@ -41,10 +45,112 @@
       display: flex;
       justify-content: flex-end;
 
-      svg.bulb {
-        cursor: pointer;
-        width: 2em;
-        height: 2em;
+      ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        list-style: none;
+
+        li {
+          margin-right: 1rem;
+
+          @media (min-width: 1000px) {
+            margin-right: 3rem;
+          }
+
+          &:nth-last-child(1) {
+            margin-right: 0;
+          }
+
+          a {
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.5;
+            transition: all 100ms ease;
+
+            &.active {
+              opacity: 1;
+
+              & > * {
+                fill: #0091ff;
+              }
+            }
+
+            &:hover {
+              opacity: 1;
+            }
+
+            & > * {
+              width: 2em;
+              height: 2em;
+            }
+          }
+
+          &.user {
+            position: relative;
+
+            span {
+              & > * {
+                width: 2em;
+                height: 2em;
+                opacity: 0.5;
+
+                &:hover {
+                  opacity: 1;
+                }
+              }
+              cursor: pointer;
+            }
+
+            .nav-dropdown {
+              position: absolute;
+              right: -5px;
+              top: 3em;
+              box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+              border: 1px solid rgba(255, 255, 255, 0.473);
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              background: inherit;
+              color: inherit;
+              display: none;
+
+              &.active {
+                display: block;
+              }
+
+              li {
+                display: block;
+                width: 100%;
+
+                & > * {
+                  text-decoration: none;
+                  opacity: 1;
+                  color: inherit;
+                  width: 100%;
+                  margin-bottom: 5px;
+                  padding: 1em;
+                  display: inline-block;
+                  white-space: pre;
+                  box-sizing: border-box;
+                  cursor: pointer;
+                  font-weight: 500;
+                  letter-spacing: 1px;
+                  transition: background 100ms ease, color 100ms ease,
+                    opacity 100ms ease;
+
+                  &:hover {
+                    background: #0091ff;
+                    color: #fff;
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
