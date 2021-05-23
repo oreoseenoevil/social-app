@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import '@Pages/signin/index.scss'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -84,7 +84,13 @@ export default function SignIn() {
   }
 
   
-  const { alert } = useSelector(state => state)
+  const { alert, auth } = useSelector(state => state)
+
+  useEffect(() => {
+    if (auth.token) {
+      history.push('/')
+    }
+  }, [auth.token, history])
 
   const [showPassword, setShowPassword] = useState(false)
   const [userData, setUserData] = useState(initialState)

@@ -4,4 +4,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: inherit;
+
+  svg.avatar {
+    width: 4em;
+    height: 4em;
+  }
+
+  svg.visible {
+    &.active {
+      fill: #fafafa;
+    }
+  }
+
+  button.Mui-disabled {
+    background-color: #0984e3;
+    color: #fafafa;
+  }
+
+  .MuiRadio-colorSecondary {
+    color: inherit;
+  }
+
+  .MuiFormControlLabel-root {
+    margin-right: 0;
+  }
 }
