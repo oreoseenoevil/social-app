@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine } from 'react-icons/ri'
+import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine } from 'react-icons/ri'
 import { GiCaptainHatProfile } from 'react-icons/gi'
 import { FaRegUserCircle } from 'react-icons/fa'
 import '@Layouts/Header/index.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '@Actions/auth'
+import { SearchBar } from '@Components/SearchBar'
 
 export const Header = ({ active, toggleDarkMode }) => {
 
@@ -58,9 +59,7 @@ export const Header = ({ active, toggleDarkMode }) => {
             <GiCaptainHatProfile />
           </Link>
         </div>
-        <div className="middle">
-          hello
-        </div>
+        <SearchBar dark={active} />
         <div className="right">
           <ul>
             {
@@ -77,7 +76,8 @@ export const Header = ({ active, toggleDarkMode }) => {
               onClick={() => setDropdownOn(!dropdownOn)}
             >
               <span>
-                <FaRegUserCircle />
+                {auth.user.avatar === '' ? <FaRegUserCircle className="avatar" /> : <img src={auth.user.avatar} alt="avatar" className={`avatar image ${dropdownOn && 'active'}`} />}
+                <RiArrowDropDownLine className="dropdown" />
               </span>
               <ul className={`nav-dropdown ${dropdownOn && 'active'}`}>
                 <li><Link to={`/profile/${auth.user._id}`} replace>Profile</Link></li>

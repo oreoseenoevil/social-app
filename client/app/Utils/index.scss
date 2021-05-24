@@ -4,4 +4,45 @@
   align-items: center;
   min-height: calc(100vh - 60px);
   flex-direction: column;
+  background: fafafa;
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 1em 0.5em;
+    background: #0091ff;
+    font-size: 1em;
+    font-weight: 500;
+    color: #fafafa;
+    border: none;
+    border-radius: 1rem;
+    transition: all 200ms ease-in-out;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    .arrow-left {
+      fill: #fafafa;
+      margin-right: 1rem;
+      width: 1em;
+      height: 1em;
+    }
+
+    &:hover,
+    &:focus {
+      background: #45aaf2;
+      outline-offset: 3px;
+      outline-color: #45aaf2;
+    }
+  }
 }

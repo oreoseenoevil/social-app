@@ -47,13 +47,13 @@
 
       &.close {
         &::after {
-          background: #555;
+          background: rgb(219, 219, 219);
           height: (60/100) * 2rem;
           width: 2px;
           transform: rotateZ(-45deg);
         }
         &::before {
-          background: #555;
+          background: rgb(219, 219, 219);
           height: (60/100) * 2rem;
           width: 2px;
           transform: rotateZ(45deg);
