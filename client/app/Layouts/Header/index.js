@@ -36,7 +36,7 @@ export const Header = ({ active, toggleDarkMode }) => {
 
   const navLinks = [
     { label: 'Home', icon: RiHome2Line, path: '/' },
-    { label: 'Message', icon: RiMessageLine, path: '/message' },
+    { label: 'Messages', icon: RiMessageLine, path: '/messages' },
     { label: 'Discover', icon: RiCompassDiscoverLine, path: '/discover' },
     { label: 'Notifications', icon: RiNotification2Line, path: '/notifications' }
   ]
