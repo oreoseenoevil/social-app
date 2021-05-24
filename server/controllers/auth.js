@@ -23,18 +23,18 @@ const authController = {
       }
 
       const user = await User.create(req.body)
-      
+
       const accessToken = createAccessToken({ id: user._id })
       const refreshToken = createRefreshToken({ id: user._id })
-      
+
       res.cookie('mern_session', refreshToken, {
         httpOnly: true,
         path: '/',
-        maxAge: 30*24*60*60*1000,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
         secure: production
       })
-      
-      
+
+
       return res.status(201).json({
         success: true,
         data: {
@@ -80,8 +80,9 @@ const authController = {
         res.cookie('mern_session', refreshToken, {
           httpOnly: true,
           path: '/',
-          maxAge: 30*24*60*60*1000,
-          secure: production
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          secure: production,
+          sameSite: true
         })
 
         return res.status(200).json({
@@ -113,7 +114,7 @@ const authController = {
       res.clearCookie('mern_session', {
         path: '/'
       })
-  
+
       return res.status(200).json({
         success: true,
         message: 'Successfully logged out.'
