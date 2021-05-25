@@ -15,6 +15,27 @@ const userController = {
         error: error.message
       })
     }
+  },
+  getUser: async (req, res) => {
+    try {
+      const user = await (await User.findById(req.params.id)).isSelected('-password')
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          error: 'User doesn\'t exist.'
+        })
+      }
+
+      return res.status(201).json({
+        success: true,
+        data: user
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

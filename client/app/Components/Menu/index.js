@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine, RiProfileLine } from 'react-icons/ri'
-import { FaRegUserCircle } from 'react-icons/fa'
+import { Avatar } from '@Components/Avatar'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import '@Components/Menu/index.scss'
@@ -14,7 +14,7 @@ const navLinks = [
   { label: 'Notifications', icon: RiNotification2Line, path: '/notifications' }
 ]
 
-export const Menu = ({ toggleDarkMode }) => {
+export const Menu = ({ toggleDarkMode, active }) => {
   const [dropdownOn, setDropdownOn] = useState(false)
   const { auth } = useSelector(state => state)
 
@@ -66,25 +66,27 @@ export const Menu = ({ toggleDarkMode }) => {
         onClick={() => setDropdownOn(!dropdownOn)}
       >
         <span>
-          {auth.user.avatar === '' ? <FaRegUserCircle className="avatar" /> : <img src={auth.user.avatar} alt="avatar" className={`avatar image ${dropdownOn && 'active'}`} />}
+          <Avatar src={auth.user.avatar} size="small" active={dropdownOn} />
           <RiArrowDropDownLine className="dropdown" />
         </span>
-        <ul className={`nav-dropdown ${dropdownOn && 'active'}`}>
-          <li><Link to={`/profile/${auth.user._id}`} replace>Profile</Link></li>
-          <li>
-            <span onClick={toggleDarkMode}>
-              Dark mode
-            </span>
-          </li>
-          <li>
-            <Link to="/" 
-              replace
-              onClick={() => dispatch(logout())}
-            >
-              Sign out
-            </Link>
-          </li>
-        </ul>
+        <div className="user-menu">
+          <ul className={`nav-dropdown ${dropdownOn && 'active'} ${active && 'dark'}`}>
+            <li><Link to={`/profile/${auth.user._id}`} replace>Profile</Link></li>
+            <li>
+              <span onClick={toggleDarkMode}>
+                Dark mode
+              </span>
+            </li>
+            <li>
+              <Link to="/" 
+                replace
+                onClick={() => dispatch(logout())}
+              >
+                Sign out
+              </Link>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
   )

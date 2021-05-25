@@ -7,6 +7,8 @@
   padding: 0.5em;
   background: #fff;
   transition: all 200ms ease-in-out;
+  z-index: 10;
+  position: relative;
 
   &.dark {
     background: #181818;
@@ -17,27 +19,8 @@
     border-color: #0091ff;
   }
 
-  .avatar {
-    width: 2.5em;
-    height: 2.5em;
-    margin-right: 1rem;
-
-    &.image {
-      opacity: 1;
-      border-radius: 50%;
-      outline: 1px solid transparent;
-      outline-offset: -1px;
-      transition: all 200ms ease-in-out;
-
-      &:hover,
-      &.active {
-        outline-offset: 2px;
-        outline-color: #0091ff;
-      }
-    }
-  }
-
   .user-name {
+    margin-left: 1rem;
     display: flex;
     flex-direction: column;
   }

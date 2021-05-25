@@ -49,30 +49,12 @@ ul.menu {
 
     &.user {
       position: relative;
+      z-index: 10;
 
       span {
         cursor: pointer;
         display: flex;
         flex-wrap: nowrap;
-
-        .avatar {
-          width: 2em;
-          height: 2em;
-
-          &.image {
-            opacity: 1;
-            border-radius: 50%;
-            outline: 1px solid transparent;
-            outline-offset: -1px;
-            transition: all 200ms ease-in-out;
-
-            &:hover,
-            &.active {
-              outline-offset: 2px;
-              outline-color: #0091ff;
-            }
-          }
-        }
 
         .dropdown {
           height: 1.2em;
@@ -81,49 +63,57 @@ ul.menu {
         }
       }
 
-      .nav-dropdown {
+      .user-menu {
         position: absolute;
-        background: inherit;
-        z-index: 1000;
         right: -5px;
         top: 3em;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.473);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        background: inherit;
-        color: inherit;
-        display: none;
 
-        &.active {
-          display: block;
-        }
+        .nav-dropdown {
+          position: relative;
+          z-index: 10;
+          background: #fff;
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.473);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          color: inherit;
+          display: none;
 
-        li {
-          display: block;
-          width: 100%;
+          &.active {
+            display: block;
+          }
 
-          & > * {
-            text-decoration: none;
-            opacity: 1;
-            color: inherit;
+          &.dark {
+            background: #181818;
+          }
+
+          li {
+            display: block;
             width: 100%;
-            margin-bottom: 5px;
-            padding: 1em;
-            display: inline-block;
-            white-space: pre;
-            box-sizing: border-box;
-            cursor: pointer;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: background 100ms ease, color 100ms ease,
-              opacity 100ms ease;
+            background: inherit;
 
-            &:hover {
-              background: #0091ff;
-              color: #fff;
+            & > * {
+              text-decoration: none;
               opacity: 1;
+              color: inherit;
+              width: 100%;
+              margin-bottom: 5px;
+              padding: 1em;
+              display: inline-block;
+              white-space: pre;
+              box-sizing: border-box;
+              cursor: pointer;
+              font-weight: 500;
+              letter-spacing: 1px;
+              transition: background 100ms ease, color 100ms ease,
+                opacity 100ms ease;
+
+              &:hover {
+                background: #0091ff;
+                color: #fff;
+                opacity: 1;
+              }
             }
           }
         }

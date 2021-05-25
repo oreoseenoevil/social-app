@@ -1,7 +1,6 @@
-.profile {
+.user-profile {
   min-height: calc(100vh - 60px);
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
