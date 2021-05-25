@@ -1,15 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { RiSearchLine, RiCloseLine } from 'react-icons/ri'
 import '@Components/SearchBar/index.scss'
+import { useSelector, useDispatch } from 'react-redux'
+import { getDataAPI } from '@Helpers/fetchData'
+import { TYPES } from '@Actions/global'
+import { Link } from 'react-router-dom'
+import { UserCard } from '@Components/UserCard'
 
 export const SearchBar = ({ dark }) => {
   const [search, setSearch] = useState('')
+  const [users, setUsers] = useState([])
+  const userInputRef = createRef()
+  const textAreaFocus = () => userInputRef.current.focus()
+
+  const { auth } = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (search && auth.token) {
+      getDataAPI(`/user/search?username=${search}`, auth.token)
+        .then(res => setUsers(res.data.data))
+        .catch(err => {
+          dispatch({
+            type: TYPES.ALERT,
+            payload: {
+              error: {
+                error: err.response.data.error
+              }
+            }
+          })
+        })
+    }
+  }, [search, auth.token, dispatch])
 
   return (
-    <div className="search-bar">
+    <div className="search-bar" onClick={textAreaFocus}>
       <form className="search-form">
         <input
           type="text"
+          ref={userInputRef}
           name="search"
           value={search}
           placeholder="Search"
@@ -26,6 +55,15 @@ export const SearchBar = ({ dark }) => {
               />
             </div>
         }
+        <div className="users-result">
+          {
+            users.map(user => (
+              <Link key={user._id} to={`/profile/${user._id}`}>
+                <UserCard user={user} />
+              </Link>
+            ))
+          }
+        </div>
       </form>
     </div>
   )
