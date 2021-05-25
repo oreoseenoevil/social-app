@@ -6,7 +6,7 @@ import { Toast } from '@Components/Toast'
 import { TYPES } from '@Actions/global'
 
 export const Notification = () => {
-  const { alert } = useSelector(state => state)
+  const { alert, profile } = useSelector(state => state)
   const dispatch = useDispatch()
 
   const { ALERT } = TYPES
@@ -14,6 +14,7 @@ export const Notification = () => {
   return (
     <div className="notification">
       {alert.loading && <Loading />}
+      {profile.loading && <Loading />}
 
       {alert.success && <Toast 
         success={alert.success}

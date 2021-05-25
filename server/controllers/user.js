@@ -18,7 +18,7 @@ const userController = {
   },
   getUser: async (req, res) => {
     try {
-      const user = await (await User.findById(req.params.id)).isSelected('-password')
+      const user = await User.findById(req.params.id).select('-password')
       if (!user) {
         return res.status(404).json({
           success: false,

@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Avatar } from '@Components/Avatar'
 import '@Components/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
+import { getProfileUsers } from '@Actions/profile'
 
 export const Info = () => {
   const { active } = useContext(LayoutContext)
   const { id } = useParams()
-  const { auth } = useSelector(state => state)
+  const { auth, profile } = useSelector(state => state)
   const dispatch = useDispatch()
 
   const [userData, setUserData] = useState([])
@@ -16,8 +17,12 @@ export const Info = () => {
   useEffect(() => {
     if (id === auth.user._id) {
       setUserData([auth.user])
+    } else {
+      dispatch(getProfileUsers({users: profile.users, id, auth}))
+      const newData = profile.users.filter(user => user._id === id)
+      setUserData(newData)
     }
-  }, [id, auth.user])
+  }, [id, auth.user, profile.users])
 
   return (
     <div className={`user-info ${active && 'dark'}`}>
