@@ -31,7 +31,8 @@ const authController = {
         httpOnly: true,
         path: '/',
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        secure: production
+        secure: production,
+        sameSite: true
       })
 
 
