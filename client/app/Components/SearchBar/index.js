@@ -17,7 +17,8 @@ export const SearchBar = ({ dark }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (search && auth.token) {
+    if (!search) return
+    if (search) {
       getDataAPI(`/user/search?username=${search}`, auth.token)
         .then(res => setUsers(res.data.data))
         .catch(err => {
@@ -32,6 +33,11 @@ export const SearchBar = ({ dark }) => {
         })
     }
   }, [search, auth.token, dispatch])
+
+  const handleClose = () => {
+    setSearch('')
+    setUsers([])
+  }
 
   return (
     <div className="search-bar" onClick={textAreaFocus}>
@@ -49,7 +55,10 @@ export const SearchBar = ({ dark }) => {
           !search ? <div className="search-icon">
             <RiSearchLine className={`icon-search ${dark && 'dark'}`} />
           </div> :
-            <div className="close-search">
+            <div  
+              className="close-search"
+              onClick={handleClose}
+            >
               <RiCloseLine
                 className={`close ${dark && 'dark'}`} 
               />
@@ -57,8 +66,8 @@ export const SearchBar = ({ dark }) => {
         }
         <div className="users-result">
           {
-            users.map(user => (
-              <Link key={user._id} to={`/profile/${user._id}`}>
+            search && users.map(user => (
+              <Link key={user._id} to={`/profile/${user._id}`} onClick={handleClose}>
                 <UserCard user={user} />
               </Link>
             ))

@@ -4,6 +4,7 @@ export const LayoutContext = createContext()
 
 export const LayoutContextProvider = ({ children }) => {
   const [active, setActive] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
 
   const darkMode = localStorage.getItem('dark')
 
@@ -23,10 +24,16 @@ export const LayoutContextProvider = ({ children }) => {
     }
   }
 
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu)
+  }
+
   return (
     <LayoutContext.Provider value={{
       active,
-      toggleDarkMode
+      toggleDarkMode,
+      openMenu,
+      toggleMenu
     }}>
       {children}
     </LayoutContext.Provider>

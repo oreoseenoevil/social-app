@@ -1,14 +1,10 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { render } from 'react-dom'
 import App from '@App'
-import { LayoutContextProvider } from '@Context/Layout'
-import DataProvider from '@Redux/store'
 
 render(
-  <DataProvider>
-    <LayoutContextProvider>
-      <App />
-    </LayoutContextProvider>
-  </DataProvider>,
+  <StrictMode>
+    <App />
+  </StrictMode>,
   document.getElementById('root')
 )

@@ -1,3 +1,5 @@
+$cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
+
 .header {
   min-width: 360px;
   width: 100%;
@@ -5,6 +7,7 @@
   display: flex;
   align-items: center;
   background: #fafafa;
+  z-index: 10;
 
   &.active {
     background: #2e2e2e;
@@ -12,13 +15,20 @@
 
   .wrapper {
     width: 100%;
-    padding: 0 30px;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    > * {
-      width: 100%;
+    @media (max-width: 400px) {
+      padding: 0 1rem;
+    }
+
+    @media (min-width: 1300px) {
+      padding: 0 50px;
+      > * {
+        width: 100%;
+      }
     }
 
     .left {
@@ -32,137 +42,59 @@
         & > * {
           width: 3em;
           height: 3em;
+
+          @media (max-width: 600px) {
+            width: 2.5em;
+            height: 2.5em;
+          }
         }
       }
     }
     .right {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
 
-      ul {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        list-style: none;
+      .burger {
+        display: none;
+        transition: all 300ms $cubic;
+        cursor: pointer;
 
-        li {
-          margin-right: 1rem;
+        @media (max-width: 700px) {
+          display: flex;
+          overflow: hidden;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 15px;
+          width: 20px;
+        }
 
-          @media (min-width: 1000px) {
-            margin-right: 3rem;
+        span {
+          width: 100%;
+          height: 1px;
+          background: #2e2e2e;
+          transform-origin: left;
+          transition: all 300ms $cubic;
+          transition-delay: 0ms;
+        }
+
+        &.dark {
+          span {
+            background: #fafafa;
           }
+        }
 
-          &:nth-last-child(1) {
-            margin-right: 0;
+        &.open-menu {
+          transform: rotate(90deg);
+          .bar1 {
+            transform: rotate(45deg);
+            transition: transform 400ms $cubic;
+            transition-delay: 200ms;
           }
-
-          a {
-            text-decoration: none;
-            color: inherit;
-            opacity: 0.5;
-            transition: all 100ms ease;
-
-            &.active {
-              opacity: 1;
-
-              & > * {
-                fill: #0091ff;
-              }
-            }
-
-            &:hover {
-              opacity: 1;
-            }
-
-            & > * {
-              width: 2em;
-              height: 2em;
-            }
-          }
-
-          &.user {
-            position: relative;
-
-            span {
-              cursor: pointer;
-              display: flex;
-              flex-wrap: nowrap;
-
-              .avatar {
-                width: 2em;
-                height: 2em;
-
-                &.image {
-                  opacity: 1;
-                  border-radius: 50%;
-                  outline: 1px solid transparent;
-                  outline-offset: -1px;
-                  transition: all 200ms ease-in-out;
-
-                  &:hover,
-                  &.active {
-                    outline-offset: 2px;
-                    outline-color: #0091ff;
-                  }
-                }
-              }
-
-              .dropdown {
-                height: 1.2em;
-                width: 1.2em;
-                align-self: flex-end;
-              }
-            }
-
-            .nav-dropdown {
-              position: absolute;
-              background: inherit;
-              z-index: 1000;
-              right: -5px;
-              top: 3em;
-              box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-              border: 1px solid rgba(255, 255, 255, 0.473);
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              background: inherit;
-              color: inherit;
-              display: none;
-
-              &.active {
-                display: block;
-              }
-
-              li {
-                display: block;
-                width: 100%;
-
-                & > * {
-                  text-decoration: none;
-                  opacity: 1;
-                  color: inherit;
-                  width: 100%;
-                  margin-bottom: 5px;
-                  padding: 1em;
-                  display: inline-block;
-                  white-space: pre;
-                  box-sizing: border-box;
-                  cursor: pointer;
-                  font-weight: 500;
-                  letter-spacing: 1px;
-                  transition: background 100ms ease, color 100ms ease,
-                    opacity 100ms ease;
-
-                  &:hover {
-                    background: #0091ff;
-                    color: #fff;
-                    opacity: 1;
-                  }
-                }
-              }
-            }
+          .bar2 {
+            transform: rotate(-45deg);
+            transition: transform 400ms $cubic;
+            transition-delay: 200ms;
           }
         }
       }

@@ -1,28 +1,21 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { hot } from 'react-hot-loader'
 import { BrowserRouter as Router } from 'react-router-dom'
 import '@App/index.scss'
-import { Header } from '@Layouts/Header'
-import { Main } from '@Layouts/Main'
-import { LayoutContext } from '@Context/Layout'
-import { Notification } from '@Components/Notifications'
-import { useSelector } from 'react-redux'
+import { Layouts } from '@Layouts'
+import { LayoutContextProvider } from '@Context/Layout'
+import DataProvider from '@Redux/store'
 
 const App = () => {
-  const { active, toggleDarkMode } = useContext(LayoutContext)
-  
-  const { auth } = useSelector(state => state)
 
   return (
-    <Router>
-      <div className={`app ${active && 'dark'}`}>
-        {auth.token && <Header active={active} toggleDarkMode={toggleDarkMode} />}
-        <div className="main">
-          <Notification />
-          <Main />
-        </div>
-      </div>
-    </Router>
+    <DataProvider>
+      <LayoutContextProvider>
+        <Router>
+          <Layouts />
+        </Router>
+      </LayoutContextProvider>
+    </DataProvider>
   )
 }
 

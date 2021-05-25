@@ -5,6 +5,17 @@
   align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 0.5em;
+  background: #fff;
+  transition: all 200ms ease-in-out;
+
+  &.dark {
+    background: #181818;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  &:hover {
+    border-color: #0091ff;
+  }
 
   .avatar {
     width: 2.5em;

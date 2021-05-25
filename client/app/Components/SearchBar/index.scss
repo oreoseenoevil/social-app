@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin: 0 1rem 0;
 
   .search-form {
     width: 100%;
@@ -58,7 +60,7 @@
     }
 
     .users-result {
-      top: 3em;
+      top: 2.5em;
       width: 100%;
       position: absolute;
 
