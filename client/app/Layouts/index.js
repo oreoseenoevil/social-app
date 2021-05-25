@@ -15,11 +15,11 @@ export const Layouts = () => {
   return (
     <div className={`app ${active && 'dark'}`}>
       {auth.token && <Header active={active} toggleDarkMode={toggleDarkMode} />}
-      <MobileMenu
+      {auth.token && <MobileMenu
         active={openMenu}
         toggleDarkMode={toggleDarkMode}
         toggleMenu={toggleMenu}
-      />
+      />}
       <div className="main">
         <Notification />
         <Main />

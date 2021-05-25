@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine } from 'react-icons/ri'
+import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine, RiProfileLine } from 'react-icons/ri'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -93,10 +93,21 @@ export const Menu = ({ toggleDarkMode }) => {
 export const MobileMenu = ({ active, toggleDarkMode, toggleMenu }) => {
 
   const dispatch = useDispatch()
+  const { auth } = useSelector(state => state)
 
   return (
     <div className={`mobile ${active && 'active'}`}>
       <ul className="mobile-menu">
+        <li onClick={toggleMenu}>
+          <Link
+            to={`/profile/${auth.user._id}`}
+            replace
+            className="menu-item"
+          >
+            <RiProfileLine className="menu-icon" />
+            <span>Profile</span>
+          </Link>
+        </li>
         {
           navLinks.map((link, index) => (
             <li key={index} onClick={toggleMenu}>
