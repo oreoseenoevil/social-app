@@ -9,6 +9,10 @@
   border: 1px solid #eee;
   z-index: 11;
 
+  &.dark {
+    background: #181818;
+  }
+
   .toast-wrapper {
     display: flex;
     align-items: center;

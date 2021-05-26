@@ -7,6 +7,7 @@ import '@Components/Profile/Edit/index.scss'
 import { VscArrowLeft } from 'react-icons/vsc'
 import { checkImage } from '@Helpers/imageUploader'
 import { TYPES } from '@Actions/global'
+import { updateProfileUser } from '@Actions/profile'
 
 const initialState = {
   fullname: '',
@@ -85,9 +86,14 @@ export const Edit = ({ setOnEdit }) => {
     })
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    dispatch(updateProfileUser({userData, avatar, auth}))
+  }
+
   return (
     <div className="edit-profile">
-      <form>
+      <form onSubmit={handleSubmit}>
         <button
           className="btn-close"
           onClick={() => setOnEdit(false)}
@@ -146,7 +152,6 @@ export const Edit = ({ setOnEdit }) => {
               value={mobile}
               onChange={handleChange}
               labelWidth={50}
-              required
               classes={{
                 root: classes.multilineColor,
                 notchedOutline: classes.notchedOutline
@@ -166,7 +171,6 @@ export const Edit = ({ setOnEdit }) => {
               value={address}
               onChange={handleChange}
               labelWidth={62}
-              required
               classes={{
                 root: classes.multilineColor,
                 notchedOutline: classes.notchedOutline
@@ -186,7 +190,6 @@ export const Edit = ({ setOnEdit }) => {
               value={website}
               onChange={handleChange}
               labelWidth={60}
-              required
               classes={{
                 root: classes.multilineColor,
                 notchedOutline: classes.notchedOutline
@@ -208,7 +211,6 @@ export const Edit = ({ setOnEdit }) => {
               labelWidth={38}
               multiline
               rows={2}
-              required
               classes={{
                 root: classes.multilineColor,
                 notchedOutline: classes.notchedOutline

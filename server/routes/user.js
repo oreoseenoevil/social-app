@@ -4,5 +4,6 @@ const auth = require('../middleware/auth')
 
 router.route('/user/search').get(auth, userController.searchUser)
 router.route('/user/:id').get(auth, userController.getUser)
+  .put(auth, userController.updateUser)
 
 module.exports = router

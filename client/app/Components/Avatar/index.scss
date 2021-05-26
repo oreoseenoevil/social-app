@@ -1,4 +1,6 @@
 .avatar {
+  display: block;
+  object-fit: cover;
   border-radius: 50%;
   outline: 1px solid transparent;
   outline-offset: -1px;
@@ -15,13 +17,13 @@
   }
 
   &.big {
-    width: 4.5em;
-    height: 4.5em;
+    width: 6em;
+    height: 6em;
   }
 
   &.large {
-    width: 6em;
-    height: 6em;
+    width: 8em;
+    height: 8em;
   }
 
   &:hover,
