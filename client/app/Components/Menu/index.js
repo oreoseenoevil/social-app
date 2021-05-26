@@ -14,7 +14,7 @@ const navLinks = [
   { label: 'Notifications', icon: RiNotification2Line, path: '/notifications' }
 ]
 
-export const Menu = ({ toggleDarkMode, active }) => {
+export const Menu = ({ toggleDarkMode, dark }) => {
   const [dropdownOn, setDropdownOn] = useState(false)
   const { auth } = useSelector(state => state)
 
@@ -70,7 +70,7 @@ export const Menu = ({ toggleDarkMode, active }) => {
           <RiArrowDropDownLine className="dropdown" />
         </span>
         <div className="user-menu">
-          <ul className={`nav-dropdown ${dropdownOn && 'active'} ${active && 'dark'}`}>
+          <ul className={`nav-dropdown ${dropdownOn && 'active'} ${dark && 'dark'}`}>
             <li><Link to={`/profile/${auth.user._id}`} replace>Profile</Link></li>
             <li>
               <span onClick={toggleDarkMode}>

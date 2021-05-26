@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Avatar } from '@Components/Avatar'
-import '@Components/Info/index.scss'
+import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
 import { getProfileUsers } from '@Actions/profile'
 
 export const Info = () => {
-  const { active } = useContext(LayoutContext)
+  const { dark } = useContext(LayoutContext)
   const { id } = useParams()
   const { auth, profile } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ export const Info = () => {
   }, [id, auth.user, profile.users])
 
   return (
-    <div className={`user-info ${active && 'dark'}`}>
+    <div className={`user-info ${dark && 'dark'}`}>
       {
         userData.map(user => (
           <div className="info-container" key={user._id}>
@@ -36,7 +36,7 @@ export const Info = () => {
               <div className="info-title">
                 <h2>{user.username}</h2>
                 <div className="group-button">
-                  <button className={`btn-info ${active && 'dark'}`}>
+                  <button className={`btn-info ${dark && 'dark'}`}>
                     Edit Profile
                   </button>
                 </div>

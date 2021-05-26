@@ -3,24 +3,24 @@ import React, { createContext, useEffect, useState } from 'react'
 export const LayoutContext = createContext()
 
 export const LayoutContextProvider = ({ children }) => {
-  const [active, setActive] = useState(false)
+  const [dark, setDark] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
 
   const darkMode = localStorage.getItem('dark')
 
   useEffect(() => {
     if (darkMode === 'enabled') {
-      setActive(true)
+      setDark(true)
     }
   }, [])
 
   const toggleDarkMode = () => {
     if (darkMode === 'enabled') {
       localStorage.setItem('dark', null)
-      setActive(false)
+      setDark(false)
     } else {
       localStorage.setItem('dark', 'enabled')
-      setActive(true)
+      setDark(true)
     }
   }
 
@@ -30,7 +30,7 @@ export const LayoutContextProvider = ({ children }) => {
 
   return (
     <LayoutContext.Provider value={{
-      active,
+      dark,
       toggleDarkMode,
       openMenu,
       toggleMenu

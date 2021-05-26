@@ -8,13 +8,13 @@ import { useSelector } from 'react-redux'
 import { MobileMenu } from '@Components/Menu'
 
 export const Layouts = () => {
-  const { active, toggleDarkMode, openMenu, toggleMenu } = useContext(LayoutContext)
+  const { dark, toggleDarkMode, openMenu, toggleMenu } = useContext(LayoutContext)
   
   const { auth } = useSelector(state => state)
 
   return (
-    <div className={`app ${active && 'dark'}`}>
-      {auth.token && <Header active={active} toggleDarkMode={toggleDarkMode} />}
+    <div className={`app ${dark && 'dark'}`}>
+      {auth.token && <Header dark={dark} toggleDarkMode={toggleDarkMode} />}
       {auth.token && <MobileMenu
         active={openMenu}
         toggleDarkMode={toggleDarkMode}

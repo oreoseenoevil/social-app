@@ -1,7 +1,6 @@
 import React from 'react'
 import '@Pages/profile/index.scss'
-import { Info } from '@Components/Info'
-import { Posts } from '@Components/Posts'
+import { Info, Posts } from '@Components/Profile'
 
 export default function Profile () {
   return (
