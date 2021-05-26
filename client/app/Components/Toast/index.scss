@@ -1,11 +1,13 @@
 .toast {
   position: absolute;
+  background: #fff;
   top: 5px;
   right: 5px;
   padding: 10px;
   min-width: 200px;
   max-width: 360px;
   border: 1px solid #eee;
+  z-index: 11;
 
   .toast-wrapper {
     display: flex;

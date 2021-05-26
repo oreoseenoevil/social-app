@@ -1,0 +1,108 @@
+.edit-profile {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  color: inherit;
+  z-index: 10;
+
+  form {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    min-width: 320px;
+    background: #fff;
+    padding: 20px;
+    margin: auto 20px;
+    color: #000;
+
+    .info-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      position: relative;
+      margin: 15px auto;
+      border: 1px solid rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      cursor: pointer;
+
+      &:hover .group-item {
+        bottom: 0;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      span.group-item {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        transition: all 300ms ease-in-out;
+
+        #file_up {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          opacity: 0;
+        }
+
+        ::-webkit-file-upload-button {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btn-close {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      align-items: center;
+      padding: 0.3em 1em 0.3em;
+      background: #0091ff;
+      font-size: 1em;
+      font-weight: 500;
+      color: #fafafa;
+      border: none;
+      border-radius: 1rem;
+      transition: all 200ms ease-in-out;
+      outline: 2px solid transparent;
+      outline-offset: -2px;
+
+      .arrow-left {
+        fill: #fafafa;
+        margin-right: 1rem;
+        width: 1em;
+        height: 1em;
+      }
+
+      &:hover,
+      &:focus {
+        background: #45aaf2;
+        outline-offset: 1px;
+        outline-color: #45aaf2;
+      }
+    }
+  }
+}

@@ -38,12 +38,18 @@ export const Info = () => {
               <div className="info-title">
                 <h2>{user.username}</h2>
                 <div className="group-button">
-                  <button
-                    className={`btn-info ${dark && 'dark'}`}
-                    onClick={() => setOnEdit(true)}
-                  >
-                    Edit Profile
-                  </button>
+                  {
+                    user._id === auth.user._id ?
+                      <button
+                        className={`btn-info ${dark && 'dark'}`}
+                        onClick={() => setOnEdit(true)}
+                      >
+                        Edit Profile
+                      </button> :
+                      <button className={`btn-info ${dark && 'dark'}`}>
+                        Follow
+                      </button>
+                  }
                 </div>
               </div>
               <h6>{user.fullname}</h6>
@@ -58,7 +64,7 @@ export const Info = () => {
                 <span>{user.following.length} Following</span>
               </div>
             </div>
-            {onEdit && <Edit user={user} setOnEdit={setOnEdit} />}
+            {onEdit && <Edit setOnEdit={setOnEdit} />}
           </div>
         ))
       }

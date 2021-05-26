@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function SignUp() {
-  const { active } = useContext(LayoutContext)
+  const { dark } = useContext(LayoutContext)
   const history = useHistory()
   const dispatch = useDispatch()
   const classes = useStyles()
@@ -218,7 +218,7 @@ export default function SignUp() {
                       onClick={() => setShowPassword(!showPassword)}
                       edge="end"
                     >
-                      {showPassword ? <MdVisibility className={`visible ${active && 'active'}`} /> : <MdVisibilityOff className={`visible ${active && 'active'}`} />}
+                      {showPassword ? <MdVisibility className={`visible ${dark && 'active'}`} /> : <MdVisibilityOff className={`visible ${dark && 'active'}`} />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -249,7 +249,7 @@ export default function SignUp() {
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                       edge="end"
                     >
-                      {showConfirmPassword ? <MdVisibility className={`visible ${active && 'active'}`} /> : <MdVisibilityOff className={`visible ${active && 'active'}`} />}
+                      {showConfirmPassword ? <MdVisibility className={`visible ${dark && 'active'}`} /> : <MdVisibilityOff className={`visible ${dark && 'active'}`} />}
                     </IconButton>
                   </InputAdornment>
                 }
