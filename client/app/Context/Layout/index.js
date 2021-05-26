@@ -4,8 +4,6 @@ export const LayoutContext = createContext()
 
 export const LayoutContextProvider = ({ children }) => {
   const [dark, setDark] = useState(false)
-  const [openMenu, setOpenMenu] = useState(false)
-
   const darkMode = localStorage.getItem('dark')
 
   useEffect(() => {
@@ -24,16 +22,11 @@ export const LayoutContextProvider = ({ children }) => {
     }
   }
 
-  const toggleMenu = () => {
-    setOpenMenu(!openMenu)
-  }
 
   return (
     <LayoutContext.Provider value={{
       dark,
       toggleDarkMode,
-      openMenu,
-      toggleMenu
     }}>
       {children}
     </LayoutContext.Provider>

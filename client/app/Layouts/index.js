@@ -6,19 +6,28 @@ import { LayoutContext } from '@Context/Layout'
 import { Notification } from '@Components/Notifications'
 import { useSelector } from 'react-redux'
 import { MobileMenu } from '@Components/Menu'
+import useComponentVisible from '@Helpers/useComponentVisible'
 
 export const Layouts = () => {
-  const { dark, toggleDarkMode, openMenu, toggleMenu } = useContext(LayoutContext)
+  const { dark, toggleDarkMode } = useContext(LayoutContext)
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
   
   const { auth } = useSelector(state => state)
 
   return (
     <div className={`app ${dark && 'dark'}`}>
-      {auth.token && <Header dark={dark} toggleDarkMode={toggleDarkMode} />}
-      {auth.token && <MobileMenu
-        active={openMenu}
+      {auth.token && <Header
+        dark={dark}
         toggleDarkMode={toggleDarkMode}
-        toggleMenu={toggleMenu}
+        isComponentVisible={isComponentVisible}
+        setIsComponentVisible={setIsComponentVisible}
+      />}
+      {auth.token && <MobileMenu
+        dark={dark}
+        toggleDarkMode={toggleDarkMode}
+        wrapperRef={ref}
+        isComponentVisible={isComponentVisible}
+        setIsComponentVisible={setIsComponentVisible}
       />}
       <div className="main">
         <Notification />

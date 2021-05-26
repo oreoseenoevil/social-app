@@ -11,11 +11,19 @@
   align-items: center;
   z-index: 1000;
 
+  &.dark {
+    background: #181818;
+  }
+
   svg.loading-icon {
     width: 5em;
     height: 5em;
     fill: #000000;
     animation: spin 1000ms linear infinite;
+
+    &.dark {
+      fill: #fff;
+    }
   }
 }
 

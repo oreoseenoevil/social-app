@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React from 'react'
 import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine, RiProfileLine } from 'react-icons/ri'
 import { Avatar } from '@Components/Avatar'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import '@Components/Menu/index.scss'
+import useComponentVisible from '@Helpers/useComponentVisible'
 
 import { logout } from '@Actions/auth'
 
@@ -15,8 +16,9 @@ const navLinks = [
 ]
 
 export const Menu = ({ toggleDarkMode, dark }) => {
-  const [dropdownOn, setDropdownOn] = useState(false)
   const { auth } = useSelector(state => state)
+
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
 
   const dispatch = useDispatch()
   const { pathname } = useLocation()
@@ -25,29 +27,6 @@ export const Menu = ({ toggleDarkMode, dark }) => {
     if (pn === pathname) {
       return 'active'
     }
-  }
-
-  const wrapperRef = useRef(null)
-  useOutsideAlerter(wrapperRef)
-
-  function useOutsideAlerter(ref) {
-    useEffect(() => {
-      /**
-         * Alert if clicked on outside of element
-         */
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setDropdownOn(false)
-        }
-      }
-  
-      // Bind the event listener
-      document.addEventListener('mousedown', handleClickOutside)
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener('mousedown', handleClickOutside)
-      }
-    }, [ref])
   }
 
   return (
@@ -62,15 +41,15 @@ export const Menu = ({ toggleDarkMode, dark }) => {
         ))
       }
       <li className="user"
-        ref={wrapperRef}
-        onClick={() => setDropdownOn(!dropdownOn)}
+        ref={ref}
+        onClick={() => setIsComponentVisible(!isComponentVisible)}
       >
         <span>
-          <Avatar src={auth.user.avatar} size="small" active={dropdownOn} />
+          <Avatar src={auth.user.avatar} size="small" active={isComponentVisible} />
           <RiArrowDropDownLine className="dropdown" />
         </span>
         <div className="user-menu">
-          <ul className={`nav-dropdown ${dropdownOn && 'active'} ${dark && 'dark'}`}>
+          <ul className={`nav-dropdown ${isComponentVisible && 'active'} ${dark && 'dark'}`}>
             <li><Link to={`/profile/${auth.user._id}`} replace>Profile</Link></li>
             <li>
               <span onClick={toggleDarkMode}>
@@ -92,13 +71,17 @@ export const Menu = ({ toggleDarkMode, dark }) => {
   )
 }
 
-export const MobileMenu = ({ active, toggleDarkMode, toggleMenu }) => {
-
+export const MobileMenu = ({ dark, toggleDarkMode, wrapperRef, setIsComponentVisible, isComponentVisible }) => {
   const dispatch = useDispatch()
   const { auth } = useSelector(state => state)
 
+  const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
+
   return (
-    <div className={`mobile ${active && 'active'}`}>
+    <div
+      className={`mobile ${dark && 'dark'} ${isComponentVisible && 'active'}`}
+      ref={wrapperRef}
+    >
       <ul className="mobile-menu">
         <li onClick={toggleMenu}>
           <Link
@@ -121,9 +104,9 @@ export const MobileMenu = ({ active, toggleDarkMode, toggleMenu }) => {
           ))
         }
         <li onClick={toggleMenu}>
-          <span className="menu-item">
+          <span className="menu-item" onClick={toggleDarkMode}>
             <RiContrastFill className="menu-icon" />
-            <span onClick={toggleDarkMode}>
+            <span>
               Dark mode
             </span>
           </span>

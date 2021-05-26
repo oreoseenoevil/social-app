@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react'
+import React, { useState, useEffect, createRef, useRef } from 'react'
 import { RiSearchLine, RiCloseLine } from 'react-icons/ri'
 import '@Components/SearchBar/index.scss'
 import { useSelector, useDispatch } from 'react-redux'
@@ -39,9 +39,39 @@ export const SearchBar = ({ dark }) => {
     setUsers([])
   }
 
+  const wrapperRef = useRef(null)
+  useOutsideAlerter(wrapperRef)
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      /**
+         * Alert if clicked on outside of element
+         */
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          handleClose()
+        }
+      }
+  
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }, [ref])
+  }
+
   return (
-    <div className="search-bar" onClick={textAreaFocus}>
-      <form className="search-form">
+    <div
+      className="search-bar"
+      onClick={textAreaFocus}
+      ref={wrapperRef}
+    >
+      <form
+        className="search-form"
+        onSubmit={e => e.preventDefault()}
+      >
         <input
           type="text"
           ref={userInputRef}

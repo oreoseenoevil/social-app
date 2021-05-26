@@ -133,7 +133,11 @@ ul.menu {
   background: inherit;
   right: -100%;
   transition: all 200ms ease-out;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.548);
+
+  &.dark {
+    box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.548);
+  }
 
   @media (min-width: 700px) {
     display: none;

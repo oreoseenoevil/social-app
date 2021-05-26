@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { GiCaptainHatProfile } from 'react-icons/gi'
 import '@Layouts/Header/index.scss'
 import { SearchBar } from '@Components/SearchBar'
 import { Menu } from '@Components/Menu'
-import { LayoutContext } from '@Context/Layout'
 
-export const Header = ({ dark, toggleDarkMode }) => {
-  const { openMenu, toggleMenu } = useContext(LayoutContext)
+export const Header = ({ dark, toggleDarkMode, setIsComponentVisible, isComponentVisible }) => {
+
+  const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
 
   return (
     <div className={`header ${dark && 'dark'}`}>
@@ -20,7 +20,7 @@ export const Header = ({ dark, toggleDarkMode }) => {
         <SearchBar dark={dark} />
         <div className="right">
           <div
-            className={`burger ${openMenu && 'open-menu'} ${dark && 'dark'}`}
+            className={`burger ${isComponentVisible && 'open-menu'} ${dark && 'dark'}`}
             onClick={toggleMenu}
           >
             <span className="bar1"></span>

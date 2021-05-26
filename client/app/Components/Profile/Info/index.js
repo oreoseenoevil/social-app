@@ -5,6 +5,7 @@ import { Avatar } from '@Components/Avatar'
 import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
 import { getProfileUsers } from '@Actions/profile'
+import { Edit } from '@Components/Profile'
 
 export const Info = () => {
   const { dark } = useContext(LayoutContext)
@@ -13,6 +14,7 @@ export const Info = () => {
   const dispatch = useDispatch()
 
   const [userData, setUserData] = useState([])
+  const [onEdit, setOnEdit] = useState(false)
 
   useEffect(() => {
     if (id === auth.user._id) {
@@ -36,22 +38,27 @@ export const Info = () => {
               <div className="info-title">
                 <h2>{user.username}</h2>
                 <div className="group-button">
-                  <button className={`btn-info ${dark && 'dark'}`}>
+                  <button
+                    className={`btn-info ${dark && 'dark'}`}
+                    onClick={() => setOnEdit(true)}
+                  >
                     Edit Profile
                   </button>
                 </div>
               </div>
               <h6>{user.fullname}</h6>
               <p>{user.address}</p>
-              <h6>{user.email}</h6>
+              <h6>{user.email} {user.mobile && `| ${user.mobile}`}</h6>
               <a href={user.website} target="_blank" rel="noopener noreferrer">
                 {user.website}
               </a>
+              <p>{user.story}</p>
               <div className="info-group">
                 <span>{user.followers.length} Followers</span>
                 <span>{user.following.length} Following</span>
               </div>
             </div>
+            {onEdit && <Edit user={user} setOnEdit={setOnEdit} />}
           </div>
         ))
       }
