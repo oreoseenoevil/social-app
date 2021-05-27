@@ -25,11 +25,10 @@
     font-size: 1em;
     font-weight: 500;
     color: #fafafa;
-    border: none;
+    outline: none;
+    border: 3px solid #fff;
     border-radius: 1rem;
     transition: all 200ms ease-in-out;
-    outline: 2px solid transparent;
-    outline-offset: -2px;
 
     .arrow-left {
       fill: #fafafa;
@@ -38,11 +37,14 @@
       height: 1em;
     }
 
+    &.dark {
+      border: 3px solid #181818;
+    }
+
     &:hover,
     &:focus {
-      background: #45aaf2;
-      outline-offset: 3px;
-      outline-color: #45aaf2;
+      background: rgba(0, 119, 255, 0.7);
+      box-shadow: 0px 0px 1px 1px rgba(0, 145, 255, 1);
     }
   }
 }

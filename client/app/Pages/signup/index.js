@@ -129,7 +129,7 @@ export default function SignUp() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <GiCaptainHatProfile className="avatar" />
+          <GiCaptainHatProfile className="logo-avatar" />
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
