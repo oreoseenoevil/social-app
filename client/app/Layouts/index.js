@@ -7,12 +7,13 @@ import { Notification } from '@Components/Notifications'
 import { useSelector } from 'react-redux'
 import { MobileMenu } from '@Components/Menu'
 import { useComponentVisible } from '@Helpers'
+import { StatusModal } from '@Components/Modal'
 
 export const Layouts = () => {
   const { dark, toggleDarkMode } = useContext(LayoutContext)
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
   
-  const { auth } = useSelector(state => state)
+  const { auth, status } = useSelector(state => state)
 
   return (
     <div className={`app ${dark && 'dark'}`}>
@@ -30,6 +31,7 @@ export const Layouts = () => {
         setIsComponentVisible={setIsComponentVisible}
       />}
       <div className="main">
+        {status && <StatusModal dark={dark} />}
         <Notification />
         <Main />
       </div>
