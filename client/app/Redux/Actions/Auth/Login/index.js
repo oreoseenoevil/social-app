@@ -1,5 +1,5 @@
 import { postDataAPI } from '@Helpers'
-import { TYPES } from '@Actions/global'
+import { TYPES } from '@Actions'
 
 const { AUTH, ALERT } = TYPES
 

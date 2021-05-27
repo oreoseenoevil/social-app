@@ -6,8 +6,7 @@ import clsx from 'clsx'
 import '@Components/Profile/Edit/index.scss'
 import { VscArrowLeft } from 'react-icons/vsc'
 import { checkImage } from '@Helpers'
-import { TYPES } from '@Actions/global'
-import { updateProfileUser } from '@Actions/profile'
+import { TYPES, updateProfileUser } from '@Actions'
 import { LayoutContext } from '@Context/Layout'
 
 const initialState = {

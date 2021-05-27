@@ -3,7 +3,7 @@ import { RiSearchLine, RiCloseLine } from 'react-icons/ri'
 import '@Components/SearchBar/index.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDataAPI } from '@Helpers'
-import { TYPES } from '@Actions/global'
+import { TYPES } from '@Actions'
 import { Link } from 'react-router-dom'
 import { UserCard } from '@Components/UserCard'
 

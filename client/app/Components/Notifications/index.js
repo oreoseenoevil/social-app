@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Loading } from '@Components/Loading'
 import '@Components/Notifications/index.scss'
 import { Toast } from '@Components/Toast'
-import { TYPES } from '@Actions/global'
+import { TYPES } from '@Actions'
 
 export const Notification = () => {
   const { alert, profile } = useSelector(state => state)

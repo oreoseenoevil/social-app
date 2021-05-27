@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Avatar } from '@Components/Avatar'
 import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
-import { getProfileUsers } from '@Actions/profile'
+import { getProfileUsers } from '@Actions'
 import { Edit } from '@Components/Profile'
 import { FollowButton } from '@Components/FollowButton'
 

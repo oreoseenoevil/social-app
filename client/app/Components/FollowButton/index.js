@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { followUser, unfollowUser } from '@Actions/profile'
+import { followUser, unfollowUser } from '@Actions'
 
 export const FollowButton = ({ user, dark }) => {
   const [followed, setFollowed] = useState(false)

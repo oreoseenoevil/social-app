@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import '@Components/Menu/index.scss'
 import { useComponentVisible } from '@Helpers'
 
-import { logout } from '@Actions/Auth'
+import { logout } from '@Actions'
 
 const navLinks = [
   { label: 'Home', icon: RiHome2Line, path: '/' },

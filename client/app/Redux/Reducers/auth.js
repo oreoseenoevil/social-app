@@ -1,4 +1,4 @@
-import { TYPES } from '@Actions/global'
+import { TYPES } from '@Actions'
 
 const { AUTH } = TYPES
 

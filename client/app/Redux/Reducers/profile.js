@@ -1,4 +1,4 @@
-import { PROFILE_TYPES } from '@Actions/profile'
+import { PROFILE_TYPES } from '@Actions'
 import { EditData } from '@Helpers'
 
 const { LOADING, GET_USER, FOLLOW, UNFOLLOW } = PROFILE_TYPES

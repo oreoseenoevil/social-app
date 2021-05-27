@@ -13,7 +13,7 @@ import { GiCaptainHatProfile } from 'react-icons/gi'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
-import { register } from '@Actions/Auth'
+import { register } from '@Actions'
 import { FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Radio, RadioGroup } from '@material-ui/core'
 
 import { useSelector } from 'react-redux'
