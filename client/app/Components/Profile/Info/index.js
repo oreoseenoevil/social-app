@@ -3,7 +3,7 @@ import { Avatar } from '@Components/Avatar'
 import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
 import { getProfileUsers } from '@Actions'
-import { Edit } from '@Components/Profile'
+import { Edit, Followers, Following } from '@Components/Profile'
 import { FollowButton } from '@Components/FollowButton'
 
 export const Info = ({id, auth, profile, dispatch}) => {
@@ -11,6 +11,8 @@ export const Info = ({id, auth, profile, dispatch}) => {
 
   const [userData, setUserData] = useState([])
   const [onEdit, setOnEdit] = useState(false)
+  const [showFollowers, setShowFollowers] = useState(false)
+  const [showFollowing, setShowFollowing] = useState(false)
 
   useEffect(() => {
     if (id === auth.user._id) {
@@ -20,7 +22,7 @@ export const Info = ({id, auth, profile, dispatch}) => {
       const newData = profile.users.filter(user => user._id === id)
       setUserData(newData)
     }
-  }, [id, auth.user, profile.users])
+  }, [id, auth.user, profile.users, dispatch])
 
   return (
     <div className={`user-info ${dark && 'dark'}`}>
@@ -54,11 +56,31 @@ export const Info = ({id, auth, profile, dispatch}) => {
               </a>
               <p>{user.story}</p>
               <div className="info-group">
-                <span>{user.followers.length} Followers</span>
-                <span>{user.following.length} Following</span>
+                <span
+                  onClick={() => setShowFollowers(true)}
+                >{user.followers.length} Followers</span>
+                <span
+                  onClick={() => setShowFollowing(true)}
+                >{user.following.length} Following</span>
               </div>
             </div>
             {onEdit && <Edit setOnEdit={setOnEdit} />}
+            {
+              showFollowers &&
+              <Followers
+                dark={dark}
+                user={user.followers}
+                setShowFollowers={setShowFollowers}
+              />
+            }
+            {
+              showFollowing &&
+              <Following
+                dark={dark}
+                user={user.following}
+                setShowFollowing={setShowFollowing}
+              />
+            }
           </div>
         ))
       }

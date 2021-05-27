@@ -99,6 +99,11 @@
         span {
           margin-right: 2rem;
           font-weight: 600;
+          cursor: pointer;
+
+          &:hover {
+            color: #0091ff;
+          }
 
           &:nth-child(2) {
             margin-right: 0;

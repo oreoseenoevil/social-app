@@ -1,27 +1,36 @@
 .user-card {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 0.5em;
+  padding: 1em 1em;
   background: #fff;
   transition: all 200ms ease-in-out;
   z-index: 10;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &.dark {
     background: #181818;
-    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
   &:hover {
     border-color: #0091ff;
   }
 
-  .user-name {
-    margin-left: 1rem;
+  .block-card {
     display: flex;
-    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+
+    .user-name {
+      margin-left: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .block-child {
+      justify-self: flex-end;
+    }
   }
 }

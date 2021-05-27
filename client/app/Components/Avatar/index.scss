@@ -12,8 +12,8 @@
   }
 
   &.medium {
-    width: 2.5em;
-    height: 2.5em;
+    width: 3em;
+    height: 3em;
   }
 
   &.big {
@@ -24,6 +24,12 @@
   &.large {
     width: 8em;
     height: 8em;
+
+    @media (max-width: 400px) {
+      margin: 0 1rem;
+      width: 6em;
+      height: 6em;
+    }
   }
 
   &:hover,

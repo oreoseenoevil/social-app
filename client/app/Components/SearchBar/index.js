@@ -4,7 +4,6 @@ import '@Components/SearchBar/index.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDataAPI } from '@Helpers'
 import { TYPES } from '@Actions'
-import { Link } from 'react-router-dom'
 import { UserCard } from '@Components/UserCard'
 
 export const SearchBar = ({ dark }) => {
@@ -97,9 +96,12 @@ export const SearchBar = ({ dark }) => {
         <div className="users-result">
           {
             search && users.map(user => (
-              <Link key={user._id} to={`/profile/${user._id}`} onClick={handleClose}>
-                <UserCard user={user} />
-              </Link>
+              <div className="results" key={user._id}>
+                <UserCard
+                  user={user}
+                  handleClose={handleClose}
+                />
+              </div>
             ))
           }
         </div>

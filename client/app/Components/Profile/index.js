@@ -1,3 +1,5 @@
-export * from '@Components/Profile/Info'
-export * from '@Components/Profile/Posts'
 export * from '@Components/Profile/Edit'
+export * from '@Components/Profile/Info'
+export * from '@Components/Profile/Following'
+export * from '@Components/Profile/Followers'
+export * from '@Components/Profile/Posts'

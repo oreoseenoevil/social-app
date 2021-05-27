@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { followUser, unfollowUser } from '@Actions'
+import '@Components/FollowButton/index.scss'
 
 export const FollowButton = ({ user, dark }) => {
   const [followed, setFollowed] = useState(false)
+  const [load, setLoad] = useState(false)
 
   const { auth, profile } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -14,14 +16,20 @@ export const FollowButton = ({ user, dark }) => {
     }
   }, [auth.user.following, user._id])
 
-  const handleUnfollow = () => {
+  const handleUnfollow = async () => {
+    if (load) return
     setFollowed(false)
-    dispatch(unfollowUser({users: profile.users, user, auth}))
+    setLoad(true)
+    await dispatch(unfollowUser({users: profile.users, user, auth}))
+    setLoad(false)
   }
 
-  const handleFollow = () => {
+  const handleFollow = async () => {
+    if (load) return
     setFollowed(true)
-    dispatch(followUser({users: profile.users, user, auth}))
+    setLoad(true)
+    await dispatch(followUser({users: profile.users, user, auth}))
+    setLoad(false)
   }
 
   return (

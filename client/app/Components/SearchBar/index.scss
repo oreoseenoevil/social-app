@@ -64,9 +64,8 @@
       width: 100%;
       position: absolute;
 
-      a {
-        text-decoration: none;
-        color: inherit;
+      .results {
+        border: 1px solid #ddd;
       }
     }
   }
