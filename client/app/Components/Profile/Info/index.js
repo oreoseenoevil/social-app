@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
 import { Avatar } from '@Components/Avatar'
 import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
 import { getProfileUsers } from '@Actions/profile'
 import { Edit } from '@Components/Profile'
+import { FollowButton } from '@Components/FollowButton'
 
-export const Info = () => {
+export const Info = ({id, auth, profile, dispatch}) => {
   const { dark } = useContext(LayoutContext)
-  const { id } = useParams()
-  const { auth, profile } = useSelector(state => state)
-  const dispatch = useDispatch()
 
   const [userData, setUserData] = useState([])
   const [onEdit, setOnEdit] = useState(false)
@@ -41,14 +37,12 @@ export const Info = () => {
                   {
                     user._id === auth.user._id ?
                       <button
-                        className={`btn-info ${dark && 'dark'}`}
+                        className={`btn-edit ${dark && 'dark'}`}
                         onClick={() => setOnEdit(true)}
                       >
                         Edit Profile
                       </button> :
-                      <button className={`btn-info ${dark && 'dark'}`}>
-                        Follow
-                      </button>
+                      <FollowButton user={user} dark={dark} />
                   }
                 </div>
               </div>

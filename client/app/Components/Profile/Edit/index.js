@@ -5,7 +5,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, makeStyle
 import clsx from 'clsx'
 import '@Components/Profile/Edit/index.scss'
 import { VscArrowLeft } from 'react-icons/vsc'
-import { checkImage } from '@Helpers/imageUploader'
+import { checkImage } from '@Helpers'
 import { TYPES } from '@Actions/global'
 import { updateProfileUser } from '@Actions/profile'
 import { LayoutContext } from '@Context/Layout'

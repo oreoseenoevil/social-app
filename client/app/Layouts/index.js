@@ -6,7 +6,7 @@ import { LayoutContext } from '@Context/Layout'
 import { Notification } from '@Components/Notifications'
 import { useSelector } from 'react-redux'
 import { MobileMenu } from '@Components/Menu'
-import useComponentVisible from '@Helpers/useComponentVisible'
+import { useComponentVisible } from '@Helpers'
 
 export const Layouts = () => {
   const { dark, toggleDarkMode } = useContext(LayoutContext)

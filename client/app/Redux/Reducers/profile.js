@@ -1,6 +1,7 @@
 import { PROFILE_TYPES } from '@Actions/profile'
+import { EditData } from '@Helpers'
 
-const { LOADING, GET_USER } = PROFILE_TYPES
+const { LOADING, GET_USER, FOLLOW, UNFOLLOW } = PROFILE_TYPES
 
 const initialState = {
   loading: false,
@@ -19,6 +20,16 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...state.users, action.payload.data]
+      }
+    case FOLLOW:
+      return {
+        ...state,
+        users: EditData(state.users, action.payload._id, action.payload)
+      }
+    case UNFOLLOW:
+      return {
+        ...state,
+        users: EditData(state.users, action.payload._id, action.payload)
       }
     default:
       return state

@@ -4,9 +4,9 @@ import { Avatar } from '@Components/Avatar'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import '@Components/Menu/index.scss'
-import useComponentVisible from '@Helpers/useComponentVisible'
+import { useComponentVisible } from '@Helpers'
 
-import { logout } from '@Actions/auth'
+import { logout } from '@Actions/Auth'
 
 const navLinks = [
   { label: 'Home', icon: RiHome2Line, path: '/' },

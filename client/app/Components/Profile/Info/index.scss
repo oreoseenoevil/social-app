@@ -50,7 +50,8 @@
         button {
           display: flex;
           align-items: center;
-          padding: 0.2rem 1rem;
+          justify-content: center;
+          padding: 0.225em 1em;
           background: transparent;
           font-size: 1em;
           font-weight: 500;
@@ -59,13 +60,18 @@
           border-radius: 0.3rem;
           transition: all 200ms ease-in-out;
           outline: none;
+          cursor: pointer;
+
+          &.btn-info {
+            width: 110px;
+          }
 
           &.dark {
             border: 1px solid rgba(255, 255, 255, 0.5);
           }
 
           &:hover,
-          &:focus {
+          &.active {
             background: #0091ff;
             color: #fff;
           }

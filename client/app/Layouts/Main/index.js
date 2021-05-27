@@ -5,7 +5,7 @@ import { PageRender, PublicRoute } from '@Router'
 import Home from '@Pages/home'
 import SignIn from '@Pages/signin'
 import SignUp from '@Pages/signup'
-import { refreshToken } from '@Actions/auth'
+import { refreshToken } from '@Actions/Auth'
 
 export const Main = () => {
   const { auth } = useSelector(state => state)
