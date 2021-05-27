@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RiCameraLine } from 'react-icons/ri'
 import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, makeStyles, OutlinedInput, Radio, RadioGroup } from '@material-ui/core'
@@ -8,6 +8,7 @@ import { VscArrowLeft } from 'react-icons/vsc'
 import { checkImage } from '@Helpers/imageUploader'
 import { TYPES } from '@Actions/global'
 import { updateProfileUser } from '@Actions/profile'
+import { LayoutContext } from '@Context/Layout'
 
 const initialState = {
   fullname: '',
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const Edit = ({ setOnEdit }) => {
+  const { dark } = useContext(LayoutContext)
   const classes = useStyles()
   const [userData, setUserData] = useState(initialState)
 
@@ -93,9 +95,9 @@ export const Edit = ({ setOnEdit }) => {
 
   return (
     <div className="edit-profile">
-      <form onSubmit={handleSubmit}>
+      <form className={`${dark && 'dark'}`} onSubmit={handleSubmit}>
         <button
-          className="btn-close"
+          className={`btn-close ${dark && 'dark'}`}
           onClick={() => setOnEdit(false)}
         >
           <VscArrowLeft className="arrow-left" />
@@ -242,7 +244,7 @@ export const Edit = ({ setOnEdit }) => {
           color="primary"
           className={classes.submit}
         >
-          Save
+          Update
         </Button>
       </form>
     </div>

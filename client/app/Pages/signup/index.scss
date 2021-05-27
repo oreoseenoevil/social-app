@@ -22,8 +22,12 @@
     color: #fafafa;
   }
 
-  .MuiRadio-colorSecondary {
+  .MuiRadio-root {
     color: inherit;
+  }
+
+  .MuiRadio-colorSecondary.Mui-checked {
+    color: #f50057;
   }
 
   .MuiFormControlLabel-root {

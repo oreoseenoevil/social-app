@@ -22,6 +22,19 @@
     margin: auto 20px;
     color: #000;
 
+    &.dark {
+      color: #fff;
+      background: #181818;
+    }
+
+    .MuiRadio-root {
+      color: inherit;
+    }
+
+    .MuiRadio-colorSecondary.Mui-checked {
+      color: #f50057;
+    }
+
     .info-avatar {
       width: 150px;
       height: 150px;
