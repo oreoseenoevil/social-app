@@ -26,7 +26,17 @@
 
       svg {
         margin-right: 1rem;
+        cursor: pointer;
+
+        &.heart.active {
+          fill: rgb(255, 47, 47);
+          color: rgb(255, 47, 47);
+        }
       }
+    }
+
+    svg {
+      cursor: pointer;
     }
   }
 }

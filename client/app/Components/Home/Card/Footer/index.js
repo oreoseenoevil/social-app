@@ -17,7 +17,7 @@ export const CardFooter = ({ post }) => {
       </div>
       <div className="card-icons">
         <div className="group">
-          <FiHeart size="1.5em" />
+          <FiHeart size="1.5em" className="heart" />
           <BiMessageRounded size="1.5em" />
           <FiSend size="1.5em" />
         </div>

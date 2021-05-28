@@ -1,12 +1,12 @@
-import React, { useState, useRef, Fragment } from 'react'
+import React, { useState, useRef, Fragment, useEffect } from 'react'
 import '@Components/Modal/Status/index.scss'
 import { useSelector, useDispatch} from 'react-redux'
-import { TYPES, createPost } from '@Actions'
+import { TYPES, createPost, updatePost } from '@Actions'
 import { FaCamera, FaImage } from 'react-icons/fa'
 
 export const StatusModal = ({ dark }) => {
   const dispatch = useDispatch()
-  const { auth } = useSelector(state => state)
+  const { auth, status } = useSelector(state => state)
 
   const { STATUS, ALERT } = TYPES
 
@@ -96,7 +96,12 @@ export const StatusModal = ({ dark }) => {
       })
     }
 
-    dispatch(createPost({ content, images, auth }))
+    if (status.onEdit) {
+      dispatch(updatePost({content, images, auth, status}))
+    } else {
+      dispatch(createPost({ content, images, auth }))
+    }
+
     setContent('')
     setImages([])
     if(tracks) tracks.stop()
@@ -106,11 +111,22 @@ export const StatusModal = ({ dark }) => {
     })
   }
 
+  useEffect(() => {
+    if (status.onEdit) {
+      setContent(status.content)
+      setImages(status.images)
+    }
+  }, [status])
+
   return (
     <div className="modal-container">
       <form className={`${dark && 'dark'}`} onSubmit={handleSubmit}>
         <div className={`modal-header ${dark && 'dark'}`}>
-          <h3>Create Post</h3>
+          <h3>
+            {
+              status.onEdit ? 'Edit Post' : 'Create Post'
+            }
+          </h3>
           <span
             className={`close x-marked ${dark && 'dark'}`}
             onClick={() => dispatch({type: STATUS, payload: false}) }
@@ -128,7 +144,13 @@ export const StatusModal = ({ dark }) => {
             {
               images.map((img, index) => (
                 <div className="image" key={index}>
-                  <img src={img.camera ? img.camera : URL.createObjectURL(img)} alt="images" />
+                  <img
+                    src={
+                      img.camera ?
+                        img.camera :
+                        img.url ? img.url : URL.createObjectURL(img)}
+                    alt="images"
+                  />
                   <span
                     className="close x-marked"
                     onClick={() => deleteImage(index)}
@@ -184,7 +206,9 @@ export const StatusModal = ({ dark }) => {
           <button
             className={`btn-info ${dark && 'dark'}`}
             type="submit"
-          >Post</button>
+          >
+            {status.onEdit ? 'Save' : 'Post'}
+          </button>
         </div>
       </form>
     </div>

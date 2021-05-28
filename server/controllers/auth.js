@@ -32,7 +32,7 @@ const authController = {
         path: '/',
         maxAge: 30 * 24 * 60 * 60 * 1000,
         secure: production,
-        sameSite: true
+        sameSite: 'Strict'
       })
 
 
@@ -83,7 +83,7 @@ const authController = {
           path: '/',
           maxAge: 30 * 24 * 60 * 60 * 1000,
           secure: production,
-          sameSite: true
+          sameSite: 'Strict'
         })
 
         return res.status(200).json({

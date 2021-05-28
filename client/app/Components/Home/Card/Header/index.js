@@ -8,11 +8,24 @@ import { GoKebabVertical } from 'react-icons/go'
 import { RiEditLine, RiDeleteBin6Line } from 'react-icons/ri'
 import { BsLink45Deg } from 'react-icons/bs'
 import { useComponentVisible } from '@Helpers'
+import { TYPES } from '@Actions' 
 
 export const CardHeader = ({ post, dark }) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
 
   const { auth } = useSelector(state => state)
+  const dispatch = useDispatch()
+  const { STATUS } = TYPES
+
+  const handleEditPost = () => {
+    dispatch({
+      type: STATUS,
+      payload: {
+        ...post,
+        onEdit: true
+      }
+    })
+  }
 
   return (
     <div className="card-header">
@@ -42,7 +55,7 @@ export const CardHeader = ({ post, dark }) => {
           <div className={`dropdown-menu ${dark && 'dark'}`}>
             { auth.user._id === post.user._id &&
               <Fragment>
-                <div className="dropdown-item">
+                <div className="dropdown-item" onClick={handleEditPost}>
                   <span>Edit Post</span>
                   <RiEditLine />
                 </div>
