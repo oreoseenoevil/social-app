@@ -10,3 +10,7 @@ export const PROFILE_TYPES = {
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW'
 }
+
+export const POST_TYPES = {
+  CREATE_POST: 'CREATE_POST'
+}

@@ -1,7 +1,7 @@
 import React, { useState, useRef, Fragment } from 'react'
 import '@Components/Modal/Status/index.scss'
 import { useSelector, useDispatch} from 'react-redux'
-import { TYPES } from '@Actions'
+import { TYPES, createPost } from '@Actions'
 import { FaCamera, FaImage } from 'react-icons/fa'
 
 export const StatusModal = ({ dark }) => {
@@ -16,7 +16,7 @@ export const StatusModal = ({ dark }) => {
   const [tracks, setTracks] = useState('')
 
   const videoRef = useRef()
-  const canvasRef = useRef()
+  const refCanvas = useRef()
 
   const handleChangeImages = e => {
     const files = [...e.target.files]
@@ -61,9 +61,8 @@ export const StatusModal = ({ dark }) => {
           const track = mediaStream.getTracks()
           setTracks(track[0])
         }).catch(err => {
-          if (err) {
-            setStream(false)
-          }
+          console.log(err)
+          setStream(false)
         })
     }
   }
@@ -72,12 +71,12 @@ export const StatusModal = ({ dark }) => {
     const width = videoRef.current.clientWidth
     const height = videoRef.current.clientHeight
 
-    canvasRef.current.setAttribute('width', width)
-    canvasRef.current.setAtrribute('height', height)
+    refCanvas.current.height = height
+    refCanvas.current.width = width
 
-    const ctx = canvasRef.current.getContext('2d')
+    const ctx = refCanvas.current.getContext('2d')
     ctx.drawImage(videoRef.current, 0, 0, width, height)
-    let URL = canvasRef.current.toDataURL()
+    let URL = refCanvas.current.toDataURL()
     setImages([...images, { camera: URL }])
   }
 
@@ -86,9 +85,30 @@ export const StatusModal = ({ dark }) => {
     setStream(false)
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (!content && images.length === 0) {
+      return dispatch({
+        type: ALERT,
+        payload: {
+          error: 'Please add content or photo.'
+        }
+      })
+    }
+
+    dispatch(createPost({ content, images, auth }))
+    setContent('')
+    setImages([])
+    if(tracks) tracks.stop()
+    dispatch({
+      type: STATUS,
+      payload: false
+    })
+  }
+
   return (
     <div className="modal-container">
-      <form className={`${dark && 'dark'}`}>
+      <form className={`${dark && 'dark'}`} onSubmit={handleSubmit}>
         <div className={`modal-header ${dark && 'dark'}`}>
           <h3>Create Post</h3>
           <span
@@ -133,8 +153,8 @@ export const StatusModal = ({ dark }) => {
                   onClick={handleStopStream}
                 ></span>
                 <canvas
-                  ref={canvasRef}
-                  style={{ display: 'none' }}
+                  ref={refCanvas}
+                  style={{display: 'none'}}
                 />
               </div>
           }
@@ -161,7 +181,10 @@ export const StatusModal = ({ dark }) => {
           </div>
         </div>
         <div className="modal-footer">
-          <button className={`btn-info ${dark && 'dark'}`}>Post</button>
+          <button
+            className={`btn-info ${dark && 'dark'}`}
+            type="submit"
+          >Post</button>
         </div>
       </form>
     </div>
