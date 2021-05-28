@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '@Components/Home/Card/Body/index.scss'
 import Carousel from 'react-material-ui-carousel'
 import { Slider } from '@Components/Home'
+import { AiOutlineLine } from 'react-icons/ai'
 
 export const CardBody = ({ post }) => {
   const [readMore, setReadMore] = useState(false)
@@ -12,16 +13,25 @@ export const CardBody = ({ post }) => {
           {
             post.content.length < 60 ?
               post.content : 
-              readMore ? post.content + ' ' : post.content.slice(0, 60) + '...'
+              readMore ? post.content + ' ' : post.content.slice(0, 60) + '... '
           }
           {
             post.content.length > 60 &&
               <span className="readMore" onClick={() => setReadMore(!readMore)}>
-                {readMore ? 'Hide content' : 'Read More'}
+                {readMore ? 'hide' : 'more'}
               </span>
           }
         </span>
-        <Carousel>
+        <Carousel
+          IndicatorIcon={<AiOutlineLine size="2em" />}
+          indicatorContainerProps={{
+            style: {
+              margin: 0,
+              position: 'absolute',
+              bottom: '1rem'
+            }
+          }}
+        >
           {
             post.images.length > 0 &&
               post.images.map((image, i) => (

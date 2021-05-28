@@ -6,5 +6,10 @@
 
   .card-body-content {
     font-size: 1rem;
+
+    .readMore {
+      cursor: pointer;
+      opacity: 0.7;
+    }
   }
 }
