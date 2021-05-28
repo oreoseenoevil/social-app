@@ -17,7 +17,7 @@ export const CardHeader = ({ post, dark }) => {
   return (
     <div className="card-header">
       <div className="group">
-        <Avatar src={post.user.avatar} size="big" />
+        <Avatar src={post.user.avatar} size="medium" />
         <div className="card-name">
           <h4>
             <Link to={`/profile/${post.user._id}`}>

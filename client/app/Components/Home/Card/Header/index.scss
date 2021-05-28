@@ -48,6 +48,7 @@ $cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
       flex-wrap: nowrap;
       width: 150px;
       border-radius: 5px;
+      z-index: 10;
 
       &.dark {
         background: #181818;

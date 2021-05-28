@@ -95,13 +95,13 @@ export const Edit = ({ setOnEdit }) => {
   return (
     <div className="edit-profile">
       <form className={`${dark && 'dark'}`} onSubmit={handleSubmit}>
-        <button
+        <span
           className={`btn-close ${dark && 'dark'}`}
           onClick={() => setOnEdit(false)}
         >
           <VscArrowLeft className="arrow-left" />
           Go Back
-        </button>
+        </span>
         <div className="info-avatar">
           <img
             src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
