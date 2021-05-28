@@ -94,7 +94,7 @@ export const StatusModal = ({ dark }) => {
           </div>
         </div>
         <div className="modal-footer">
-          <button className={`btn-info ${dark && 'dark'}`}>Posts</button>
+          <button className={`btn-info ${dark && 'dark'}`}>Post</button>
         </div>
       </form>
     </div>

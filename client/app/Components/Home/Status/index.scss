@@ -32,5 +32,9 @@
     &:hover {
       background: rgba(0, 0, 0, 0.08);
     }
+
+    @media (max-width: 400px) {
+      font-size: 0.85rem;
+    }
   }
 }
