@@ -195,15 +195,71 @@
         }
       }
 
+      .stream {
+        position: relative;
+        border: 1px solid #000;
+
+        &.dark {
+          border: 1px solid #fff;
+        }
+
+        span.close {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          background: #fff;
+          border-radius: 50%;
+          width: 1.5rem;
+          height: 1.5rem;
+          display: flex;
+          outline: none;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+
+          &.dark {
+            box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+          }
+
+          &::before,
+          &::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+          }
+
+          &.x-marked {
+            &::after {
+              background: crimson;
+              height: (60/100) * 1.5rem;
+              width: 3px;
+              transform: rotateZ(-45deg);
+            }
+
+            &::before {
+              background: crimson;
+              height: (60/100) * 1.5rem;
+              width: 3px;
+              transform: rotateZ(45deg);
+            }
+          }
+        }
+      }
+
       .input-images {
         margin-top: 1em;
         display: flex;
         justify-content: center;
         align-items: center;
-        opacity: 0.6;
 
         svg {
           cursor: pointer;
+          opacity: 0.6;
+
+          &:hover {
+            opacity: 1;
+          }
         }
 
         .file-upload {
@@ -213,6 +269,10 @@
           display: flex;
           align-items: center;
           cursor: pointer;
+
+          &:hover svg {
+            opacity: 1;
+          }
 
           svg {
             cursor: pointer;

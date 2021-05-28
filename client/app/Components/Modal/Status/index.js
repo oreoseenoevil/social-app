@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, Fragment } from 'react'
 import '@Components/Modal/Status/index.scss'
 import { useSelector, useDispatch} from 'react-redux'
 import { TYPES } from '@Actions'
@@ -12,6 +12,11 @@ export const StatusModal = ({ dark }) => {
 
   const [content, setContent] = useState('')
   const [images, setImages] = useState([])
+  const [stream, setStream] = useState(false)
+  const [tracks, setTracks] = useState('')
+
+  const videoRef = useRef()
+  const canvasRef = useRef()
 
   const handleChangeImages = e => {
     const files = [...e.target.files]
@@ -46,6 +51,41 @@ export const StatusModal = ({ dark }) => {
     setImages(newArr)
   }
 
+  const handleStream = () => {
+    setStream(true)
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(mediaStream => {
+          videoRef.current.srcObject = mediaStream
+          videoRef.current.play()
+          const track = mediaStream.getTracks()
+          setTracks(track[0])
+        }).catch(err => {
+          if (err) {
+            setStream(false)
+          }
+        })
+    }
+  }
+
+  const handleCapture = () => {
+    const width = videoRef.current.clientWidth
+    const height = videoRef.current.clientHeight
+
+    canvasRef.current.setAttribute('width', width)
+    canvasRef.current.setAtrribute('height', height)
+
+    const ctx = canvasRef.current.getContext('2d')
+    ctx.drawImage(videoRef.current, 0, 0, width, height)
+    let URL = canvasRef.current.toDataURL()
+    setImages([...images, { camera: URL }])
+  }
+
+  const handleStopStream = () => {
+    tracks.stop()
+    setStream(false)
+  }
+
   return (
     <div className="modal-container">
       <form className={`${dark && 'dark'}`}>
@@ -68,7 +108,7 @@ export const StatusModal = ({ dark }) => {
             {
               images.map((img, index) => (
                 <div className="image" key={index}>
-                  <img src={URL.createObjectURL(img)} alt="images" />
+                  <img src={img.camera ? img.camera : URL.createObjectURL(img)} alt="images" />
                   <span
                     className="close x-marked"
                     onClick={() => deleteImage(index)}
@@ -78,19 +118,46 @@ export const StatusModal = ({ dark }) => {
             }
           </div>
 
+          {
+            stream &&
+              <div className={`stream ${dark && 'dark'}`}>
+                <video
+                  autoPlay
+                  muted
+                  ref={videoRef}
+                  width="100%"
+                  height="100%"
+                />
+                <span
+                  className={`close x-marked ${dark && 'dark'}`}
+                  onClick={handleStopStream}
+                ></span>
+                <canvas
+                  ref={canvasRef}
+                  style={{ display: 'none' }}
+                />
+              </div>
+          }
+
           <div className="input-images">
-            <FaCamera size="2em" />
-            <div className="file-upload">
-              <FaImage size="2em" />
-              <input
-                type="file"
-                name="file"
-                id="file"
-                multiple
-                accept="image/*"
-                onChange={handleChangeImages}
-              />
-            </div>
+            {
+              stream ?
+                <FaCamera size="2em" onClick={handleCapture} /> :
+                <Fragment>
+                  <FaCamera size="2em" onClick={handleStream} />
+                  <div className="file-upload">
+                    <FaImage size="2em" />
+                    <input
+                      type="file"
+                      name="file"
+                      id="file"
+                      multiple
+                      accept="image/*"
+                      onChange={handleChangeImages}
+                    />
+                  </div>
+                </Fragment>
+            }
           </div>
         </div>
         <div className="modal-footer">
