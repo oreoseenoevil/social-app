@@ -12,7 +12,9 @@ import { StatusModal } from '@Components/Modal'
 export const Layouts = () => {
   const { dark, toggleDarkMode } = useContext(LayoutContext)
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
-  
+
+  const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
+
   const { auth, status } = useSelector(state => state)
 
   return (
@@ -21,14 +23,14 @@ export const Layouts = () => {
         dark={dark}
         toggleDarkMode={toggleDarkMode}
         isComponentVisible={isComponentVisible}
-        setIsComponentVisible={setIsComponentVisible}
+        toggleMenu={toggleMenu}
       />}
       {auth.token && <MobileMenu
         dark={dark}
         toggleDarkMode={toggleDarkMode}
         wrapperRef={ref}
         isComponentVisible={isComponentVisible}
-        setIsComponentVisible={setIsComponentVisible}
+        toggleMenu={toggleMenu}
       />}
       <div className="main">
         {status && <StatusModal dark={dark} />}

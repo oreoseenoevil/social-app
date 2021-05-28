@@ -5,10 +5,7 @@ import '@Layouts/Header/index.scss'
 import { SearchBar } from '@Components/SearchBar'
 import { Menu } from '@Components/Menu'
 
-export const Header = ({ dark, toggleDarkMode, setIsComponentVisible, isComponentVisible }) => {
-
-  const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
-
+export const Header = ({ dark, toggleDarkMode, toggleMenu, isComponentVisible }) => {
   return (
     <div className={`header ${dark && 'dark'}`}>
       <div className="wrapper">

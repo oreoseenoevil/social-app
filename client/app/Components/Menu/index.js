@@ -1,7 +1,8 @@
 import React from 'react'
 import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine, RiProfileLine } from 'react-icons/ri'
+import { CgProfile } from 'react-icons/cg'
 import { Avatar } from '@Components/Avatar'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import '@Components/Menu/index.scss'
 import { useComponentVisible } from '@Helpers'
@@ -22,6 +23,7 @@ export const Menu = ({ toggleDarkMode, dark }) => {
 
   const dispatch = useDispatch()
   const { pathname } = useLocation()
+  const history = useHistory()
 
   const isActive = pn => {
     if (pn === pathname) {
@@ -48,34 +50,41 @@ export const Menu = ({ toggleDarkMode, dark }) => {
           <Avatar src={auth.user.avatar} size="small" active={isComponentVisible} />
           <RiArrowDropDownLine className="dropdown" />
         </span>
-        <div className="user-menu">
-          <ul className={`nav-dropdown ${isComponentVisible && 'active'} ${dark && 'dark'}`}>
-            <li><Link to={`/profile/${auth.user._id}`} replace>Profile</Link></li>
-            <li>
-              <span onClick={toggleDarkMode}>
-                Dark mode
-              </span>
-            </li>
-            <li>
-              <Link to="/" 
-                replace
+        { isComponentVisible &&
+            <div className={`dropdown-menu ${dark && 'dark'}`}>
+              <div
+                className="dropdown-item"
+                onClick={() => history.push(`/profile/${auth.user._id}`)}
+              >
+                <span>Profile</span>
+                <CgProfile />
+              </div>
+              <span className={`dropdown-line ${dark && 'dark'}`}></span>
+              <div className="dropdown-item"
+                onClick={toggleDarkMode}
+              >
+                <span>
+                  Dark mode
+                </span>
+                <RiContrastFill />
+              </div>
+              <span className={`dropdown-line ${dark && 'dark'}`}></span>
+              <div className="dropdown-item"
                 onClick={() => dispatch(logout())}
               >
-                Sign out
-              </Link>
-            </li>
-          </ul>
-        </div>
+                <span>Sign out</span>
+                <RiLogoutBoxRLine />
+              </div>
+            </div>
+        }
       </li>
     </ul>
   )
 }
 
-export const MobileMenu = ({ dark, toggleDarkMode, wrapperRef, setIsComponentVisible, isComponentVisible }) => {
+export const MobileMenu = ({ dark, toggleDarkMode, wrapperRef, toggleMenu, isComponentVisible }) => {
   const dispatch = useDispatch()
   const { auth } = useSelector(state => state)
-
-  const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
 
   return (
     <div

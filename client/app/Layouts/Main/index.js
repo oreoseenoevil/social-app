@@ -5,7 +5,7 @@ import { PageRender, PublicRoute } from '@Router'
 import Home from '@Pages/home'
 import SignIn from '@Pages/signin'
 import SignUp from '@Pages/signup'
-import { refreshToken } from '@Actions'
+import { refreshToken, getPosts } from '@Actions'
 
 export const Main = () => {
   const { auth } = useSelector(state => state)
@@ -14,6 +14,12 @@ export const Main = () => {
   useEffect(() => {
     dispatch(refreshToken())
   }, [dispatch])
+
+  useEffect(() => {
+    if (auth.token) {
+      dispatch(getPosts(auth.token))
+    }
+  }, [dispatch, auth.token])
 
   return (
     <Switch>

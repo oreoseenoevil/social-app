@@ -1,10 +1,13 @@
 import { POST_TYPES } from '@Actions'
 
 const initialState = {
-  posts: []
+  loading: false,
+  posts: [],
+  result: 0,
+  page: 2
 }
 
-const { CREATE_POST } = POST_TYPES
+const { CREATE_POST, LOADING_POST, GET_POSTS } = POST_TYPES
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +15,17 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts, action.payload]
+      }
+    case LOADING_POST:
+      return {
+        ...state,
+        loading: action.payload
+      }
+    case GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload.data,
+        result: action.payload.result
       }
     default:
       return state

@@ -51,6 +51,71 @@ ul.menu {
       position: relative;
       z-index: 10;
 
+      .dropdown-menu {
+        position: absolute;
+        background: #fff;
+        top: 3em;
+        right: 1em;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+        display: flex;
+        padding: 1em;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 160px;
+        border-radius: 5px;
+
+        &.dark {
+          background: #181818;
+          box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.1);
+
+          &::before,
+          &::after {
+            border: 8px solid #181818;
+            box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.03);
+          }
+        }
+
+        &::before,
+        &::after {
+          top: -6px;
+          right: 9px;
+          left: auto;
+          position: absolute;
+          display: inline-block;
+          content: '';
+          border: 8px solid transparent;
+          border: 8px solid #fff;
+          transform: rotate(45deg);
+          box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        .dropdown-item {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: nowrap;
+          padding: 0.5em;
+          font-size: 1rem;
+          color: inherit;
+          cursor: pointer;
+        }
+
+        .dropdown-line {
+          margin: 5px 0;
+          height: 1px;
+          width: 100%;
+          background: rgba(0, 0, 0, 0.1);
+
+          &.dark {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+
       span {
         cursor: pointer;
         display: flex;
@@ -60,62 +125,6 @@ ul.menu {
           height: 1.2em;
           width: 1.2em;
           align-self: flex-end;
-        }
-      }
-
-      .user-menu {
-        position: absolute;
-        right: -5px;
-        top: 3em;
-
-        .nav-dropdown {
-          position: relative;
-          z-index: 10;
-          background: #fff;
-          box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.473);
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          color: inherit;
-          display: none;
-
-          &.active {
-            display: block;
-          }
-
-          &.dark {
-            background: #181818;
-          }
-
-          li {
-            display: block;
-            width: 100%;
-            background: inherit;
-
-            & > * {
-              text-decoration: none;
-              opacity: 1;
-              color: inherit;
-              width: 100%;
-              margin-bottom: 5px;
-              padding: 1em;
-              display: inline-block;
-              white-space: pre;
-              box-sizing: border-box;
-              cursor: pointer;
-              font-weight: 500;
-              letter-spacing: 1px;
-              transition: background 100ms ease, color 100ms ease,
-                opacity 100ms ease;
-
-              &:hover {
-                background: #0091ff;
-                color: #fff;
-                opacity: 1;
-              }
-            }
-          }
         }
       }
     }

@@ -26,6 +26,24 @@ const postController = {
         error: error.message
       })
     }
+  },
+  getPosts: async (req, res) => {
+    try {
+      const posts = await Post.find({
+        user: [...req.user.following, req.user._id]
+      }).populate('user likes', 'avatar username fullname')
+
+      return res.status(200).json({
+        success: true,
+        data: posts,
+        result: posts.length
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 
