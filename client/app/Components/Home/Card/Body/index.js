@@ -9,7 +9,7 @@ export const CardBody = ({ post }) => {
   return (
     <div className="card-body">
       <div className="card-body-content">
-        <span>
+        <span className="content-text">
           {
             post.content.length < 60 ?
               post.content : 
