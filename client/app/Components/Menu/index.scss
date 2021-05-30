@@ -17,11 +17,9 @@ ul.menu {
     background: #fafafa;
     display: inline-flex;
     transition: all 300ms $cubic;
-    opacity: 0;
 
     &.active {
-      top: 60px;
-      opacity: 1;
+      top: 0px;
     }
   }
 
