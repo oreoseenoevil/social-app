@@ -33,6 +33,13 @@ const postController = {
         user: [...req.user.following, req.user._id]
       }).sort('-createdAt')
         .populate('user likes', 'avatar username fullname')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user likes',
+            select: '-password'
+          }
+        })
 
       return res.status(200).json({
         success: true,

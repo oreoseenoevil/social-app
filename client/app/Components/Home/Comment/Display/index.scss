@@ -1,0 +1,25 @@
+.comment-display {
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+
+  .comment-content {
+    display: flex;
+    gap: 0.5em;
+
+    a {
+      display: inline-flex;
+      align-items: flex-start;
+      text-decoration: none;
+      color: inherit;
+      gap: 0.5em;
+
+      h5 {
+        font-size: 1rem;
+      }
+    }
+  }
+}

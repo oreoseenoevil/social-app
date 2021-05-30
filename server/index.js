@@ -31,6 +31,7 @@ app.use(fileUpload({
 app.use('/api', require('./routes/auth'))
 app.use('/api', require('./routes/user'))
 app.use('/api', require('./routes/post'))
+app.use('/api', require('./routes/comment'))
 
 if (process.env.NODE_ENV !== 'production') {
   const compiler = webpack(webpackConfig)
