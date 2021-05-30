@@ -2,14 +2,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 15px;
+  padding: 0.5rem 1rem 1rem;
 
   .card-container {
     display: flex;
     justify-content: space-between;
     align-content: center;
     width: 100%;
-    margin: 1rem 0;
     font-size: 1rem;
     font-weight: 400;
   }
@@ -19,6 +18,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 1rem;
 
     .group {
       display: flex;
@@ -28,9 +28,10 @@
         margin-right: 1rem;
         cursor: pointer;
 
-        &.heart.active {
-          fill: rgb(255, 47, 47);
-          color: rgb(255, 47, 47);
+        &.active {
+          fill: rgb(255, 88, 88);
+          color: rgb(255, 88, 88);
+          animation: pulse 500ms;
         }
       }
     }
@@ -38,5 +39,15 @@
     svg {
       cursor: pointer;
     }
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
   }
 }

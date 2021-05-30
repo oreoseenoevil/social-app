@@ -1,3 +1,5 @@
 export * from '@Actions/Post/Create'
 export * from '@Actions/Post/Get'
 export * from '@Actions/Post/Update'
+export * from '@Actions/Post/Like'
+export * from '@Actions/Post/Unlike'

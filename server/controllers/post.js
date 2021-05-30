@@ -1,6 +1,6 @@
 const Post = require('../models/Post')
-const Comment = require('../models/Comment')
-const User = require('../models/User')
+// const Comment = require('../models/Comment')
+// const User = require('../models/User')
 
 const postController = {
   createPost: async (req, res) => {
@@ -63,6 +63,62 @@ const postController = {
         },
         message: 'Post updated.'
       })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  likePost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id)
+
+      if (!post) {
+        return res.status(403).json({
+          success: false,
+          error: 'No post found.'
+        })
+      }
+
+      if (!post.likes.includes(req.user._id)) {
+        await post.updateOne({ $push: {
+          likes: req.user._id
+        }})
+
+        return res.status(200).json({
+          success: true,
+          message: 'Post has been liked.'
+        })
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  unlikePost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id)
+
+      if (!post) {
+        return res.status(403).json({
+          success: false,
+          error: 'No post found.'
+        })
+      }
+
+      if (post.likes.includes(req.user._id)) {
+        await post.updateOne({ $pull: {
+          likes: req.user._id
+        }})
+
+        return res.status(200).json({
+          success: true,
+          message: 'Post has been unliked.'
+        })
+      }
     } catch (error) {
       return res.status(500).json({
         success: false,
