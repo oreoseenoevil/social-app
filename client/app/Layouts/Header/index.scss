@@ -8,6 +8,8 @@ $cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
   align-items: center;
   background: #fafafa;
   z-index: 10;
+  top: 0;
+  position: fixed;
 
   &.dark {
     background: #2e2e2e;

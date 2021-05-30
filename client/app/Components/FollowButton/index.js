@@ -16,26 +16,22 @@ export const FollowButton = ({ user, dark }) => {
     }
   }, [auth.user.following, user._id])
 
-  const handleUnfollow = async () => {
-    if (load) return
-    setFollowed(false)
-    setLoad(true)
-    await dispatch(unfollowUser({users: profile.users, user, auth}))
-    setLoad(false)
-  }
-
   const handleFollow = async () => {
     if (load) return
-    setFollowed(true)
+    setFollowed(!followed)
     setLoad(true)
-    await dispatch(followUser({users: profile.users, user, auth}))
+    if (followed) {
+      await dispatch(unfollowUser({users: profile.users, user, auth}))
+    } else {
+      await dispatch(followUser({users: profile.users, user, auth}))
+    }
     setLoad(false)
   }
 
   return (
     <button
       className={`btn-info ${!followed && 'active'} ${dark && 'dark'}`}
-      onClick={followed ? handleUnfollow : handleFollow}
+      onClick={handleFollow}
     >
       {followed ? 'Following' : 'Follow'}
     </button>
