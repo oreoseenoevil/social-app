@@ -4,7 +4,6 @@ import { RiCameraLine } from 'react-icons/ri'
 import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, makeStyles, OutlinedInput, Radio, RadioGroup } from '@material-ui/core'
 import clsx from 'clsx'
 import '@Components/Profile/Edit/index.scss'
-import { VscArrowLeft } from 'react-icons/vsc'
 import { checkImage } from '@Helpers'
 import { TYPES, updateProfileUser } from '@Actions'
 import { LayoutContext } from '@Context/Layout'
@@ -96,12 +95,9 @@ export const Edit = ({ setOnEdit }) => {
     <div className="edit-profile">
       <form className={`${dark && 'dark'}`} onSubmit={handleSubmit}>
         <span
-          className={`btn-close ${dark && 'dark'}`}
+          className={`close x-marked ${dark && 'dark'}`}
           onClick={() => setOnEdit(false)}
-        >
-          <VscArrowLeft className="arrow-left" />
-          Go Back
-        </span>
+        ></span>
         <div className="info-avatar">
           <img
             src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}

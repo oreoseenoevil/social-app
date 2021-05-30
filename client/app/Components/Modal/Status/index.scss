@@ -297,18 +297,22 @@
     }
 
     .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       .btn-info {
         text-align: center;
+        width: 100%;
         padding: 0.3em 1em 0.3em;
         margin-top: 1rem;
-        width: 100%;
         background: #0091ff;
         font-size: 1em;
         font-weight: 500;
         color: #fafafa;
         outline: none;
         border: 3px solid #fff;
-        border-radius: 1rem;
+        border-radius: 0.3em;
         transition: all 200ms ease-in-out;
 
         &.dark {
@@ -318,7 +322,6 @@
         &:hover,
         &:focus {
           background: rgba(0, 119, 255, 0.7);
-          box-shadow: 0px 0px 1px 1px rgba(0, 145, 255, 1);
         }
       }
     }
