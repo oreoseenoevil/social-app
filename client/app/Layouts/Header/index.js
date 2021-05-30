@@ -4,8 +4,13 @@ import { GiCaptainHatProfile } from 'react-icons/gi'
 import '@Layouts/Header/index.scss'
 import { SearchBar } from '@Components/SearchBar'
 import { Menu } from '@Components/Menu'
+import { useComponentVisible } from '@Helpers'
 
-export const Header = ({ dark, toggleDarkMode, toggleMenu, isComponentVisible }) => {
+export const Header = ({ dark, toggleDarkMode }) => {
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
+
+  const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
+
   return (
     <div className={`header ${dark && 'dark'}`}>
       <div className="wrapper">
@@ -15,7 +20,7 @@ export const Header = ({ dark, toggleDarkMode, toggleMenu, isComponentVisible })
           </Link>
         </div>
         <SearchBar dark={dark} />
-        <div className="right">
+        <div className="right" ref={ref}>
           <div
             className={`burger ${isComponentVisible && 'open-menu'} ${dark && 'dark'}`}
             onClick={toggleMenu}
@@ -23,7 +28,11 @@ export const Header = ({ dark, toggleDarkMode, toggleMenu, isComponentVisible })
             <span className="bar1"></span>
             <span className="bar2"></span>
           </div>
-          <Menu toggleDarkMode={toggleDarkMode} dark={dark} />
+          <Menu
+            toggleDarkMode={toggleDarkMode}
+            dark={dark}
+            mobileActive={isComponentVisible}
+          />
         </div>
       </div>
     </div>

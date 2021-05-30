@@ -7,9 +7,9 @@ $cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
   display: flex;
   align-items: center;
   background: #fafafa;
-  z-index: 10;
   top: 0;
   position: fixed;
+  z-index: 1;
 
   &.dark {
     background: #2e2e2e;

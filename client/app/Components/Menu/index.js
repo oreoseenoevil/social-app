@@ -1,5 +1,5 @@
 import React from 'react'
-import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine, RiProfileLine } from 'react-icons/ri'
+import { RiMessageLine, RiHome2Line, RiNotification2Line, RiCompassDiscoverLine, RiArrowDropDownLine, RiContrastFill, RiLogoutBoxRLine } from 'react-icons/ri'
 import { CgProfile } from 'react-icons/cg'
 import { Avatar } from '@Components/Avatar'
 import { Link, useLocation, useHistory } from 'react-router-dom'
@@ -16,7 +16,7 @@ const navLinks = [
   { label: 'Notifications', icon: RiNotification2Line, path: '/notifications' }
 ]
 
-export const Menu = ({ toggleDarkMode, dark }) => {
+export const Menu = ({ toggleDarkMode, dark, mobileActive }) => {
   const { auth } = useSelector(state => state)
 
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
@@ -32,7 +32,7 @@ export const Menu = ({ toggleDarkMode, dark }) => {
   }
 
   return (
-    <ul className="menu">
+    <ul className={`menu ${mobileActive && 'active'}`}>
       {
         navLinks.map((link, index) => (
           <li key={index}>
@@ -79,60 +79,5 @@ export const Menu = ({ toggleDarkMode, dark }) => {
         }
       </li>
     </ul>
-  )
-}
-
-export const MobileMenu = ({ dark, toggleDarkMode, wrapperRef, toggleMenu, isComponentVisible }) => {
-  const dispatch = useDispatch()
-  const { auth } = useSelector(state => state)
-
-  return (
-    <div
-      className={`mobile ${dark && 'dark'} ${isComponentVisible && 'active'}`}
-      ref={wrapperRef}
-    >
-      <ul className="mobile-menu">
-        <li onClick={toggleMenu}>
-          <Link
-            to={`/profile/${auth.user._id}`}
-            replace
-            className="menu-item"
-          >
-            <RiProfileLine className="menu-icon" />
-            <span>Profile</span>
-          </Link>
-        </li>
-        {
-          navLinks.map((link, index) => (
-            <li key={index} onClick={toggleMenu}>
-              <Link className="menu-item" to={link.path}>
-                <link.icon className="menu-icon" />
-                <span>{link.label}</span>
-              </Link>
-            </li>
-          ))
-        }
-        <li onClick={toggleMenu}>
-          <span className="menu-item" onClick={toggleDarkMode}>
-            <RiContrastFill className="menu-icon" />
-            <span>
-              Dark mode
-            </span>
-          </span>
-        </li>
-        <li onClick={toggleMenu}>
-          <Link to="/" 
-            replace
-            className="menu-item"
-            onClick={() => dispatch(logout())}
-          >
-            <RiLogoutBoxRLine className="menu-icon" />
-            <span>
-              Sign out
-            </span>
-          </Link>
-        </li>
-      </ul>
-    </div>
   )
 }
