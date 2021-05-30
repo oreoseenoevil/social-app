@@ -23,6 +23,10 @@ export const CardBody = ({ post }) => {
           }
         </span>
         <Carousel
+          autoPlay={false}
+          animation="slide"
+          navButtonsAlwaysInvisible={post.images.length > 1 ? false : true}
+          indicators={post.images.length > 1 ? true : false}
           IndicatorIcon={<AiOutlineLine size="2em" />}
           indicatorContainerProps={{
             style: {
