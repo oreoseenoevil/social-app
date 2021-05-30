@@ -18,7 +18,7 @@ export const Layouts = () => {
         dark={dark}
         toggleDarkMode={toggleDarkMode}
       />}
-      <div className="main">
+      <div className={`main ${dark && 'dark'}`}>
         {status && <StatusModal dark={dark} />}
         <Notification />
         <Main />
