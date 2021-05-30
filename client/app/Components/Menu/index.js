@@ -32,7 +32,7 @@ export const Menu = ({ toggleDarkMode, dark, mobileActive }) => {
   }
 
   return (
-    <ul className={`menu ${mobileActive && 'active'}`}>
+    <ul className={`menu ${mobileActive && 'active'} ${dark && 'dark'}`}>
       {
         navLinks.map((link, index) => (
           <li key={index}>

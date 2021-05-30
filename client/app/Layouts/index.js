@@ -10,10 +10,10 @@ import { StatusModal } from '@Components/Modal'
 export const Layouts = () => {
   const { dark, toggleDarkMode } = useContext(LayoutContext)
 
-  const { auth, status } = useSelector(state => state)
+  const { auth, status, modal } = useSelector(state => state)
 
   return (
-    <div className={`app ${dark && 'dark'}`}>
+    <div className={`app ${dark && 'dark'} ${(status || modal) && 'modal-active'}`}>
       {auth.token && <Header
         dark={dark}
         toggleDarkMode={toggleDarkMode}

@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Avatar } from '@Components/Avatar'
 import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
-import { getProfileUsers } from '@Actions'
+import { getProfileUsers, TYPES } from '@Actions'
 import { Edit, Followers, Following } from '@Components/Profile'
 import { FollowButton } from '@Components/FollowButton'
 
 export const Info = ({id, auth, profile, dispatch}) => {
   const { dark } = useContext(LayoutContext)
 
+  const { MODAL } = TYPES
   const [userData, setUserData] = useState([])
   const [onEdit, setOnEdit] = useState(false)
   const [showFollowers, setShowFollowers] = useState(false)
@@ -23,6 +24,14 @@ export const Info = ({id, auth, profile, dispatch}) => {
       setUserData(newData)
     }
   }, [id, auth.user, profile.users, dispatch])
+
+  useEffect(() => {
+    if(showFollowers || showFollowing || onEdit){
+      dispatch({ type: MODAL, payload: true})
+    }else{
+      dispatch({ type: MODAL, payload: false})
+    }
+  }, [showFollowers, showFollowing, onEdit, dispatch])
 
   return (
     <div className={`user-info ${dark && 'dark'}`}>

@@ -3,14 +3,15 @@
   left: 0;
   position: fixed;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
-  overflow: auto;
+  overflow-y: auto;
   color: inherit;
   z-index: 10;
+  padding: 1rem 0;
 
   form {
     position: relative;

@@ -9,7 +9,7 @@ ul.menu {
   list-style: none;
 
   @media (max-width: 700px) {
-    top: -100%;
+    top: -100px;
     right: 0;
     position: absolute;
     width: 100%;
@@ -20,6 +20,10 @@ ul.menu {
 
     &.active {
       top: 0px;
+    }
+
+    &.dark {
+      background: #2e2e2e;
     }
   }
 
