@@ -63,6 +63,61 @@ const commentController = {
         error: error.message
       })
     }
+  },
+  likeComment: async (req, res) => {
+    try {
+      const comment = await Comment.findById(req.params.id)
+      if (!comment) {
+        return res.status(403).json({
+          success: false,
+          error: 'No comment found.'
+        })
+      }
+
+      if (!comment.likes.includes(req.user._id)) {
+        await comment.updateOne({ $push: {
+          likes: req.user._id
+        }})
+
+        return res.status(200).json({
+          success: true,
+          message: 'Comment has been liked.'
+        })
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  unlikeComment: async (req, res) => {
+    try {
+      const comment = await Comment.findById(req.params.id)
+
+      if (!comment) {
+        return res.status(403).json({
+          success: false,
+          error: 'No comment found.'
+        })
+      }
+
+      if (comment.likes.includes(req.user._id)) {
+        await comment.updateOne({ $pull: {
+          likes: req.user._id
+        }})
+
+        return res.status(200).json({
+          success: true,
+          message: 'Comment has been unliked.'
+        })
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

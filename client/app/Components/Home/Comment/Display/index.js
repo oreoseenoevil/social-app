@@ -7,7 +7,7 @@ import '@Components/Home/Comment/Display/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { MenuOption } from '@Components/MenuOption'
 import { EditComment } from '@Components/Home'
-import { updateComment, TYPES } from '@Actions'
+import { updateComment, TYPES, likeComment, unlikeComment } from '@Actions'
 
 export const DisplayComment = ({ comment, post }) => {
   const [content, setContent] = useState('')
@@ -25,16 +25,20 @@ export const DisplayComment = ({ comment, post }) => {
     if (loadLike) return
     setIsLike(!isLike)
     setLoadLike(true)
-    // if (isLike) {
-    //   await dispatch(unlikeComment({comment, post, auth}))
-    // } else {
-    //   await dispatch(likeComment({comment, post, auth}))
-    // }
+    if (isLike) {
+      await dispatch(unlikeComment({comment, post, auth}))
+    } else {
+      await dispatch(likeComment({comment, post, auth}))
+    }
     setLoadLike(false)
   }
 
   useEffect(() => {
     setContent(comment.content)
+    setIsLike(false)
+    if(comment.likes.find(like => like._id === auth.user._id)) {
+      setIsLike(true)
+    }
   }, [comment])
 
   const handleUpdate = () => {
@@ -108,10 +112,12 @@ export const DisplayComment = ({ comment, post }) => {
                 <span>
                   {moment(comment.createdAt).fromNow(true)}
                 </span>
-                <button>
-                  {comment.likes.length > 0 ?
-                    comment.likes.length : null} like{comment.likes.length > 1 && 's'}
-                </button>
+                {
+                  comment.likes.length > 0 ?
+                    <button>
+                      {comment.likes.length} like{comment.likes.length > 1 && 's'}
+                    </button> : null
+                }
                 <button>reply</button>
               </Fragment> :
               <span className="comment-loading">
