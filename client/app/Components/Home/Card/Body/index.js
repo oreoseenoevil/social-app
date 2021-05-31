@@ -18,7 +18,7 @@ export const CardBody = ({ post }) => {
           {
             post.content.length > 60 &&
               <span className="readMore" onClick={() => setReadMore(!readMore)}>
-                {readMore ? 'hide' : 'more'}
+                {readMore ? 'less' : 'more'}
               </span>
           }
         </span>

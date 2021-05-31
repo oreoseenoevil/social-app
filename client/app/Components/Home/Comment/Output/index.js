@@ -6,9 +6,9 @@ export const OutputComment = ({ post }) => {
   return (
     <div className="comment-output">
       {
-        post.comments.map(comment => (
+        post.comments.map((comment, index) => (
           <DisplayComment
-            key={comment._id}
+            key={index}
             comment={comment}
             post={post}
           />

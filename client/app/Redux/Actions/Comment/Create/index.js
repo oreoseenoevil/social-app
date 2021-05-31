@@ -21,8 +21,14 @@ export const createComment = ({ post, newComment, auth }) => async dispatch => {
       postId: post._id,
       postUserId: post.user._id
     }
-    await postDataAPI('/comments', data, auth.token)
+    const res = await postDataAPI('/comments', data, auth.token)
 
+    const newData = {...res.data.data, user: auth.user}
+    const newPost = {...post, comments: [...post.comments, newData]}
+    dispatch({
+      type: UPDATE_POST,
+      payload: newPost
+    })
   } catch (error) {
     dispatch({
       type: ALERT,

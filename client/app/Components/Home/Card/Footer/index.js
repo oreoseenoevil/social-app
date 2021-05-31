@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import '@Components/Home/Card/Footer/index.scss'
 import { BiMessageRounded } from 'react-icons/bi'
-import { FiSend, FiHeart } from 'react-icons/fi'
+import { FiSend } from 'react-icons/fi'
+import { LikeButton } from '@Components/LikeButton'
 import { BsBookmark } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { likePost, unlikePost } from '@Actions'
@@ -43,10 +44,10 @@ export const CardFooter = ({ post }) => {
       </div>
       <div className="card-icons">
         <div className="group">
-          <FiHeart
+          <LikeButton
             size="1.5em"
-            className={isLike && 'active'}
-            onClick={handleLike}
+            isLike={isLike}
+            handleLike={handleLike}
           />
           <BiMessageRounded size="1.5em" />
           <FiSend size="1.5em" />

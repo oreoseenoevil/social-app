@@ -27,27 +27,11 @@
       svg {
         margin-right: 1rem;
         cursor: pointer;
-
-        &.active {
-          fill: rgb(255, 88, 88);
-          color: rgb(255, 88, 88);
-          animation: pulse 500ms;
-        }
       }
     }
 
     svg {
       cursor: pointer;
     }
-  }
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(1.2);
-  }
-
-  to {
-    transform: scale(1);
   }
 }

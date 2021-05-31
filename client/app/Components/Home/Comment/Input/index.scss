@@ -12,6 +12,15 @@
     caret-color: rgba(0, 119, 255, 0.7);
     font-size: 1rem;
     font-weight: 400;
+    color: inherit;
+  }
+
+  input:focus ~ button {
+    opacity: 0.5;
+  }
+
+  input:not(:placeholder-shown) ~ button {
+    opacity: 1;
   }
 
   button {
@@ -21,5 +30,7 @@
     cursor: pointer;
     font-size: 1rem;
     font-weight: 400;
+    color: inherit;
+    opacity: 0;
   }
 }

@@ -13,14 +13,15 @@ export const InputComment = ({ post }) => {
     e.preventDefault()
     if (!content.trim()) return
 
+    setContent('')
+
     const newComment = {
       content,
-      like: [],
+      likes: [],
       user: auth.user,
       createdAt: new Date().toISOString()
     }
     dispatch(createComment({post, newComment, auth}))
-    setContent('')
   }
 
   return (
@@ -35,4 +36,3 @@ export const InputComment = ({ post }) => {
     </form>
   )
 }
-
