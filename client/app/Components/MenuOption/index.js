@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { LayoutContext } from '@Context/Layout'
 import '@Components/MenuOption/index.scss'
 
-export const MenuOption = ({ post, comment }) => {
+export const MenuOption = ({ post, comment, setOnEdit }) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
   const { dark } = useContext(LayoutContext)
 
@@ -16,7 +16,7 @@ export const MenuOption = ({ post, comment }) => {
   const MenuItem = () => {
     return (
       <Fragment>
-        <div className="dropdown-item">
+        <div className="dropdown-item" onClick={() => setOnEdit(true)}>
           <span>Edit Comment</span>
           <RiEditLine />
         </div>

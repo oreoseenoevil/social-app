@@ -44,6 +44,25 @@ const commentController = {
         error: error.message
       })
     }
+  },
+  updateComment: async (req, res) => {
+    try {
+      const { content } = req.body
+      await Comment.findOneAndUpdate({
+        _id: req.params.id,
+        user: req.user._id
+      }, { content })
+
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully updated.'
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

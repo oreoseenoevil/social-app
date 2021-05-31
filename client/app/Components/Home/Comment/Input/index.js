@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '@Components/Home/Comment/Input/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { createComment } from '@Actions'
+import { TextareaAutosize } from '@material-ui/core'
 
 export const InputComment = ({ post }) => {
   const [content, setContent] = useState('')
@@ -26,8 +27,8 @@ export const InputComment = ({ post }) => {
 
   return (
     <form className="comment-input" onSubmit={handleSubmit}>
-      <input
-        type="text"
+      <TextareaAutosize
+        rowsMax={5}
         placeholder="Add a comment..."
         value={content}
         onChange={e => setContent(e.target.value)}

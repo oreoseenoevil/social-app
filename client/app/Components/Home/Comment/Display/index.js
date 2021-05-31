@@ -6,16 +6,20 @@ import moment from 'moment'
 import '@Components/Home/Comment/Display/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { MenuOption } from '@Components/MenuOption'
+import { EditComment } from '@Components/Home'
+import { updateComment, TYPES } from '@Actions'
 
 export const DisplayComment = ({ comment, post }) => {
   const [content, setContent] = useState('')
   const [readMore, setReadMore] = useState(false)
+  const [onEdit, setOnEdit] = useState(false)
 
   const [isLike, setIsLike] = useState(false)
   const [loadLike, setLoadLike] = useState(false)
 
   const { auth } = useSelector(state => state)
   const dispatch = useDispatch()
+  const { MODAL } = TYPES
 
   const handleLike = async () => {
     if (loadLike) return
@@ -33,6 +37,22 @@ export const DisplayComment = ({ comment, post }) => {
     setContent(comment.content)
   }, [comment])
 
+  const handleUpdate = () => {
+    if (comment.content !== content) {
+      dispatch(updateComment({comment, post, content, auth}))
+      setOnEdit(false)
+      dispatch({ type: MODAL, payload: false})
+    } else {
+      setOnEdit(false)
+      dispatch({ type: MODAL, payload: false})
+    }
+  }
+
+  const cancelUpdate = () => {
+    setOnEdit(false)
+    dispatch({ type: MODAL, payload: false})
+  }
+
   return (
     <div className="comment-display">
       <Link
@@ -42,29 +62,37 @@ export const DisplayComment = ({ comment, post }) => {
       </Link>
       <div className="comment-content">
         <span className="row">
-          <span className="content-group">
+          <pre>
             <Link
               to={`/profile/${comment.user._id}`}
             >
               {comment.user.fullname}
             </Link> {
-              content.length < 100 ? content :
-                readMore ? content + ' ' : content.slice(0, 100) + '...'
-            } {
-              content.length > 100 &&
-                <span
-                  className="read-more"
-                  onClick={() => setReadMore(!readMore)}
-                >
-                  {readMore ? 'less' : 'more'}
-                </span>
+              <Fragment>
+                {
+                  content.length < 100 ? content :
+                    readMore ? content + ' ' : content.slice(0, 100) + '...'
+                } {
+                  content.length > 100 &&
+                    <span
+                      className="read-more"
+                      onClick={() => setReadMore(!readMore)}
+                    >
+                      {readMore ? 'less' : 'more'}
+                    </span>
+                }
+              </Fragment>
             }
-          </span>
+          </pre>
           <span className="menu-icons">
             {
               (post.user._id === auth.user._id ||
                 comment.user._id === auth.user._id) &&
-                <MenuOption post={post} comment={comment} />
+                <MenuOption
+                  post={post}
+                  comment={comment}
+                  setOnEdit={setOnEdit}
+                />
             }
             <LikeButton
               size="1em"
@@ -92,6 +120,15 @@ export const DisplayComment = ({ comment, post }) => {
           }
         </span>
       </div>
+      {onEdit &&
+        <EditComment
+          onEdit={onEdit}
+          content={content}
+          setContent={setContent}
+          cancelUpdate={cancelUpdate}
+          handleUpdate={handleUpdate}
+        />
+      }
     </div>
   )
 }
