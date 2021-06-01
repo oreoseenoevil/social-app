@@ -1,8 +1,12 @@
 .user-posts {
   display: flex;
   align-self: center;
-  justify-self: flex-start;
-  width: 100%;
+  justify-content: center;
   max-width: 700px;
+  width: 100%;
   min-width: 320px;
+
+  h2 {
+    text-align: center;
+  }
 }

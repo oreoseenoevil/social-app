@@ -5,6 +5,7 @@ import profile from '@Reducers/profile'
 import status from '@Reducers/status'
 import posts from '@Reducers/post'
 import modal from '@Reducers/modal'
+import detailPost from '@Reducers/detailPost'
 
 export default combineReducers({
   auth,
@@ -12,5 +13,6 @@ export default combineReducers({
   profile,
   status,
   posts,
-  modal
+  modal,
+  detailPost
 })

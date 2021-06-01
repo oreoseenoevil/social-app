@@ -1,0 +1,22 @@
+.posts {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+
+  .loading-profile {
+    margin-top: 5rem;
+    justify-self: center;
+    align-self: center;
+    animation: spin 1000ms linear infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

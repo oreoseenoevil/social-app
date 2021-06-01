@@ -25,7 +25,7 @@ export const updatePost = ({ content, images, auth, status }) => async dispatch 
       media = await imageUpload(imgNewUrl)
     }
 
-    const res = await putDataAPI(`/posts/${status._id}`, {
+    const res = await putDataAPI(`/post/${status._id}`, {
       content,
       images: [...imgOldUrl, ...media]
     }, auth.token)

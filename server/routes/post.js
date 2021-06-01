@@ -6,8 +6,9 @@ router.route('/posts')
   .post(auth, postController.createPost)
   .get(auth, postController.getPosts)
 
-router.route('/posts/:id')
+router.route('/post/:id')
   .put(auth, postController.updatePost)
+  .get(auth, postController.getPost)
 
 router.route('/posts/:id/like').patch(auth, postController.likePost)
 router.route('/posts/:id/unlike').patch(auth, postController.unlikePost)
