@@ -132,6 +132,23 @@ const postController = {
         error: error.message
       })
     }
+  },
+  getUserPosts: async (req, res) => {
+    try {
+      const posts = await Post.find({user: req.params.id})
+        .sort('-createdAt')
+
+      return res.status(200).json({
+        success: false,
+        data: posts,
+        result: posts.length
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

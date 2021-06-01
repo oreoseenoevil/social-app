@@ -3,6 +3,7 @@ import '@Pages/profile/index.scss'
 import { Info, Posts } from '@Components/Profile'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { VscLoading } from 'react-icons/vsc'
 
 export default function Profile () {
   const { id } = useParams()
@@ -17,7 +18,11 @@ export default function Profile () {
         profile={profile}
         dispatch={dispatch}
       />
-      <Posts />
+      {
+        !profile.loading ?
+          <VscLoading size="3em" className="loading-profile" /> :
+          <Posts />
+      }
     </div>
   )
 }

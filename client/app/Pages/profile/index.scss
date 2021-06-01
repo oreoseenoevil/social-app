@@ -3,4 +3,16 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  .loading-profile {
+    margin-top: 5rem;
+    align-self: center;
+    animation: spin 1000ms linear infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
