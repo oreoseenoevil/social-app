@@ -6,16 +6,18 @@ import moment from 'moment'
 import '@Components/Home/Comment/Display/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { MenuOption } from '@Components/MenuOption'
-import { EditComment } from '@Components/Home'
+import { EditComment, InputComment } from '@Components/Home'
 import { updateComment, TYPES, likeComment, unlikeComment } from '@Actions'
 
-export const DisplayComment = ({ comment, post }) => {
+export const DisplayComment = ({ children, comment, post, commentId }) => {
   const [content, setContent] = useState('')
   const [readMore, setReadMore] = useState(false)
   const [onEdit, setOnEdit] = useState(false)
 
   const [isLike, setIsLike] = useState(false)
   const [loadLike, setLoadLike] = useState(false)
+
+  const [onReply, setOnReply] = useState(false)
 
   const { auth } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -26,9 +28,9 @@ export const DisplayComment = ({ comment, post }) => {
     setIsLike(!isLike)
     setLoadLike(true)
     if (isLike) {
-      await dispatch(unlikeComment({comment, post, auth}))
+      await dispatch(unlikeComment({ comment, post, auth }))
     } else {
-      await dispatch(likeComment({comment, post, auth}))
+      await dispatch(likeComment({ comment, post, auth }))
     }
     setLoadLike(false)
   }
@@ -36,25 +38,32 @@ export const DisplayComment = ({ comment, post }) => {
   useEffect(() => {
     setContent(comment.content)
     setIsLike(false)
-    if(comment.likes.find(like => like._id === auth.user._id)) {
+    if (comment.likes.find(like => like._id === auth.user._id)) {
       setIsLike(true)
     }
-  }, [comment])
+  }, [comment, auth.user._id])
 
   const handleUpdate = () => {
     if (comment.content !== content) {
-      dispatch(updateComment({comment, post, content, auth}))
+      dispatch(updateComment({ comment, post, content, auth }))
       setOnEdit(false)
-      dispatch({ type: MODAL, payload: false})
+      dispatch({ type: MODAL, payload: false })
     } else {
       setOnEdit(false)
-      dispatch({ type: MODAL, payload: false})
+      dispatch({ type: MODAL, payload: false })
     }
   }
 
   const cancelUpdate = () => {
     setOnEdit(false)
-    dispatch({ type: MODAL, payload: false})
+    dispatch({ type: MODAL, payload: false })
+  }
+
+  const handleReply = () => {
+    if (onReply) {
+      return setOnReply(false)
+    }
+    setOnReply({...comment, commentId})
   }
 
   return (
@@ -74,16 +83,19 @@ export const DisplayComment = ({ comment, post }) => {
             </Link> {
               <Fragment>
                 {
+                  comment.tag && comment.tag._id !== comment.user._id &&
+                  <Link style={{ color: '#0984e3' }} to={`/profile/${comment.tag._id}`}>{comment.tag.fullname}</Link>
+                } {
                   content.length < 100 ? content :
                     readMore ? content + ' ' : content.slice(0, 100) + '...'
                 } {
                   content.length > 100 &&
-                    <span
-                      className="read-more"
-                      onClick={() => setReadMore(!readMore)}
-                    >
-                      {readMore ? 'less' : 'more'}
-                    </span>
+                  <span
+                    className="read-more"
+                    onClick={() => setReadMore(!readMore)}
+                  >
+                    {readMore ? 'less' : 'more'}
+                  </span>
                 }
               </Fragment>
             }
@@ -92,11 +104,11 @@ export const DisplayComment = ({ comment, post }) => {
             {
               (post.user._id === auth.user._id ||
                 comment.user._id === auth.user._id) &&
-                <MenuOption
-                  post={post}
-                  comment={comment}
-                  setOnEdit={setOnEdit}
-                />
+              <MenuOption
+                post={post}
+                comment={comment}
+                setOnEdit={setOnEdit}
+              />
             }
             <LikeButton
               size="1em"
@@ -118,17 +130,33 @@ export const DisplayComment = ({ comment, post }) => {
                       {comment.likes.length} like{comment.likes.length > 1 && 's'}
                     </button> : null
                 }
-                <button>reply</button>
+                <button onClick={handleReply}>
+                  { onReply ? 'cancel' : 'reply' }
+                </button>
               </Fragment> :
               <span className="comment-loading">
                 loading...
               </span>
           }
         </span>
+        {
+          onReply &&
+          <InputComment
+            post={post}
+            onReply={onReply}
+            setOnReply={setOnReply}
+          >
+            <Link to={`profile/${auth.user._id}`}>
+              <Avatar src={auth.user.avatar} size="common" />
+            </Link>
+          </InputComment>
+        }
+        {children}
       </div>
       {onEdit &&
         <EditComment
           onEdit={onEdit}
+          comment={comment}
           content={content}
           setContent={setContent}
           cancelUpdate={cancelUpdate}

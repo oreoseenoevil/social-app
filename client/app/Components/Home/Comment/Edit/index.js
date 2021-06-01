@@ -5,7 +5,7 @@ import { LayoutContext } from '@Context/Layout'
 import { TYPES } from '@Actions'
 import { useDispatch } from 'react-redux'
 
-export const EditComment = ({ content, setContent, cancelUpdate, handleUpdate, onEdit }) => {
+export const EditComment = ({ comment, content, setContent, cancelUpdate, handleUpdate, onEdit }) => {
   const { dark } = useContext(LayoutContext)
   const dispatch = useDispatch()
   const { MODAL } = TYPES
@@ -29,8 +29,15 @@ export const EditComment = ({ content, setContent, cancelUpdate, handleUpdate, o
           onChange={e => setContent(e.target.value)}
         />
         <div className={`button-group ${dark && 'dark'}`}>
-          <button onClick={cancelUpdate}>Cancel</button>
-          <button onClick={handleUpdate}>Update</button>
+          <button
+            onClick={cancelUpdate}
+            className="btn-cancel"
+          >Cancel</button>
+          <button
+            onClick={handleUpdate}
+            className="btn-update"
+            disabled={comment.content === content ? true : false}
+          >Update</button>
         </div>
       </div>
     </div>

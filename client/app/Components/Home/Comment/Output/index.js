@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import '@Components/Home/Comment/Output/index.scss'
-import { DisplayComment } from '@Components/Home'
+import { CommentCard } from '@Components/Home'
 
 export const OutputComment = ({ post }) => {
   const [comments, setComments] = useState([])
   const [showComments, setShowComments] = useState([])
   const [next, setNext] = useState(0)
+
+  const [replyComments, setReplyComments] = useState([])
 
   useEffect(() => {
     const newComment = post.comments.filter(comment => !comment.reply)
@@ -13,17 +15,13 @@ export const OutputComment = ({ post }) => {
     setShowComments(newComment.slice(newComment.length - next))
   }, [post.comments, next])
 
+  useEffect(() => {
+    const newReply = post.comments.filter(comment => comment.reply)
+    setReplyComments(newReply)
+  }, [post.comments])
+
   return (
     <div className="comment-output">
-      {
-        showComments.map((comment, index) => (
-          <DisplayComment
-            key={index}
-            comment={comment}
-            post={post}
-          />
-        ))
-      }
       {
         comments.length - next > 0 ?
           <span
@@ -43,6 +41,16 @@ export const OutputComment = ({ post }) => {
             >
               Hide comments
             </span>
+      }
+      {
+        showComments.map((comment, index) => (
+          <CommentCard
+            key={index}
+            comment={comment}
+            post={post}
+            replyComment={replyComments.filter(item => item.reply === comment._id)}
+          />
+        ))
       }
     </div>
   )

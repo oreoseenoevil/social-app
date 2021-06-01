@@ -38,9 +38,6 @@ export const CardFooter = ({ post }) => {
         <span className="likes">
           {post.likes.length} like{post.likes.length > 1 && 's'}
         </span>
-        <span className="comments">
-          {post.comments.length} comment{post.comments.length > 1 && 's'}
-        </span>
       </div>
       <div className="card-icons">
         <div className="group">

@@ -74,9 +74,22 @@
         font-weight: 500;
         transition: all 200ms ease-in-out;
 
-        &:hover {
-          background: #0091ff;
-          color: #fff;
+        &:disabled {
+          opacity: 0.7;
+          cursor: initial;
+        }
+
+        &.btn-update {
+          &:not(:disabled) {
+            background: #0091ff;
+          }
+        }
+
+        &.btn-cancel {
+          :hover {
+            background: #0091ff;
+            color: #fff;
+          }
         }
       }
     }
