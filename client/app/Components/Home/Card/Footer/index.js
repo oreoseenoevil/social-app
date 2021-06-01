@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import '@Components/Home/Card/Footer/index.scss'
-import { BiMessageRounded } from 'react-icons/bi'
+import { FaRegComment } from 'react-icons/fa'
 import { FiSend } from 'react-icons/fi'
 import { LikeButton } from '@Components/LikeButton'
 import { BsBookmark } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { likePost, unlikePost } from '@Actions'
+import { useHistory } from 'react-router'
 
 export const CardFooter = ({ post }) => {
   const [isLike, setIsLike] = useState(false)
   const [loadLike, setLoadLike] = useState(false)
+  const history = useHistory()
 
   const { auth } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -46,7 +48,9 @@ export const CardFooter = ({ post }) => {
             isLike={isLike}
             handleLike={handleLike}
           />
-          <BiMessageRounded size="1.5em" />
+          <FaRegComment size="1.5em"
+            onClick={() => history.push(`/post/${post._id}`)}
+          />
           <FiSend size="1.5em" />
         </div>
         <BsBookmark size="1.5em" />
