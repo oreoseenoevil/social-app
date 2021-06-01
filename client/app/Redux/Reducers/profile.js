@@ -1,9 +1,10 @@
 import { PROFILE_TYPES } from '@Actions'
 import { EditData } from '@Helpers'
 
-const { LOADING, GET_USER, FOLLOW, UNFOLLOW } = PROFILE_TYPES
+const { LOADING, GET_USER, FOLLOW, UNFOLLOW, GET_ID, GET_POSTS } = PROFILE_TYPES
 
 const initialState = {
+  ids: [],
   loading: false,
   users: [],
   posts: []
@@ -30,6 +31,16 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         users: EditData(state.users, action.payload._id, action.payload)
+      }
+    case GET_ID:
+      return {
+        ...state,
+        ids: [...state.ids, action.payload]
+      }
+    case GET_POSTS:
+      return {
+        ...state,
+        posts: [...state.posts, action.payload]
       }
     default:
       return state

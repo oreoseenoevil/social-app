@@ -4,34 +4,42 @@ import { getDataAPI } from '@Helpers'
 const { ALERT } = TYPES
 
 
-const { LOADING, GET_USER } = PROFILE_TYPES
+const { LOADING, GET_USER, GET_ID, GET_POSTS } = PROFILE_TYPES
 
-export const getProfileUsers = ({ users, id, auth }) => async dispatch => {
-  if (users.every(user => user._id !== id)) {
-    try {
-      dispatch({
-        type: LOADING,
-        payload: true
-      })
+export const getProfileUsers = ({ id, auth }) => async dispatch => {
+  dispatch({
+    type: GET_ID,
+    payload: id
+  })
+  try {
+    dispatch({
+      type: LOADING,
+      payload: true
+    })
 
-      const res = await getDataAPI(`/user/${id}`, auth.token)
+    const users = await getDataAPI(`/user/${id}`, auth.token)
+    const posts = await getDataAPI(`/user/posts/${id}`, auth.token)
 
-      dispatch({
-        type: GET_USER,
-        payload: res.data
-      })
+    dispatch({
+      type: GET_USER,
+      payload: users.data
+    })
 
-      dispatch({
-        type: LOADING,
-        payload: false
-      })
-    } catch (error) {
-      dispatch({
-        type: ALERT,
-        payload: {
-          error: error.response.data.error
-        }
-      })
-    }
+    dispatch({
+      type: GET_POSTS,
+      payload: { ...posts.data, _id: id, page: 2 }
+    })
+
+    dispatch({
+      type: LOADING,
+      payload: false
+    })
+  } catch (error) {
+    dispatch({
+      type: ALERT,
+      payload: {
+        error: error.response.data.error
+      }
+    })
   }
 }

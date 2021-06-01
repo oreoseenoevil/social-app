@@ -139,7 +139,7 @@ const postController = {
         .sort('-createdAt')
 
       return res.status(200).json({
-        success: false,
+        success: true,
         data: posts,
         result: posts.length
       })

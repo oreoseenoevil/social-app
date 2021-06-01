@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Avatar } from '@Components/Avatar'
 import '@Components/Profile/Info/index.scss'
 import { LayoutContext } from '@Context/Layout'
-import { getProfileUsers, TYPES } from '@Actions'
+import { TYPES } from '@Actions'
 import { Edit, Followers, Following } from '@Components/Profile'
 import { FollowButton } from '@Components/FollowButton'
 
@@ -19,7 +19,6 @@ export const Info = ({id, auth, profile, dispatch}) => {
     if (id === auth.user._id) {
       setUserData([auth.user])
     } else {
-      dispatch(getProfileUsers({users: profile.users, id, auth}))
       const newData = profile.users.filter(user => user._id === id)
       setUserData(newData)
     }
