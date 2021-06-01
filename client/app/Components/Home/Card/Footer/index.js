@@ -7,11 +7,15 @@ import { BsBookmark } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { likePost, unlikePost } from '@Actions'
 import { useHistory } from 'react-router'
+import { ShareModal } from '@Components/Modal'
+import { BASE_URL } from '@Utils'
 
 export const CardFooter = ({ post }) => {
   const [isLike, setIsLike] = useState(false)
   const [loadLike, setLoadLike] = useState(false)
   const history = useHistory()
+
+  const [isShare, setIsShare] = useState(false)
 
   const { auth } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -51,10 +55,13 @@ export const CardFooter = ({ post }) => {
           <FaRegComment size="1.5em"
             onClick={() => history.push(`/post/${post._id}`)}
           />
-          <FiSend size="1.5em" />
+          <FiSend size="1.5em"
+            onClick={() => setIsShare(!isShare)}
+          />
         </div>
         <BsBookmark size="1.5em" />
       </div>
+      {isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} />}
     </div>
   )
 }
