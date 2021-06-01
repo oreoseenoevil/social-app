@@ -32,3 +32,5 @@ export const validate = ({password, confirmPassword}) => {
     errorLength: Object.keys(error).length
   }
 }
+
+export const BASE_URL = process.env.BASE_URL

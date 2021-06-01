@@ -8,7 +8,8 @@ import { GoKebabVertical } from 'react-icons/go'
 import { RiEditLine, RiDeleteBin6Line } from 'react-icons/ri'
 import { BsLink45Deg } from 'react-icons/bs'
 import { useComponentVisible } from '@Helpers'
-import { TYPES, deletePost } from '@Actions' 
+import { TYPES, deletePost } from '@Actions'
+import { BASE_URL } from '@Utils'
 
 export const CardHeader = ({ post, dark }) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
@@ -32,6 +33,10 @@ export const CardHeader = ({ post, dark }) => {
   const handleDeletePost = () => {
     dispatch(deletePost({post, auth}))
     return history.push('/')
+  }
+
+  const handeCopyLink = () => {
+    navigator.clipboard.writeText(`${BASE_URL}/post/${post._id}`)
   }
 
   return (
@@ -80,7 +85,7 @@ export const CardHeader = ({ post, dark }) => {
               </Fragment>
             }
             {auth.user._id === post.user._id && <span className={`dropdown-line ${dark && 'dark'}`}></span>}
-            <div className="dropdown-item">
+            <div className="dropdown-item" onClick={handeCopyLink}>
               <span>Copy Link</span>
               <BsLink45Deg />
             </div>
