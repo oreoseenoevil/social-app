@@ -118,6 +118,31 @@ const commentController = {
         error: error.message
       })
     }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      const comment = await Comment.findOneAndDelete({
+        _id: req.params.id,
+        $or: [
+          { user: req.user._id },
+          { postUserId: req.user._id }
+        ]
+      })
+
+      await Post.findOneAndUpdate({_id: comment.postId}, {
+        $pull: { comments: req.params.id }
+      })
+
+      return res.status(200).json({
+        success: false,
+        message: 'Successfully Deleted.'
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

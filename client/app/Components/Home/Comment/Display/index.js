@@ -38,6 +38,7 @@ export const DisplayComment = ({ children, comment, post, commentId }) => {
   useEffect(() => {
     setContent(comment.content)
     setIsLike(false)
+    setOnReply(false)
     if (comment.likes.find(like => like._id === auth.user._id)) {
       setIsLike(true)
     }

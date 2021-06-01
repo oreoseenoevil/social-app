@@ -7,6 +7,7 @@ router.route('/comments')
 
 router.route('/comments/:id')
   .patch(auth, commentController.updateComment)
+  .delete(auth, commentController.deleteComment)
 
 router.route('/comments/:id/like')
   .patch(auth, commentController.likeComment)
