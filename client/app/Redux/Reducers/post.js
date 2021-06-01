@@ -1,5 +1,5 @@
 import { POST_TYPES } from '@Actions'
-import { EditData } from '@Helpers'
+import { EditData, DeleteData } from '@Helpers'
 
 const initialState = {
   loading: false,
@@ -8,7 +8,7 @@ const initialState = {
   page: 2
 }
 
-const { CREATE_POST, LOADING_POST, GET_POSTS, UPDATE_POST } = POST_TYPES
+const { CREATE_POST, LOADING_POST, GET_POSTS, UPDATE_POST, DELETE_POST } = POST_TYPES
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -33,6 +33,11 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: EditData(state.posts, action.payload._id, action.payload)
+      }
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: DeleteData(state.posts, action.payload._id)
       }
     default:
       return state

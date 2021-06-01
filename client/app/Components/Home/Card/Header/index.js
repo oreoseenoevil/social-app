@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Avatar } from '@Components/Avatar'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import '@Components/Home/Card/Header/index.scss'
@@ -8,10 +8,12 @@ import { GoKebabVertical } from 'react-icons/go'
 import { RiEditLine, RiDeleteBin6Line } from 'react-icons/ri'
 import { BsLink45Deg } from 'react-icons/bs'
 import { useComponentVisible } from '@Helpers'
-import { TYPES } from '@Actions' 
+import { TYPES, deletePost } from '@Actions' 
 
 export const CardHeader = ({ post, dark }) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
+
+  const history = useHistory()
 
   const { auth } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -25,6 +27,11 @@ export const CardHeader = ({ post, dark }) => {
         onEdit: true
       }
     })
+  }
+
+  const handleDeletePost = () => {
+    dispatch(deletePost({post, auth}))
+    return history.push('/')
   }
 
   return (
@@ -55,12 +62,18 @@ export const CardHeader = ({ post, dark }) => {
           <div className={`dropdown-menu ${dark && 'dark'}`}>
             { auth.user._id === post.user._id &&
               <Fragment>
-                <div className="dropdown-item" onClick={handleEditPost}>
+                <div
+                  className="dropdown-item"
+                  onClick={handleEditPost}
+                >
                   <span>Edit Post</span>
                   <RiEditLine />
                 </div>
                 <span className={`dropdown-line ${dark && 'dark'}`}></span>
-                <div className="dropdown-item">
+                <div
+                  className="dropdown-item"
+                  onClick={handleDeletePost}
+                >
                   <span>Delete Post</span>
                   <RiDeleteBin6Line />
                 </div>
