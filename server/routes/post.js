@@ -9,6 +9,7 @@ router.route('/posts')
 router.route('/post/:id')
   .put(auth, postController.updatePost)
   .get(auth, postController.getPost)
+  .delete(auth, postController.deletePost)
 
 router.route('/posts/:id/like').patch(auth, postController.likePost)
 router.route('/posts/:id/unlike').patch(auth, postController.unlikePost)

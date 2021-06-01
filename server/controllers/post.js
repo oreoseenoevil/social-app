@@ -1,5 +1,5 @@
 const Post = require('../models/Post')
-// const Comment = require('../models/Comment')
+const Comment = require('../models/Comment')
 // const User = require('../models/User')
 
 class APIfeatures {
@@ -223,6 +223,28 @@ const postController = {
         success: true,
         data: posts,
         result: posts.length
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  deletePost: async (req, res) => {
+    try {
+      const post = await Post.findOneAndDelete({
+        _id: req.params.id,
+        user: req.user._id
+      })
+
+      await Comment.deleteMany({
+        _id: { $in: post.comments }
+      })
+
+      return res.status(200).json({
+        success: true,
+        message: 'Successfully deleted.'
       })
     } catch (error) {
       return res.status(500).json({
