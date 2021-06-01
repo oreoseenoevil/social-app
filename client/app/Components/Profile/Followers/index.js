@@ -15,19 +15,21 @@ export const Followers = ({ dark, user, setShowFollowers }) => {
           <h3>Followers</h3>
           <span className={`close x-marked ${dark && 'dark'}`} onClick={() => setShowFollowers(false)}></span>
         </div>
-        {
-          user.map(user => (
-            <UserCard
-              user={user}
-              key={user._id}
-              setShowFollowers={setShowFollowers}
-            >
-              {auth.user._id !== user._id &&
-                <FollowButton dark={dark} user={user} />
-              }
-            </UserCard>
-          ))
-        }
+        <div className="follow-display">
+          {
+            user.map(user => (
+              <UserCard
+                user={user}
+                key={user._id}
+                setShowFollowers={setShowFollowers}
+              >
+                {auth.user._id !== user._id &&
+                  <FollowButton dark={dark} user={user} />
+                }
+              </UserCard>
+            ))
+          }
+        </div>
       </div>
     </div>
   )

@@ -17,6 +17,7 @@
     width: 100%;
     min-width: 320px;
     min-height: 500px;
+    max-height: 500px;
     background: #fff;
     position: relative;
     padding: 1em;
@@ -25,6 +26,7 @@
     flex-direction: column;
     color: inherit;
     margin: 0 1rem;
+    overflow: hidden;
 
     &.dark {
       background: #181818;
@@ -35,7 +37,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 50px;
+      min-height: 50px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 
       &.dark {
@@ -90,6 +92,24 @@
               background: rgb(255, 255, 255);
             }
           }
+        }
+      }
+    }
+
+    .follow-display {
+      width: 100%;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 3px;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.5);
         }
       }
     }
