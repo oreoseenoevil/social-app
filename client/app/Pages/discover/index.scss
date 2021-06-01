@@ -1,7 +1,27 @@
 .discover {
   min-height: calc(100vh - 60px);
-  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+
+  .loading-profile {
+    margin-top: 5rem;
+    align-self: center;
+    animation: spin 1000ms linear infinite;
+  }
+
+  .discover-display {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    max-width: 700px;
+    width: 100%;
+    min-width: 320px;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -14,7 +14,7 @@ export const getPosts = token => async dispatch => {
 
     dispatch({
       type: GET_POSTS,
-      payload: res.data
+      payload: { ...res.data, page: 2 }
     })
 
     dispatch({

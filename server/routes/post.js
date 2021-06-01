@@ -16,4 +16,7 @@ router.route('/posts/:id/unlike').patch(auth, postController.unlikePost)
 router.route('/user/posts/:id')
   .get(auth, postController.getUserPosts)
 
+router.route('/posts/discover')
+  .get(auth, postController.getPostsDiscover)
+
 module.exports = router

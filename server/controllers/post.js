@@ -2,6 +2,22 @@ const Post = require('../models/Post')
 // const Comment = require('../models/Comment')
 // const User = require('../models/User')
 
+class APIfeatures {
+  constructor(query, queryString) {
+    this.query = query
+    this.queryString = queryString
+  }
+
+  paginating() {
+    const page = this.queryString.page * 1 || 1
+    const limit = this.queryString.limit * 1 || 9
+    const skip = (page - 1) * limit
+    this.query = this.query.skip(skip).limit(limit)
+
+    return this
+  }
+}
+
 const postController = {
   createPost: async (req, res) => {
     try {
@@ -29,9 +45,11 @@ const postController = {
   },
   getPosts: async (req, res) => {
     try {
-      const posts = await Post.find({
+      const features = new APIfeatures(Post.find({
         user: [...req.user.following, req.user._id]
-      }).sort('-createdAt')
+      }), req.query).paginating()
+
+      const posts = await features.query.sort('-createdAt')
         .populate('user likes', 'avatar username fullname')
         .populate({
           path: 'comments',
@@ -142,8 +160,11 @@ const postController = {
   },
   getUserPosts: async (req, res) => {
     try {
-      const posts = await Post.find({user: req.params.id})
-        .sort('-createdAt')
+      const features = new APIfeatures(Post.find({
+        user: req.params.id
+      }), req.query)
+        .paginating()
+      const posts = await features.query.sort('-createdAt')
 
       return res.status(200).json({
         success: true,
@@ -179,6 +200,29 @@ const postController = {
       return res.status(200).json({
         success: true,
         data: post
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  getPostsDiscover: async (req, res) => {
+    try {
+      const newArr = [...req.user.following, req.user._id]
+      
+      const num = req.query.num || 9
+
+      const posts = await Post.aggregate([
+        { $match: { user: { $nin: newArr } } },
+        { $sample: { size: Number(num) } }
+      ])
+
+      return res.status(200).json({
+        success: true,
+        data: posts,
+        result: posts.length
       })
     } catch (error) {
       return res.status(500).json({
