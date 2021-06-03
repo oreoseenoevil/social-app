@@ -4,7 +4,9 @@ import { EmailIcon, EmailShareButton,
   RedditIcon, RedditShareButton,
   TwitterIcon, TwitterShareButton } from 'react-share'
 
-export const ShareModal = ({ url }) => {
+export const ShareButton = ({ url }) => {
+
+  console.log(url)
 
   const styleShare = {
     display: 'flex',

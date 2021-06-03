@@ -7,7 +7,7 @@ import { BsBookmark } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { likePost, unlikePost } from '@Actions'
 import { useHistory } from 'react-router'
-import { ShareModal } from '@Components/Modal'
+import { ShareButton } from '@Components/Modal'
 import { BASE_URL } from '@Utils'
 
 export const CardFooter = ({ post }) => {
@@ -56,7 +56,7 @@ export const CardFooter = ({ post }) => {
         </div>
         <BsBookmark size="1.5em" />
       </div>
-      {isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} />}
+      {isShare && <ShareButton url={`${BASE_URL}/post/${post._id}`} />}
       <div className="card-container">
         <span className="likes">
           {post.likes.length} like{post.likes.length > 1 && 's'}
