@@ -40,11 +40,6 @@ export const CardFooter = ({ post }) => {
 
   return (
     <div className="card-footer">
-      <div className="card-container">
-        <span className="likes">
-          {post.likes.length} like{post.likes.length > 1 && 's'}
-        </span>
-      </div>
       <div className="card-icons">
         <div className="group">
           <LikeButton
@@ -62,6 +57,11 @@ export const CardFooter = ({ post }) => {
         <BsBookmark size="1.5em" />
       </div>
       {isShare && <ShareModal url={`${BASE_URL}/post/${post._id}`} />}
+      <div className="card-container">
+        <span className="likes">
+          {post.likes.length} like{post.likes.length > 1 && 's'}
+        </span>
+      </div>
     </div>
   )
 }
