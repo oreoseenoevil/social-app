@@ -41,7 +41,10 @@ export const InputComment = ({ children, post, onReply, setOnReply }) => {
         value={content}
         onChange={e => setContent(e.target.value)}
       />
-      <button type="submit">Post</button>
+      <button
+        type="submit"
+        disabled={!content ? true : false}
+      >Post</button>
     </form>
   )
 }

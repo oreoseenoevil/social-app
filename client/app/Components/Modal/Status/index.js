@@ -206,6 +206,7 @@ export const StatusModal = ({ dark }) => {
           <button
             className={`btn-info ${dark && 'dark'}`}
             type="submit"
+            disabled={!content && images.length === 0 ? true : false}
           >
             {status.onEdit ? 'Save' : 'Post'}
           </button>
