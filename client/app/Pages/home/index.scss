@@ -1,24 +1,29 @@
 .homepage {
   min-height: calc(100vh - 60px);
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   .home-container {
     width: 100%;
     min-width: 320px;
     max-width: 1000px;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
 
     .home-main {
       flex: 3;
       display: flex;
-      justify-content: center;
       align-items: center;
       flex-direction: column;
       padding: 0.5em 0.5em;
+
+      .loading-profile {
+        margin-top: 5rem;
+        align-self: center;
+        animation: spin 1000ms linear infinite;
+      }
     }
 
     .home-sidebar {
@@ -30,5 +35,11 @@
         display: none;
       }
     }
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
 }
