@@ -93,19 +93,24 @@ export const SearchBar = ({ dark }) => {
               />
             </div>
         }
-        <div className="users-result">
-          {
-            search && users.map(user => (
-              <div className="results" key={user._id}>
-                <UserCard
-                  user={user}
-                  handleClose={handleClose}
-                />
-              </div>
-            ))
+      </form>
+      {
+        search && <div className={`users-result ${dark && 'dark'}`}>
+          {users.length === 0 ?
+            <span className="no-result">No results found.</span> :
+            <div className={`result-container ${dark && 'dark'}`}>
+              {users.map(user => (
+                <div className="results" key={user._id}>
+                  <UserCard
+                    user={user}
+                    handleClose={handleClose}
+                  />
+                </div>
+              ))}
+            </div>
           }
         </div>
-      </form>
+      }
     </div>
   )
 }

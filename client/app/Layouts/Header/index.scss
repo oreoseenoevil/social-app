@@ -5,6 +5,7 @@ $cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
   width: 100%;
   min-height: 60px;
   display: flex;
+  justify-content: center;
   align-items: center;
   background: #fafafa;
   top: 0;
@@ -17,20 +18,20 @@ $cubic: cubic-bezier(0.4, 0.01, 0.165, 0.99);
 
   .wrapper {
     width: 100%;
+    max-width: 1000px;
     padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 400px) {
-      padding: 0 1rem;
-    }
-
-    @media (min-width: 1300px) {
-      padding: 0 50px;
-      > * {
+    @media (min-width: 700px) {
+      & > * {
         width: 100%;
       }
+    }
+
+    @media (max-width: 400px) {
+      padding: 0 1rem;
     }
 
     .left {
