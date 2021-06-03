@@ -70,7 +70,6 @@
     height: 350px;
     position: absolute;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 0.2em;
@@ -101,7 +100,8 @@
     }
 
     .no-result {
-      justify-self: center;
+      position: absolute;
+      top: 40%;
       color: inherit;
     }
 

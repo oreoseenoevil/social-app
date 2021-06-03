@@ -76,6 +76,7 @@ ul.menu {
         flex-wrap: nowrap;
         width: 160px;
         border-radius: 5px;
+        z-index: 1;
 
         &.dark {
           background: #181818;

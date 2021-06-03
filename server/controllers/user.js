@@ -124,6 +124,41 @@ const userController = {
       })
     }
   },
+  suggestionUser: async (req, res) => {
+    try {
+      const newArr = [...req.user.following, req.user._id]
+
+      const num = req.query.num || 5
+
+      const users = await User.aggregate([
+        { $match: { _id: { $nin: newArr } } },
+        { $sample: { size: Number(num) } },
+        { $lookup: {
+          from: 'users',
+          localField: 'followers',
+          foreignField: '_id',
+          as: 'followers'
+        } },
+        { $lookup: {
+          from: 'users',
+          localField: 'following',
+          foreignField: '_id',
+          as: 'following'
+        } },
+      ]).project('-password')
+
+      return res.status(200).json({
+        success: true,
+        data: users,
+        result: users.length
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  }
 }
 
 module.exports = userController
