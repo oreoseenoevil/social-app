@@ -22,6 +22,9 @@ router.route('/user/posts/:id')
 router.route('/posts/discover')
   .get(auth, postController.getPostsDiscover)
 
+router.route('/posts/saved')
+  .get(auth, postController.getSavedPost)
+
 router.route('/user/:id/saved')
   .patch(auth, postController.savedPost)
 router.route('/user/:id/unsaved')

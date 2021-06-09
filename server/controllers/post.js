@@ -308,6 +308,26 @@ const postController = {
         error: error.message
       })
     }
+  },
+  getSavedPost: async (req, res) => {
+    try {
+      const features = new APIfeatures(Post.find({
+        _id: { $in: req.user.saved }
+      }), req.query).paginating()
+
+      const savedPosts = await features.query.sort('-createdAt')
+
+      return res.status(200).json({
+        success: true,
+        data: savedPosts,
+        result: savedPosts.length
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

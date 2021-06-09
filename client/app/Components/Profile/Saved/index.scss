@@ -1,0 +1,13 @@
+.saved-posts {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  max-width: 700px;
+  width: 100%;
+  min-width: 320px;
+  flex-direction: column;
+
+  h2 {
+    text-align: center;
+  }
+}

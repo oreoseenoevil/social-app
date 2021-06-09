@@ -3,7 +3,6 @@ import '@Pages/discover/index.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDiscoverPosts, DISCOVER_TYPES } from '@Actions'
 import { PostThumb } from '@Components/PostThumb'
-import { VscLoading } from 'react-icons/vsc'
 import { LoadMore } from '@Components/LoadMore'
 import { getDataAPI } from '@Helpers'
 
@@ -31,24 +30,20 @@ export default function Discover() {
     setLoad(false)
   }
 
-  const { result, page } = discover
+  const { result, page, loading } = discover
 
   return (
     <div className="discover">
-      {
-        discover.loading ?
-          <VscLoading size="3em" className="loading-profile" /> :
-          <div className="discover-display">
-            <PostThumb
-              posts={discover.posts}
-              result={discover.result}
-            />
-          </div>
-      }
+      <div className="discover-display">
+        <PostThumb
+          posts={discover.posts}
+          result={discover.result}
+        />
+      </div>
       {
         result < 9 * (page - 1) ? null
           : <LoadMore
-            active={load}
+            active={load || loading}
             handleLoadMore={handleLoadMore}
           />
       }
