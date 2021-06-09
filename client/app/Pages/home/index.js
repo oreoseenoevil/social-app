@@ -16,7 +16,7 @@ export default function Home() {
           {
             posts.loading ?
               <VscLoading size="3em" className="loading-profile" />:
-              posts.result === 0 ?
+              posts.result === 0 && posts.posts.length ?
                 <h2>No Posts</h2> :
                 <Posts />
           }
