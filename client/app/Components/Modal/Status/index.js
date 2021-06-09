@@ -14,6 +14,7 @@ export const StatusModal = ({ dark }) => {
   const [images, setImages] = useState([])
   const [stream, setStream] = useState(false)
   const [tracks, setTracks] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const videoRef = useRef()
   const refCanvas = useRef()
@@ -85,8 +86,9 @@ export const StatusModal = ({ dark }) => {
     setStream(false)
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
+    setLoading(true)
     if (!content && images.length === 0) {
       return dispatch({
         type: ALERT,
@@ -97,9 +99,9 @@ export const StatusModal = ({ dark }) => {
     }
 
     if (status.onEdit) {
-      dispatch(updatePost({content, images, auth, status}))
+      await dispatch(updatePost({content, images, auth, status}))
     } else {
-      dispatch(createPost({ content, images, auth }))
+      await dispatch(createPost({ content, images, auth }))
     }
 
     setContent('')
@@ -109,6 +111,7 @@ export const StatusModal = ({ dark }) => {
       type: STATUS,
       payload: false
     })
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -206,9 +209,10 @@ export const StatusModal = ({ dark }) => {
           <button
             className={`btn-info ${dark && 'dark'}`}
             type="submit"
-            disabled={!content && images.length === 0 ? true : false}
+            disabled={!content && images.length === 0 || loading ? true : false}
           >
-            {status.onEdit ? 'Save' : 'Post'}
+            {status.onEdit ? loading ? 'Saving' : 'Save' :
+              loading ? ' Posting' : 'Post'}
           </button>
         </div>
       </form>

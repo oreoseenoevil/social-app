@@ -15,12 +15,6 @@ export const updatePost = ({ content, images, auth, status }) => async dispatch 
     return
   }
   try {
-    dispatch({
-      type: ALERT,
-      payload: {
-        loading: true
-      }
-    })
     if (imgNewUrl.length > 0) {
       media = await imageUpload(imgNewUrl)
     }
@@ -33,13 +27,6 @@ export const updatePost = ({ content, images, auth, status }) => async dispatch 
     dispatch({
       type: UPDATE_POST,
       payload: res.data.data
-    })
-
-    dispatch({
-      type: ALERT,
-      payload: {
-        success: res.data.message
-      }
     })
   } catch (error) {
     dispatch({

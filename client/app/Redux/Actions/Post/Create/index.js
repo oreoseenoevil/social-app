@@ -7,12 +7,6 @@ const { ALERT } = TYPES
 export const createPost = ({ content, images, auth }) => async dispatch => {
   let media = []
   try {
-    dispatch({
-      type: ALERT,
-      payload: {
-        loading: true
-      }
-    })
     if (images.length > 0) {
       media = await imageUpload(images)
     }
@@ -25,13 +19,6 @@ export const createPost = ({ content, images, auth }) => async dispatch => {
     dispatch({
       type: CREATE_POST,
       payload: {...res.data.data, user: auth.user}
-    })
-
-    dispatch({
-      type: ALERT,
-      payload: {
-        loading: false
-      }
     })
   } catch (error) {
     dispatch({
