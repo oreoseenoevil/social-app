@@ -1,16 +1,12 @@
 .user-card {
   width: 100%;
   padding: 0.5em 1em;
-  background: #fff;
+  background: transparent;
   transition: all 200ms ease-in-out;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  &.dark {
-    background: #2e2e2e;
-  }
 
   &:hover {
     border-color: #0091ff;
