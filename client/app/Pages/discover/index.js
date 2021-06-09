@@ -17,7 +17,7 @@ export default function Discover() {
     if (!discover.firstLoad) {
       dispatch(getDiscoverPosts(auth.token))
     }
-  }, [dispatch, auth.token])
+  }, [dispatch, auth.token, discover.firstLoad])
 
   const { UPDATE_POST } = DISCOVER_TYPES
 
