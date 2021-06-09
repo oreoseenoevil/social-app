@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema({
   story: {
     type: String,
     default: '',
-    maxLength: [200, 'Maximum at least 200 characters.']
+    maxLength: [50, 'Maximum at least 50 characters.']
   },
   website: {
     type: String,
@@ -68,6 +68,12 @@ const UserSchema = new mongoose.Schema({
     {
       type: ObjectId,
       ref: 'User'
+    }
+  ],
+  saved: [
+    {
+      type: ObjectId,
+      ref: 'Post'
     }
   ]
 }, { timestamps: true })

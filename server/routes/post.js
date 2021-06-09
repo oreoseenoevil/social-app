@@ -11,13 +11,20 @@ router.route('/post/:id')
   .get(auth, postController.getPost)
   .delete(auth, postController.deletePost)
 
-router.route('/posts/:id/like').patch(auth, postController.likePost)
-router.route('/posts/:id/unlike').patch(auth, postController.unlikePost)
+router.route('/posts/:id/like')
+  .patch(auth, postController.likePost)
+router.route('/posts/:id/unlike')
+  .patch(auth, postController.unlikePost)
 
 router.route('/user/posts/:id')
   .get(auth, postController.getUserPosts)
 
 router.route('/posts/discover')
   .get(auth, postController.getPostsDiscover)
+
+router.route('/user/:id/saved')
+  .patch(auth, postController.savedPost)
+router.route('/user/:id/unsaved')
+  .patch(auth, postController.unsavedPost)
 
 module.exports = router

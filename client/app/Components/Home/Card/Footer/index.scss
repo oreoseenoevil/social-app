@@ -30,8 +30,19 @@
       }
     }
 
-    svg {
+    .bookmark-icon {
       cursor: pointer;
+      animation: pulse 500ms;
     }
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
   }
 }

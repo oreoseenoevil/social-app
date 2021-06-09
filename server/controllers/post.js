@@ -1,6 +1,6 @@
 const Post = require('../models/Post')
 const Comment = require('../models/Comment')
-// const User = require('../models/User')
+const User = require('../models/User')
 
 class APIfeatures {
   constructor(query, queryString) {
@@ -246,6 +246,62 @@ const postController = {
         success: true,
         message: 'Successfully deleted.'
       })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  savedPost: async (req, res) => {
+    try {
+      const user = await User.findById({_id: req.user._id })
+
+      if (!user) {
+        return res.status(403).json({
+          success: false,
+          error: 'No user found.'
+        })
+      }
+
+      if (!user.saved.includes(req.params.id)) {
+        await user.updateOne({ $push: {
+          saved: req.params.id
+        }})
+
+        return res.status(200).json({
+          success: true,
+          message: 'Post has been saved.'
+        })
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
+  },
+  unsavedPost: async (req, res) => {
+    try {
+      const user = await User.findById({_id: req.user._id})
+
+      if (!user) {
+        return res.status(403).json({
+          success: false,
+          error: 'No user found.'
+        })
+      }
+
+      if (user.saved.includes(req.params.id)) {
+        await user.updateOne({ $pull: {
+          saved: req.params.id
+        }})
+
+        return res.status(200).json({
+          success: true,
+          message: 'Post has been unsaved.'
+        })
+      }
     } catch (error) {
       return res.status(500).json({
         success: false,

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import '@Components/Home/Card/Footer/index.scss'
-import { FaRegComment } from 'react-icons/fa'
+import { FaRegComment, FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { FiSend } from 'react-icons/fi'
 import { LikeButton } from '@Components/LikeButton'
-import { BsBookmark } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
-import { likePost, unlikePost } from '@Actions'
+import { likePost, unlikePost, savedPost, unsavedPost } from '@Actions'
 import { useHistory } from 'react-router'
 import { ShareButton } from '@Components/Modal'
 import { BASE_URL } from '@Utils'
@@ -16,6 +15,9 @@ export const CardFooter = ({ post }) => {
   const history = useHistory()
 
   const [isShare, setIsShare] = useState(false)
+
+  const [saved, setSaved] = useState(false)
+  const [loadSaved, setLoadSaved] = useState(false)
 
   const { auth } = useSelector(state => state)
   const dispatch = useDispatch()
@@ -38,6 +40,28 @@ export const CardFooter = ({ post }) => {
     setLoadLike(false)
   }
 
+  useEffect(() => {
+    if (auth.user.saved.find(id => id === post._id)) {
+      setSaved(true)
+    } else {
+      setSaved(false)
+    }
+  }, [auth.user.saved, post._id])
+
+  const handleSaved = async () => {
+    if (loadSaved) return
+    setSaved(!saved)
+    setLoadSaved(true)
+    if (saved) {
+      await dispatch(unsavedPost({post, auth}))
+    } else {
+      await dispatch(savedPost({post, auth}))
+    }
+    setLoadSaved(false)
+  }
+
+  const IconBookmark = saved ? FaBookmark : FaRegBookmark
+
   return (
     <div className="card-footer">
       <div className="card-icons">
@@ -54,7 +78,11 @@ export const CardFooter = ({ post }) => {
             onClick={() => setIsShare(!isShare)}
           />
         </div>
-        <BsBookmark size="1.5em" />
+        <IconBookmark
+          size="1.5em"
+          className="bookmark-icon"
+          onClick={handleSaved}
+        />
       </div>
       {isShare && <ShareButton url={`${BASE_URL}/post/${post._id}`} />}
       <div className="card-container">
