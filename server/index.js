@@ -10,7 +10,7 @@ const middleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const historyApiFallback = require('connect-history-api-fallback')
 const path = require('path')
-
+const SocketServer = require('./socketServer')
 const keys = require('./config/keys')
 const connectDB = require('./config/db')
 const webpackConfig = require('../webpack.config')
@@ -26,6 +26,12 @@ app.use(cors())
 app.use(fileUpload({
   useTempFiles: true
 }))
+
+// Socket
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+
+io.on('connection', socket => SocketServer(socket))
 
 // Routes
 app.use('/api', require('./routes/auth'))
@@ -58,7 +64,7 @@ if (process.env.NODE_ENV !== 'production') {
   })
 }
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(
     `${chalk.green('OK')} ${chalk.blue(
       `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`

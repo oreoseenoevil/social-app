@@ -4,7 +4,7 @@ import { DeleteData, patchDataAPI } from '@Helpers'
 const { ALERT, AUTH } = TYPES
 const { UNFOLLOW } = PROFILE_TYPES
 
-export const unfollowUser = ({ users, user, auth}) => async dispatch => {
+export const unfollowUser = ({ users, user, auth, socket}) => async dispatch => {
   let newUser
   if (users.every(item => item._id !== user._id)) {
     newUser = {
@@ -39,7 +39,8 @@ export const unfollowUser = ({ users, user, auth}) => async dispatch => {
   })
 
   try {
-    await patchDataAPI(`/user/${user._id}/unfollow`, null, auth.token)
+    const res = await patchDataAPI(`/user/${user._id}/unfollow`, null, auth.token)
+    socket.emit('unfollow', res.data.data)
   } catch (error) {
     dispatch({
       type: ALERT,

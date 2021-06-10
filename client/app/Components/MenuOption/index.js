@@ -11,12 +11,12 @@ export const MenuOption = ({ post, comment, setOnEdit }) => {
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
   const { dark } = useContext(LayoutContext)
 
-  const { auth } = useSelector(state => state)
+  const { auth, socket } = useSelector(state => state)
   const dispatch = useDispatch()
 
   const handleRemove = () => {
     if (post.user._id === auth.user._id || comment.user._id === auth.user._id) {
-      dispatch(deleteComment({post, auth, comment}))
+      dispatch(deleteComment({post, auth, comment, socket}))
     }
   }
 

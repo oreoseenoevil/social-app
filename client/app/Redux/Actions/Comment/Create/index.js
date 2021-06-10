@@ -4,7 +4,7 @@ import { postDataAPI } from '@Helpers'
 const { UPDATE_POST } = POST_TYPES
 const { ALERT } = TYPES
 
-export const createComment = ({ post, newComment, auth }) => async dispatch => {
+export const createComment = ({ post, newComment, auth, socket }) => async dispatch => {
   const newPost = {
     ...post,
     comments: [...post.comments, newComment]
@@ -29,6 +29,8 @@ export const createComment = ({ post, newComment, auth }) => async dispatch => {
       type: UPDATE_POST,
       payload: newPost
     })
+
+    socket.emit('createComment', newPost)
   } catch (error) {
     dispatch({
       type: ALERT,

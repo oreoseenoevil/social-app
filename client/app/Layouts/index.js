@@ -6,6 +6,7 @@ import { LayoutContext } from '@Context/Layout'
 import { Notification } from '@Components/Notifications'
 import { useSelector } from 'react-redux'
 import { StatusModal } from '@Components/Modal'
+import SocketClient from '@Socket'
 
 export const Layouts = () => {
   const { dark, toggleDarkMode } = useContext(LayoutContext)
@@ -20,6 +21,7 @@ export const Layouts = () => {
       />}
       <div className={`main ${dark && 'dark'}`}>
         {status && <StatusModal dark={dark} />}
+        {auth.token && <SocketClient />}
         <Notification />
         <Main />
       </div>

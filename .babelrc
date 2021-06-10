@@ -29,7 +29,8 @@
           "@Helpers": "./client/app/Helpers",
           "@Utils": "./client/app/Utils",
           "@Router": "./client/app/Router",
-          "@Pages": "./client/app/Pages"
+          "@Pages": "./client/app/Pages",
+          "@Socket": "./client/app/Socket"
         }
       }
     ]

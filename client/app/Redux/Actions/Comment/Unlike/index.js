@@ -4,7 +4,7 @@ import { patchDataAPI, EditData, DeleteData } from '@Helpers'
 const { ALERT } = TYPES
 const { UPDATE_POST } = POST_TYPES
 
-export const unlikeComment = ({comment, post, auth}) => async dispatch => {
+export const unlikeComment = ({comment, post, auth, socket }) => async dispatch => {
   const newComment = {
     ...comment,
     likes: DeleteData(comment.likes, auth.user._id)
@@ -18,6 +18,8 @@ export const unlikeComment = ({comment, post, auth}) => async dispatch => {
     type: UPDATE_POST,
     payload: newPost
   })
+
+  socket.emit('unlikeComment', newPost)
 
   try {
     await patchDataAPI(`/comments/${comment._id}/unlike`, null, auth.token)

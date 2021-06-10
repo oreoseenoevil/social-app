@@ -65,19 +65,19 @@ const userController = {
   followUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id)
-      const currentUser = await User.findById(req.user._id)
 
       if (!user.followers.includes(req.user._id)) {
-        await user.updateOne({ $push: {
-          followers: req.user._id
-        }})
+        const newUser = await User.findOneAndUpdate({_id: req.params.id}, {
+          $push: { followers: req.user._id }
+        }, { new: true }).populate('followers following', '-password')
 
-        await currentUser.updateOne({ $push: {
-          following: req.params.id
-        }})
+        await User.findOneAndUpdate({ _id: req.user._id }, {
+          $push: { following: req.params.id }
+        }, { new: true })
 
         return res.status(200).json({
           success: true,
+          data: newUser,
           message: 'User has been followed.'
         })
       } else {
@@ -96,19 +96,19 @@ const userController = {
   unfollowUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id)
-      const currentUser = await User.findById(req.user._id)
 
       if (user.followers.includes(req.user._id)) {
-        await user.updateOne({ $pull: {
-          followers: req.user._id
-        }})
+        const newUser = await User.findOneAndUpdate({_id: req.params.id}, {
+          $pull: { followers: req.user._id }
+        }, { new: true }).populate('followers following', '-password')
 
-        await currentUser.updateOne({ $pull: {
-          following: req.params.id
-        }})
+        await User.findOneAndUpdate({ _id: req.user._id }, {
+          $pull: { following: req.params.id }
+        }, { new: true })
 
         return res.status(200).json({
           success: true,
+          data: newUser,
           message: 'User has been unfollowed.'
         })
       } else {

@@ -2,7 +2,8 @@ export const TYPES = {
   AUTH: 'AUTH',
   ALERT: 'ALERT',
   STATUS: 'STATUS',
-  MODAL: 'MODAL'
+  MODAL: 'MODAL',
+  SOCKET: 'SOCKET'
 }
 
 export const PROFILE_TYPES = {

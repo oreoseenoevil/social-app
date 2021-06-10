@@ -8,6 +8,7 @@ import modal from '@Reducers/modal'
 import detailPost from '@Reducers/detailPost'
 import discover from '@Reducers/discover'
 import suggestions from '@Reducers/suggestions'
+import socket from '@Reducers/socket'
 
 export default combineReducers({
   auth,
@@ -18,5 +19,6 @@ export default combineReducers({
   modal,
   detailPost,
   discover,
-  suggestions
+  suggestions,
+  socket
 })

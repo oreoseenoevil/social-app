@@ -4,7 +4,7 @@ import { deleteDataAPI } from '@Helpers'
 const { UPDATE_POST } = POST_TYPES
 const { ALERT } = TYPES
 
-export const deleteComment = ({ comment, post, auth }) => async dispatch => {
+export const deleteComment = ({ comment, post, auth, socket }) => async dispatch => {
   const deleteArr = [...post.comments.filter(
     item => item.reply === comment._id
   ), comment]
@@ -18,6 +18,8 @@ export const deleteComment = ({ comment, post, auth }) => async dispatch => {
     type: UPDATE_POST,
     payload: newPost
   })
+
+  socket.emit('deleteComment', newPost)
 
   try {
     deleteArr.forEach(item => deleteDataAPI(`/comments/${item._id}`, auth.token))

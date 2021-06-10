@@ -19,7 +19,7 @@ export const DisplayComment = ({ children, comment, post, commentId }) => {
 
   const [onReply, setOnReply] = useState(false)
 
-  const { auth } = useSelector(state => state)
+  const { auth, socket } = useSelector(state => state)
   const dispatch = useDispatch()
   const { MODAL } = TYPES
 
@@ -28,9 +28,9 @@ export const DisplayComment = ({ children, comment, post, commentId }) => {
     setIsLike(!isLike)
     setLoadLike(true)
     if (isLike) {
-      await dispatch(unlikeComment({ comment, post, auth }))
+      await dispatch(unlikeComment({ comment, post, auth, socket }))
     } else {
-      await dispatch(likeComment({ comment, post, auth }))
+      await dispatch(likeComment({ comment, post, auth, socket }))
     }
     setLoadLike(false)
   }

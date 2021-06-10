@@ -5,7 +5,7 @@ const { ALERT, AUTH } = TYPES
 
 const { FOLLOW } = PROFILE_TYPES
 
-export const followUser = ({ users, user, auth}) => async dispatch => {
+export const followUser = ({ users, user, auth, socket}) => async dispatch => {
   let newUser
   if (users.every(item => item._id !== user._id)) {
     newUser = {
@@ -37,7 +37,8 @@ export const followUser = ({ users, user, auth}) => async dispatch => {
   })
 
   try {
-    await patchDataAPI(`/user/${user._id}/follow`, null, auth.token)
+    const res = await patchDataAPI(`/user/${user._id}/follow`, null, auth.token)
+    socket.emit('follow', res.data.data)
   } catch (error) {
     dispatch({
       type: ALERT,

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import io from 'socket.io-client'
 import { PageRender, PublicRoute } from '@Router'
 import Home from '@Pages/home'
 import SignIn from '@Pages/signin'
 import SignUp from '@Pages/signup'
-import { refreshToken, getPosts, getSuggestions } from '@Actions'
+import { refreshToken, getPosts, getSuggestions, TYPES } from '@Actions'
 
 export const Main = () => {
   const { auth } = useSelector(state => state)
@@ -13,6 +14,13 @@ export const Main = () => {
 
   useEffect(() => {
     dispatch(refreshToken())
+    const socket = io()
+    
+    dispatch({
+      type: TYPES.SOCKET,
+      payload: socket
+    })
+    return () => socket.close()
   }, [dispatch])
 
   useEffect(() => {

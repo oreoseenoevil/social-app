@@ -4,7 +4,7 @@ import { patchDataAPI, EditData } from '@Helpers'
 const { ALERT } = TYPES
 const { UPDATE_POST } = POST_TYPES
 
-export const likeComment = ({comment, post, auth}) => async dispatch => {
+export const likeComment = ({comment, post, auth, socket }) => async dispatch => {
   const newComment = {
     ...comment,
     likes: [...comment.likes, auth.user]
@@ -21,6 +21,8 @@ export const likeComment = ({comment, post, auth}) => async dispatch => {
     type: UPDATE_POST,
     payload: newPost
   })
+
+  socket.emit('likeComment', newPost)
 
   try {
     await patchDataAPI(`/comments/${comment._id}/like`, null, auth.token)
