@@ -83,7 +83,11 @@ ul.menu {
         }
 
         &.notification {
+          padding-left: 0;
+          padding-right: 0;
           width: 400px;
+          height: 300px;
+          max-height: 300px;
           gap: 1em;
           top: 3em;
           right: -5px;

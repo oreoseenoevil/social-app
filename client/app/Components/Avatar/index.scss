@@ -24,6 +24,10 @@
   &.medium {
     width: 3em;
     height: 3em;
+
+    &.square {
+      border-radius: 0;
+    }
   }
 
   &.big {

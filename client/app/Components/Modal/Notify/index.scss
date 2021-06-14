@@ -1,12 +1,51 @@
 .notify-container {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+
+  &.read {
+    background: rgba(219, 219, 219, 0.116);
+  }
 
   .notify-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 1em;
     width: 100%;
     cursor: pointer;
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    .notify-info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .group {
+        .username {
+          font-weight: 600;
+          margin-right: 6px;
+        }
+      }
+
+      .content {
+        font-size: 1rem;
+      }
+
+      .time {
+        font-size: 0.8rem;
+        opacity: 0.8;
+      }
+    }
+
+    .image-container {
+      padding: 0.2em;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
   }
 }

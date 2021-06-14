@@ -8,5 +8,6 @@ router.route('/notify')
 
 router.route('/notify/:id')
   .delete(auth, notifyController.removeNotify)
+  .patch(auth, notifyController.isReadNotify)
 
 module.exports = router

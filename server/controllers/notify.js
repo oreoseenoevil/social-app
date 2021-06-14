@@ -60,6 +60,22 @@ const notifyController = {
         error: error.message
       })
     }
+  },
+  isReadNotify: async (req, res) => {
+    try {
+      await Notify.findByIdAndUpdate(req.params.id, {
+        isRead: true
+      })
+
+      return res.status(200).json({
+        success: true
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      })
+    }
   }
 }
 

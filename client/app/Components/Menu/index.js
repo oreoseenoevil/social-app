@@ -51,7 +51,7 @@ export const Menu = ({ toggleDarkMode, dark, mobileActive }) => {
         ref={notifyRef}
         onClick={() => setDropDown(!dropDown)}
       >
-        <a>
+        <a className={`${dropDown && 'active'}`}>
           <RiNotification2Line size="1.6em" />
         </a>
         {
