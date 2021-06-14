@@ -16,7 +16,7 @@ export const CardHeader = ({ post, dark }) => {
 
   const history = useHistory()
 
-  const { auth } = useSelector(state => state)
+  const { auth, socket } = useSelector(state => state)
   const dispatch = useDispatch()
   const { STATUS } = TYPES
 
@@ -31,7 +31,7 @@ export const CardHeader = ({ post, dark }) => {
   }
 
   const handleDeletePost = () => {
-    dispatch(deletePost({post, auth}))
+    dispatch(deletePost({ post, auth, socket }))
     return history.push('/')
   }
 

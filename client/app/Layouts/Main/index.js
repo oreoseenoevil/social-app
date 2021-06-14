@@ -6,7 +6,7 @@ import { PageRender, PublicRoute } from '@Router'
 import Home from '@Pages/home'
 import SignIn from '@Pages/signin'
 import SignUp from '@Pages/signup'
-import { refreshToken, getPosts, getSuggestions, TYPES } from '@Actions'
+import { refreshToken, getPosts, getSuggestions, TYPES, getNotify } from '@Actions'
 
 export const Main = () => {
   const { auth } = useSelector(state => state)
@@ -27,6 +27,7 @@ export const Main = () => {
     if (auth.token) {
       dispatch(getPosts(auth.token))
       dispatch(getSuggestions(auth.token))
+      dispatch(getNotify(auth.token))
     }
   }, [dispatch, auth.token])
 

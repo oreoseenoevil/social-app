@@ -6,7 +6,7 @@ import { FaCamera, FaImage } from 'react-icons/fa'
 
 export const StatusModal = ({ dark }) => {
   const dispatch = useDispatch()
-  const { auth, status } = useSelector(state => state)
+  const { auth, status, socket } = useSelector(state => state)
 
   const { STATUS, ALERT } = TYPES
 
@@ -101,7 +101,7 @@ export const StatusModal = ({ dark }) => {
     if (status.onEdit) {
       await dispatch(updatePost({content, images, auth, status}))
     } else {
-      await dispatch(createPost({ content, images, auth }))
+      await dispatch(createPost({ content, images, auth, socket }))
     }
 
     setContent('')
@@ -118,6 +118,11 @@ export const StatusModal = ({ dark }) => {
     if (status.onEdit) {
       setContent(status.content)
       setImages(status.images)
+    }
+
+    return () => {
+      setContent('')
+      setImages([])
     }
   }, [status])
 

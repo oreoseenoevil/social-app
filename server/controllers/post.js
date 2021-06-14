@@ -244,7 +244,11 @@ const postController = {
 
       return res.status(200).json({
         success: true,
-        message: 'Successfully deleted.'
+        message: 'Successfully deleted.',
+        data: {
+          ...post,
+          user: req.user
+        }
       })
     } catch (error) {
       return res.status(500).json({

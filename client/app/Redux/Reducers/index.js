@@ -9,6 +9,7 @@ import detailPost from '@Reducers/detailPost'
 import discover from '@Reducers/discover'
 import suggestions from '@Reducers/suggestions'
 import socket from '@Reducers/socket'
+import notify from '@Reducers/notify'
 
 export default combineReducers({
   auth,
@@ -20,5 +21,6 @@ export default combineReducers({
   detailPost,
   discover,
   suggestions,
-  socket
+  socket,
+  notify
 })
