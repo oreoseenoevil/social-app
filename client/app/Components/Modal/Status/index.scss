@@ -1,14 +1,15 @@
 .modal-container {
   position: fixed;
+  padding: 1rem 0;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
-  overflow: auto;
+  overflow-y: auto;
   color: inherit;
   z-index: 10;
 
@@ -199,11 +200,8 @@
 
       .stream {
         position: relative;
-        border: 1px solid #000;
-
-        &.dark {
-          border: 1px solid #fff;
-        }
+        width: 100%;
+        object-fit: contain;
 
         span.close {
           position: absolute;
