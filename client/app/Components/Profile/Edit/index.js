@@ -80,9 +80,11 @@ export const Edit = ({ setOnEdit }) => {
 
   const handleChange = e => {
     const { name, value } = e.target
-    setUserData({
-      ...userData,
-      [name]:value
+    setUserData(prevState => {
+      return {
+        ...prevState,
+        [name]:value
+      }
     })
   }
 
