@@ -12,7 +12,8 @@ import { TYPES, deletePost } from '@Actions'
 import { BASE_URL } from '@Utils'
 
 export const CardHeader = ({ post, dark }) => {
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false)
 
   const history = useHistory()
 
@@ -45,13 +46,9 @@ export const CardHeader = ({ post, dark }) => {
         <Avatar src={post.user.avatar} size="medium" />
         <div className="card-name">
           <h4>
-            <Link to={`/profile/${post.user._id}`}>
-              {post.user.fullname}
-            </Link>
+            <Link to={`/profile/${post.user._id}`}>{post.user.fullname}</Link>
           </h4>
-          <span>
-            {moment(post.createdAt).fromNow()}
-          </span>
+          <span>{moment(post.createdAt).fromNow()}</span>
         </div>
       </div>
       <div
@@ -63,34 +60,30 @@ export const CardHeader = ({ post, dark }) => {
           size="1.5em"
           className={isComponentVisible && 'active'}
         />
-        {isComponentVisible &&
+        {isComponentVisible && (
           <div className={`dropdown-menu ${dark && 'dark'}`}>
-            { auth.user._id === post.user._id &&
+            {auth.user._id === post.user._id && (
               <Fragment>
-                <div
-                  className="dropdown-item"
-                  onClick={handleEditPost}
-                >
+                <div className="dropdown-item" onClick={handleEditPost}>
                   <span>Edit Post</span>
                   <RiEditLine />
                 </div>
                 <span className={`dropdown-line ${dark && 'dark'}`}></span>
-                <div
-                  className="dropdown-item"
-                  onClick={handleDeletePost}
-                >
+                <div className="dropdown-item" onClick={handleDeletePost}>
                   <span>Delete Post</span>
                   <RiDeleteBin6Line />
                 </div>
               </Fragment>
-            }
-            {auth.user._id === post.user._id && <span className={`dropdown-line ${dark && 'dark'}`}></span>}
+            )}
+            {auth.user._id === post.user._id && (
+              <span className={`dropdown-line ${dark && 'dark'}`}></span>
+            )}
             <div className="dropdown-item" onClick={handeCopyLink}>
               <span>Copy Link</span>
               <BsLink45Deg />
             </div>
           </div>
-        }
+        )}
       </div>
     </div>
   )

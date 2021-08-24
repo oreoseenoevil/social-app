@@ -12,11 +12,11 @@ const Post = () => {
   const { id } = useParams()
   const [post, setPost] = useState([])
 
-  const { auth, detailPost }= useSelector(state => state)
+  const { auth, detailPost } = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getPost({detailPost, id, auth}))
+    dispatch(getPost({ detailPost, id, auth }))
 
     if (detailPost.length > 0) {
       const newArr = detailPost.filter(post => post._id === id)
@@ -26,15 +26,12 @@ const Post = () => {
 
   return (
     <div className="posts">
-      {
-        post.length === 0 &&
+      {post.length === 0 && (
         <VscLoading size="3em" className="loading-profile" />
-      }
-      {
-        post.map(item => (
-          <PostCard key={item._id} post={item} dark={dark} />
-        ))
-      }
+      )}
+      {post.map(item => (
+        <PostCard key={item._id} post={item} dark={dark} />
+      ))}
     </div>
   )
 }

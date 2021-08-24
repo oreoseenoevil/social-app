@@ -24,9 +24,10 @@ const notifyReducer = (state = initialState, action) => {
     case REMOVE_NOTIFY:
       return {
         ...state,
-        data: state.data.filter(item => (
-          item.id !== action.payload.id || item.url !== action.payload.url
-        ))
+        data: state.data.filter(
+          item =>
+            item.id !== action.payload.id || item.url !== action.payload.url
+        )
       }
     case UPDATE_NOTIFY:
       return {

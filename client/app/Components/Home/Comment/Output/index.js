@@ -22,37 +22,32 @@ export const OutputComment = ({ post }) => {
 
   return (
     <div className="comment-output">
-      {
-        comments.length - next > 0 ?
-          <span
-            className="show-comments"
-            onClick={() => setNext(next + post.comments.length)}
-          >
-            {
-              post.comments.length > 1 ?
-              `View all ${post.comments.length} comments` :
-              `View ${post.comments.length} comment`
-            }
-          </span> :
-          comments.length > 0 &&
-            <span
-              className="show-comments"
-              onClick={() => setNext(0)}
-            >
-              Hide comments
-            </span>
-      }
-      {
-        showComments.map((comment, index) => (
-          <CommentCard
-            key={index}
-            comment={comment}
-            post={post}
-            replyComment={replyComments.filter(item => item.reply === comment._id)}
-          />
-        ))
-      }
+      {comments.length - next > 0 ? (
+        <span
+          className="show-comments"
+          onClick={() => setNext(next + post.comments.length)}
+        >
+          {post.comments.length > 1
+            ? `View all ${post.comments.length} comments`
+            : `View ${post.comments.length} comment`}
+        </span>
+      ) : (
+        comments.length > 0 && (
+          <span className="show-comments" onClick={() => setNext(0)}>
+            Hide comments
+          </span>
+        )
+      )}
+      {showComments.map((comment, index) => (
+        <CommentCard
+          key={index}
+          comment={comment}
+          post={post}
+          replyComment={replyComments.filter(
+            item => item.reply === comment._id
+          )}
+        />
+      ))}
     </div>
   )
 }
-

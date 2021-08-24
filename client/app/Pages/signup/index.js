@@ -14,7 +14,17 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
 import { register } from '@Actions'
-import { FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Radio, RadioGroup } from '@material-ui/core'
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core'
 
 import { useSelector } from 'react-redux'
 
@@ -33,7 +43,7 @@ function Copyright() {
   )
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
@@ -41,35 +51,35 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     minWidth: '320px',
     width: '100%',
-    color: 'inherit'
+    color: 'inherit',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
-    padding: '1em'
+    padding: '1em',
   },
   form: {
     width: '95%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    color: 'inherit'
+    color: 'inherit',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   multilineColor: {
-    color: 'inherit'
+    color: 'inherit',
   },
   notchedOutline: {
-    borderColor: 'inherit'
+    borderColor: 'inherit',
   },
   button: {
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   margin: {
-    margin: theme.spacing(1, 0, 1)
+    margin: theme.spacing(1, 0, 1),
   },
   textField: {
-    width: '100%'
+    width: '100%',
   },
   group: {
     width: '100%',
@@ -77,8 +87,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'nowrap',
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 }))
 
 export default function SignUp() {
@@ -92,20 +102,16 @@ export default function SignUp() {
     email: '',
     password: '',
     confirmPassword: '',
-    gender: 'male'
+    gender: 'male',
   }
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [userData, setUserData] = useState(initialState)
 
-  const {
-    fullname,
-    username,
-    email, password,
-    confirmPassword,
-    gender } = userData
-  
+  const { fullname, username, email, password, confirmPassword, gender } =
+    userData
+
   const { alert, auth } = useSelector(state => state)
 
   useEffect(() => {
@@ -116,7 +122,7 @@ export default function SignUp() {
 
   const handleChange = e => {
     const { name, value } = e.target
-    setUserData({ ...userData, [name]:value })
+    setUserData({ ...userData, [name]: value })
   }
 
   const handleSubmit = async e => {
@@ -134,12 +140,17 @@ export default function SignUp() {
             Sign Up
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
-                  root: classes.multilineColor
+                  root: classes.multilineColor,
                 }}
-              >Fullname</InputLabel>
+              >
+                Fullname
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-fullname"
                 type="text"
@@ -150,16 +161,21 @@ export default function SignUp() {
                 required
                 classes={{
                   root: classes.multilineColor,
-                  notchedOutline: classes.notchedOutline
+                  notchedOutline: classes.notchedOutline,
                 }}
               />
             </FormControl>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
-                  root: classes.multilineColor
+                  root: classes.multilineColor,
                 }}
-              >Username</InputLabel>
+              >
+                Username
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-username"
                 type="text"
@@ -170,16 +186,21 @@ export default function SignUp() {
                 required
                 classes={{
                   root: classes.multilineColor,
-                  notchedOutline: classes.notchedOutline
+                  notchedOutline: classes.notchedOutline,
                 }}
               />
             </FormControl>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
-                  root: classes.multilineColor
+                  root: classes.multilineColor,
                 }}
-              >Email</InputLabel>
+              >
+                Email
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-email"
                 type="email"
@@ -190,16 +211,21 @@ export default function SignUp() {
                 required
                 classes={{
                   root: classes.multilineColor,
-                  notchedOutline: classes.notchedOutline
+                  notchedOutline: classes.notchedOutline,
                 }}
               />
             </FormControl>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
-                  root: classes.multilineColor
+                  root: classes.multilineColor,
                 }}
-              >Password</InputLabel>
+              >
+                Password
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-password"
                 type={showPassword ? 'text' : 'password'}
@@ -209,7 +235,7 @@ export default function SignUp() {
                 required
                 classes={{
                   root: classes.multilineColor,
-                  notchedOutline: classes.notchedOutline
+                  notchedOutline: classes.notchedOutline,
                 }}
                 endAdornment={
                   <InputAdornment position="end">
@@ -218,19 +244,32 @@ export default function SignUp() {
                       onClick={() => setShowPassword(!showPassword)}
                       edge="end"
                     >
-                      {showPassword ? <MdVisibility className={`visible ${dark && 'active'}`} /> : <MdVisibilityOff className={`visible ${dark && 'active'}`} />}
+                      {showPassword ? (
+                        <MdVisibility
+                          className={`visible ${dark && 'active'}`}
+                        />
+                      ) : (
+                        <MdVisibilityOff
+                          className={`visible ${dark && 'active'}`}
+                        />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
                 labelWidth={70}
               />
             </FormControl>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
-                  root: classes.multilineColor
+                  root: classes.multilineColor,
                 }}
-              >Confirm Password</InputLabel>
+              >
+                Confirm Password
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-confirm-password"
                 type={showConfirmPassword ? 'text' : 'password'}
@@ -240,37 +279,64 @@ export default function SignUp() {
                 required
                 classes={{
                   root: classes.multilineColor,
-                  notchedOutline: classes.notchedOutline
+                  notchedOutline: classes.notchedOutline,
                 }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                       edge="end"
                     >
-                      {showConfirmPassword ? <MdVisibility className={`visible ${dark && 'active'}`} /> : <MdVisibilityOff className={`visible ${dark && 'active'}`} />}
+                      {showConfirmPassword ? (
+                        <MdVisibility
+                          className={`visible ${dark && 'active'}`}
+                        />
+                      ) : (
+                        <MdVisibilityOff
+                          className={`visible ${dark && 'active'}`}
+                        />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
                 labelWidth={136}
               />
             </FormControl>
-            <FormControl component="fieldset" className={clsx(classes.textField, classes.margin)}>
-              <FormLabel 
-                component="legend"
-                className={classes.multilineColor}
-              >Gender</FormLabel>
-              <RadioGroup 
+            <FormControl
+              component="fieldset"
+              className={clsx(classes.textField, classes.margin)}
+            >
+              <FormLabel component="legend" className={classes.multilineColor}>
+                Gender
+              </FormLabel>
+              <RadioGroup
                 aria-label="gender"
                 name="gender"
                 value={gender}
                 onChange={handleChange}
                 className={classes.group}
               >
-                <FormControlLabel name="gender" value="male" control={<Radio className={classes.notchedOutline} />} label="Male" />
-                <FormControlLabel name="gender" value="female" control={<Radio />} label="Female" />
-                <FormControlLabel name="gender" value="other" control={<Radio />} label="Other" />
+                <FormControlLabel
+                  name="gender"
+                  value="male"
+                  control={<Radio className={classes.notchedOutline} />}
+                  label="Male"
+                />
+                <FormControlLabel
+                  name="gender"
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel
+                  name="gender"
+                  value="other"
+                  control={<Radio />}
+                  label="Other"
+                />
               </RadioGroup>
             </FormControl>
             <Button
@@ -285,7 +351,8 @@ export default function SignUp() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link variant="body2"
+                <Link
+                  variant="body2"
                   className={classes.button}
                   onClick={() => history.push('/signin')}
                 >

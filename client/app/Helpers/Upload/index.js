@@ -1,4 +1,4 @@
-export const checkImage = (file) => {
+export const checkImage = file => {
   let err = ''
   if (!file) {
     err = 'File doesn\'t exist.'
@@ -15,7 +15,7 @@ export const checkImage = (file) => {
   return err
 }
 
-export const imageUpload = async (images) => {
+export const imageUpload = async images => {
   let imageArray = []
   for (const item of images) {
     const formData = new FormData()
@@ -35,8 +35,8 @@ export const imageUpload = async (images) => {
     })
 
     const data = await res.json()
-    imageArray.push({public_id: data.public_id, url: data.secure_url})
+    imageArray.push({ public_id: data.public_id, url: data.secure_url })
   }
 
   return imageArray
-} 
+}

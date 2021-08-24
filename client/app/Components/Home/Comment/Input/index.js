@@ -27,8 +27,8 @@ export const InputComment = ({ children, post, onReply, setOnReply }) => {
       reply: onReply && onReply.commentId,
       tag: onReply && onReply.user
     }
-    dispatch(createComment({post, newComment, auth, socket}))
-    
+    dispatch(createComment({ post, newComment, auth, socket }))
+
     if (setOnReply) return setOnReply(false)
   }
 
@@ -41,10 +41,9 @@ export const InputComment = ({ children, post, onReply, setOnReply }) => {
         value={content}
         onChange={e => setContent(e.target.value)}
       />
-      <button
-        type="submit"
-        disabled={!content ? true : false}
-      >Post</button>
+      <button type="submit" disabled={!content ? true : false}>
+        Post
+      </button>
     </form>
   )
 }

@@ -2,7 +2,6 @@ import { TYPES } from '@Actions'
 
 const { SOCKET } = TYPES
 
-
 const socketReducer = (state = [], action) => {
   switch (action.type) {
     case SOCKET:

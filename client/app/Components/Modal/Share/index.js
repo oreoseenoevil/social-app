@@ -1,11 +1,16 @@
 import React from 'react'
-import { EmailIcon, EmailShareButton,
-  FacebookIcon, FacebookShareButton,
-  RedditIcon, RedditShareButton,
-  TwitterIcon, TwitterShareButton } from 'react-share'
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  RedditIcon,
+  RedditShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from 'react-share'
 
 export const ShareButton = ({ url }) => {
-
   console.log(url)
 
   const styleShare = {
@@ -13,7 +18,7 @@ export const ShareButton = ({ url }) => {
     width: '100%',
     padding: '0.5em',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   }
 
   return (

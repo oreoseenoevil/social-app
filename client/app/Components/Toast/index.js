@@ -5,7 +5,6 @@ import '@Components/Toast/index.scss'
 import { LayoutContext } from '@Context/Layout'
 
 export const Toast = ({ success, error, handleClose }) => {
-
   const { dark } = useContext(LayoutContext)
 
   return (
@@ -17,10 +16,7 @@ export const Toast = ({ success, error, handleClose }) => {
           {success && `${success}`}
           {error && `${error}`}
         </div>
-        <span
-          className="toast-close close"
-          onClick={handleClose}
-        ></span>
+        <span className="toast-close close" onClick={handleClose}></span>
       </div>
     </div>
   )

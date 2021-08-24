@@ -1,5 +1,11 @@
 import React from 'react'
-import { CardHeader, CardBody, CardFooter, OutputComment, InputComment } from '@Components/Home'
+import {
+  CardHeader,
+  CardBody,
+  CardFooter,
+  OutputComment,
+  InputComment
+} from '@Components/Home'
 import '@Components/Home/PostCard/index.scss'
 
 export const PostCard = ({ post, dark }) => {

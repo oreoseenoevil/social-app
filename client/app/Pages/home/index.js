@@ -5,7 +5,6 @@ import { VscLoading } from 'react-icons/vsc'
 import { useSelector } from 'react-redux'
 
 export default function Home() {
-
   const { posts } = useSelector(state => state)
 
   return (
@@ -13,13 +12,13 @@ export default function Home() {
       <div className="home-container">
         <div className="home-main">
           <Status />
-          {
-            posts.loading ?
-              <VscLoading size="3em" className="loading-profile" />:
-              posts.result === 0 && posts.posts.length ?
-                <h2>No Posts</h2> :
-                <Posts />
-          }
+          {posts.loading ? (
+            <VscLoading size="3em" className="loading-profile" />
+          ) : posts.result === 0 && posts.posts.length ? (
+            <h2>No Posts</h2>
+          ) : (
+            <Posts />
+          )}
         </div>
         <div className="home-sidebar">
           <SideBar />

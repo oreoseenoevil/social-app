@@ -8,7 +8,8 @@ const initialState = {
   page: 2
 }
 
-const { CREATE_POST, LOADING_POST, GET_POSTS, UPDATE_POST, DELETE_POST } = POST_TYPES
+const { CREATE_POST, LOADING_POST, GET_POSTS, UPDATE_POST, DELETE_POST } =
+  POST_TYPES
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {

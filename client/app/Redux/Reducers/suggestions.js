@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const suggestionsReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOADING:
       return {
         ...state,

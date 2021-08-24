@@ -23,9 +23,9 @@ export const FollowButton = ({ user, dark }) => {
     setFollowed(!followed)
     setLoad(true)
     if (followed) {
-      await dispatch(unfollowUser({users: profile.users, user, auth, socket}))
+      await dispatch(unfollowUser({ users: profile.users, user, auth, socket }))
     } else {
-      await dispatch(followUser({users: profile.users, user, auth, socket}))
+      await dispatch(followUser({ users: profile.users, user, auth, socket }))
     }
     setLoad(false)
   }

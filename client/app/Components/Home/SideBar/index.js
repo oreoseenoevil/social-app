@@ -24,15 +24,15 @@ export const SideBar = () => {
         />
       </div>
       <div className="suggestions">
-        {
-          suggestions.loading ?
-            <VscLoading size="3em" className="loading-profile" /> :
-            suggestions.users.map(user => (
-              <UserCard key={user._id} user={user}>
-                <FollowButton dark={dark} user={user} />
-              </UserCard>
-            ))
-        }
+        {suggestions.loading ? (
+          <VscLoading size="3em" className="loading-profile" />
+        ) : (
+          suggestions.users.map(user => (
+            <UserCard key={user._id} user={user}>
+              <FollowButton dark={dark} user={user} />
+            </UserCard>
+          ))
+        )}
       </div>
     </div>
   )

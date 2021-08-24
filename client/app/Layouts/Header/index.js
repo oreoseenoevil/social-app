@@ -7,7 +7,8 @@ import { Menu } from '@Components/Menu'
 import { useComponentVisible } from '@Helpers'
 
 export const Header = ({ dark, toggleDarkMode }) => {
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false)
 
   const toggleMenu = () => setIsComponentVisible(!isComponentVisible)
 
@@ -22,7 +23,9 @@ export const Header = ({ dark, toggleDarkMode }) => {
         <SearchBar dark={dark} />
         <div className="right" ref={ref}>
           <div
-            className={`burger ${isComponentVisible && 'open-menu'} ${dark && 'dark'}`}
+            className={`burger ${isComponentVisible && 'open-menu'} ${
+              dark && 'dark'
+            }`}
             onClick={toggleMenu}
           >
             <span className="bar1"></span>

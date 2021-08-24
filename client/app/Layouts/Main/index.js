@@ -6,7 +6,13 @@ import { PageRender, PublicRoute } from '@Router'
 import Home from '@Pages/home'
 import SignIn from '@Pages/signin'
 import SignUp from '@Pages/signup'
-import { refreshToken, getPosts, getSuggestions, TYPES, getNotify } from '@Actions'
+import {
+  refreshToken,
+  getPosts,
+  getSuggestions,
+  TYPES,
+  getNotify
+} from '@Actions'
 
 export const Main = () => {
   const { auth } = useSelector(state => state)
@@ -15,7 +21,7 @@ export const Main = () => {
   useEffect(() => {
     dispatch(refreshToken())
     const socket = io()
-    
+
     dispatch({
       type: TYPES.SOCKET,
       payload: socket
@@ -33,37 +39,18 @@ export const Main = () => {
 
   return (
     <Switch>
-      <Route
-        component={auth.token ? Home : SignIn}
-        path={'/'}
-        exact 
-      />
-      <PublicRoute 
-        restricted={true} 
-        component={SignIn}
-        path='/signin'
-        exact
-      />
-      <PublicRoute 
-        restricted={true} 
-        component={SignIn}
-        path='/login'
-        exact
-      />
-      <PublicRoute 
-        restricted={true} 
+      <Route component={auth.token ? Home : SignIn} path={'/'} exact />
+      <PublicRoute restricted={true} component={SignIn} path="/signin" exact />
+      <PublicRoute restricted={true} component={SignIn} path="/login" exact />
+      <PublicRoute
+        restricted={true}
         component={SignUp}
-        path='/register'
+        path="/register"
         exact
       />
-      <PublicRoute 
-        restricted={true} 
-        component={SignUp}
-        path='/signup'
-        exact
-      />
-      <Route component={PageRender} path='/:page' exact />
-      <Route component={PageRender} path='/:page/:id' exact />
+      <PublicRoute restricted={true} component={SignUp} path="/signup" exact />
+      <Route component={PageRender} path="/:page" exact />
+      <Route component={PageRender} path="/:page/:id" exact />
     </Switch>
   )
 }

@@ -16,21 +16,29 @@ export const Notification = () => {
       {alert.loading && <Loading />}
       {profile.loading && <Loading />}
 
-      {alert.success && <Toast 
-        success={alert.success}
-        handleClose={() => dispatch({
-          type: ALERT,
-          payload: {}
-        })}
-      />}
+      {alert.success && (
+        <Toast
+          success={alert.success}
+          handleClose={() =>
+            dispatch({
+              type: ALERT,
+              payload: {}
+            })
+          }
+        />
+      )}
 
-      {alert.error && <Toast
-        error={alert.error}
-        handleClose={() => dispatch({
-          type: ALERT,
-          payload: {}
-        })}
-      />}
+      {alert.error && (
+        <Toast
+          error={alert.error}
+          handleClose={() =>
+            dispatch({
+              type: ALERT,
+              payload: {}
+            })
+          }
+        />
+      )}
     </div>
   )
 }

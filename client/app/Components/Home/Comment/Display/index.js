@@ -64,97 +64,81 @@ export const DisplayComment = ({ children, comment, post, commentId }) => {
     if (onReply) {
       return setOnReply(false)
     }
-    setOnReply({...comment, commentId})
+    setOnReply({ ...comment, commentId })
   }
 
   return (
     <div className="comment-display">
-      <Link
-        to={`/profile/${comment.user._id}`} className="comment-info"
-      >
+      <Link to={`/profile/${comment.user._id}`} className="comment-info">
         <Avatar src={comment.user.avatar} size="common" />
       </Link>
       <div className="comment-content">
         <span className="row">
           <pre>
-            <Link
-              to={`/profile/${comment.user._id}`}
-            >
+            <Link to={`/profile/${comment.user._id}`}>
               {comment.user.fullname}
-            </Link> {
+            </Link>{' '}
+            {
               <Fragment>
-                {
-                  comment.tag && comment.tag._id !== comment.user._id &&
-                  <Link style={{ color: '#0984e3' }} to={`/profile/${comment.tag._id}`}>{comment.tag.fullname}</Link>
-                } {
-                  content.length < 100 ? content :
-                    readMore ? content + ' ' : content.slice(0, 100) + '...'
-                } {
-                  content.length > 100 &&
+                {comment.tag && comment.tag._id !== comment.user._id && (
+                  <Link
+                    style={{ color: '#0984e3' }}
+                    to={`/profile/${comment.tag._id}`}
+                  >
+                    {comment.tag.fullname}
+                  </Link>
+                )}{' '}
+                {content.length < 100
+                  ? content
+                  : readMore
+                    ? content + ' '
+                    : content.slice(0, 100) + '...'}{' '}
+                {content.length > 100 && (
                   <span
                     className="read-more"
                     onClick={() => setReadMore(!readMore)}
                   >
                     {readMore ? 'less' : 'more'}
                   </span>
-                }
+                )}
               </Fragment>
             }
           </pre>
           <span className="menu-icons">
-            {
-              (post.user._id === auth.user._id ||
-                comment.user._id === auth.user._id) &&
-              <MenuOption
-                post={post}
-                comment={comment}
-                setOnEdit={setOnEdit}
-              />
-            }
-            <LikeButton
-              size="1em"
-              isLike={isLike}
-              handleLike={handleLike}
-            />
+            {(post.user._id === auth.user._id ||
+              comment.user._id === auth.user._id) && (
+              <MenuOption post={post} comment={comment} setOnEdit={setOnEdit} />
+            )}
+            <LikeButton size="1em" isLike={isLike} handleLike={handleLike} />
           </span>
         </span>
         <span className="group">
-          {
-            comment._id ?
-              <Fragment>
-                <span>
-                  {moment(comment.createdAt).fromNow(true)}
-                </span>
-                {
-                  comment.likes.length > 0 ?
-                    <button>
-                      {comment.likes.length} like{comment.likes.length > 1 && 's'}
-                    </button> : null
-                }
-                <button onClick={handleReply}>
-                  { onReply ? 'cancel' : 'reply' }
+          {comment._id ? (
+            <Fragment>
+              <span>{moment(comment.createdAt).fromNow(true)}</span>
+              {comment.likes.length > 0 ? (
+                <button>
+                  {comment.likes.length} like{comment.likes.length > 1 && 's'}
                 </button>
-              </Fragment> :
-              <span className="comment-loading">
-                loading...
-              </span>
-          }
+              ) : null}
+              <button onClick={handleReply}>
+                {onReply ? 'cancel' : 'reply'}
+              </button>
+            </Fragment>
+          ) : (
+            <span className="comment-loading">loading...</span>
+          )}
         </span>
-        {
-          onReply &&
-          <InputComment
-            post={post}
-            onReply={onReply}
-            setOnReply={setOnReply}
-          >
+        {onReply && (
+          <InputComment post={post} onReply={onReply} setOnReply={setOnReply}>
             <Link to={`profile/${auth.user._id}`}>
               <Avatar src={auth.user.avatar} size="common" />
             </Link>
           </InputComment>
-        }
+        )}
         {children}
       </div>
-      {onEdit &&
+      {onEdit && (
         <EditComment
           onEdit={onEdit}
           comment={comment}
@@ -163,7 +147,7 @@ export const DisplayComment = ({ children, comment, post, commentId }) => {
           cancelUpdate={cancelUpdate}
           handleUpdate={handleUpdate}
         />
-      }
+      )}
     </div>
   )
 }

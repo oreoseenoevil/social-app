@@ -16,7 +16,7 @@ export const Status = () => {
       <Avatar src={auth.user.avatar} size="big" />
       <button
         className={`status-btn ${dark && 'dark'}`}
-        onClick={() => dispatch({type: STATUS, payload: true})}
+        onClick={() => dispatch({ type: STATUS, payload: true })}
       >
         @{auth.user.username}, What&apos;s on your mind?
       </button>

@@ -4,20 +4,8 @@ import { Posts, SavedPosts } from '@Components/Profile'
 export const Navigation = ({ tab, id, auth, profile, dispatch }) => {
   switch (tab) {
     case 'posts':
-      return (
-        <Posts
-          id={id}
-          auth={auth}
-          profile={profile}
-          dispatch={dispatch}
-        />
-      )
+      return <Posts id={id} auth={auth} profile={profile} dispatch={dispatch} />
     case 'saved':
-      return (
-        <SavedPosts
-          auth={auth}
-          dispatch={dispatch}
-        />
-      )
+      return <SavedPosts auth={auth} dispatch={dispatch} />
   }
 }

@@ -3,8 +3,13 @@ import '@Components/UserCard/index.scss'
 import { Avatar } from '@Components/Avatar'
 import { Link } from 'react-router-dom'
 
-export const UserCard = ({ user, children, handleClose, setShowFollowers, setShowFollowing }) => {
-
+export const UserCard = ({
+  user,
+  children,
+  handleClose,
+  setShowFollowers,
+  setShowFollowing
+}) => {
   const handleCloseAll = () => {
     if (handleClose) handleClose()
     if (setShowFollowing) setShowFollowing(false)
@@ -23,11 +28,8 @@ export const UserCard = ({ user, children, handleClose, setShowFollowers, setSho
           <span className="block-username">@{user.username}</span>
           <span className="block-fullname">{user.fullname}</span>
         </div>
-        
       </Link>
-      {
-        children && <div className="block-child">{children}</div>
-      }
+      {children && <div className="block-child">{children}</div>}
     </div>
   )
 }

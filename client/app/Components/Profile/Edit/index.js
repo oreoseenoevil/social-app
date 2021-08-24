@@ -1,7 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RiCameraLine } from 'react-icons/ri'
-import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, makeStyles, OutlinedInput, Radio, RadioGroup } from '@material-ui/core'
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputLabel,
+  makeStyles,
+  OutlinedInput,
+  Radio,
+  RadioGroup
+} from '@material-ui/core'
 import clsx from 'clsx'
 import '@Components/Profile/Edit/index.scss'
 import { checkImage } from '@Helpers'
@@ -17,14 +27,14 @@ const initialState = {
   gender: ''
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
     padding: '1em'
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   multilineColor: {
     color: 'inherit'
@@ -83,14 +93,14 @@ export const Edit = ({ setOnEdit }) => {
     setUserData(prevState => {
       return {
         ...prevState,
-        [name]:value
+        [name]: value
       }
     })
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    dispatch(updateProfileUser({userData, avatar, auth}))
+    dispatch(updateProfileUser({ userData, avatar, auth }))
   }
 
   return (
@@ -118,12 +128,17 @@ export const Edit = ({ setOnEdit }) => {
           </span>
         </div>
         <div className="form-group">
-          <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+          <FormControl
+            className={clsx(classes.textField, classes.margin)}
+            variant="outlined"
+          >
             <InputLabel
               classes={{
                 root: classes.multilineColor
               }}
-            >Fullname</InputLabel>
+            >
+              Fullname
+            </InputLabel>
             <OutlinedInput
               id="standard-adornment-fullname"
               type="text"
@@ -138,12 +153,17 @@ export const Edit = ({ setOnEdit }) => {
               }}
             />
           </FormControl>
-          <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+          <FormControl
+            className={clsx(classes.textField, classes.margin)}
+            variant="outlined"
+          >
             <InputLabel
               classes={{
                 root: classes.multilineColor
               }}
-            >Mobile</InputLabel>
+            >
+              Mobile
+            </InputLabel>
             <OutlinedInput
               id="standard-adornment-mobile"
               type="text"
@@ -157,12 +177,17 @@ export const Edit = ({ setOnEdit }) => {
               }}
             />
           </FormControl>
-          <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+          <FormControl
+            className={clsx(classes.textField, classes.margin)}
+            variant="outlined"
+          >
             <InputLabel
               classes={{
                 root: classes.multilineColor
               }}
-            >Address</InputLabel>
+            >
+              Address
+            </InputLabel>
             <OutlinedInput
               id="standard-adornment-address"
               type="text"
@@ -176,12 +201,17 @@ export const Edit = ({ setOnEdit }) => {
               }}
             />
           </FormControl>
-          <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+          <FormControl
+            className={clsx(classes.textField, classes.margin)}
+            variant="outlined"
+          >
             <InputLabel
               classes={{
                 root: classes.multilineColor
               }}
-            >Website</InputLabel>
+            >
+              Website
+            </InputLabel>
             <OutlinedInput
               id="standard-adornment-mobile"
               type="text"
@@ -195,12 +225,17 @@ export const Edit = ({ setOnEdit }) => {
               }}
             />
           </FormControl>
-          <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+          <FormControl
+            className={clsx(classes.textField, classes.margin)}
+            variant="outlined"
+          >
             <InputLabel
               classes={{
                 root: classes.multilineColor
               }}
-            >Story</InputLabel>
+            >
+              Story
+            </InputLabel>
             <OutlinedInput
               id="standard-adornment-mobile"
               type="text"
@@ -216,21 +251,38 @@ export const Edit = ({ setOnEdit }) => {
               }}
             />
           </FormControl>
-          <FormControl component="fieldset" className={clsx(classes.textField, classes.margin)}>
-            <FormLabel 
-              component="legend"
-              className={classes.multilineColor}
-            >Gender</FormLabel>
-            <RadioGroup 
+          <FormControl
+            component="fieldset"
+            className={clsx(classes.textField, classes.margin)}
+          >
+            <FormLabel component="legend" className={classes.multilineColor}>
+              Gender
+            </FormLabel>
+            <RadioGroup
               aria-label="gender"
               name="gender"
               value={gender}
               onChange={handleChange}
               className={classes.group}
             >
-              <FormControlLabel name="gender" value="male" control={<Radio className={classes.notchedOutline} />} label="Male" />
-              <FormControlLabel name="gender" value="female" control={<Radio />} label="Female" />
-              <FormControlLabel name="gender" value="other" control={<Radio />} label="Other" />
+              <FormControlLabel
+                name="gender"
+                value="male"
+                control={<Radio className={classes.notchedOutline} />}
+                label="Male"
+              />
+              <FormControlLabel
+                name="gender"
+                value="female"
+                control={<Radio />}
+                label="Female"
+              />
+              <FormControlLabel
+                name="gender"
+                value="other"
+                control={<Radio />}
+                label="Other"
+              />
             </RadioGroup>
           </FormControl>
         </div>

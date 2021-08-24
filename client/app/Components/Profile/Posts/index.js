@@ -25,8 +25,11 @@ export const Posts = ({ auth, id, dispatch, profile }) => {
 
   const handleLoadMore = async () => {
     setLoad(true)
-    const res = await getDataAPI(`/user/posts/${id}?limit=${page * 9}`, auth.token)
-    const newData = { ...res.data, page: page + 1, _id: id}
+    const res = await getDataAPI(
+      `/user/posts/${id}?limit=${page * 9}`,
+      auth.token
+    )
+    const newData = { ...res.data, page: page + 1, _id: id }
     dispatch({
       type: UPDATE_POST,
       payload: newData
@@ -38,13 +41,9 @@ export const Posts = ({ auth, id, dispatch, profile }) => {
     <div className="user-posts">
       <PostThumb posts={posts} result={result} />
 
-      {
-        result < 9 * (page - 1) ? null
-          : <LoadMore
-            active={load}
-            handleLoadMore={handleLoadMore}
-          />
-      }
+      {result < 9 * (page - 1) ? null : (
+        <LoadMore active={load} handleLoadMore={handleLoadMore} />
+      )}
     </div>
   )
 }

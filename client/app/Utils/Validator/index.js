@@ -1,4 +1,4 @@
-export const validate = ({password, confirmPassword}) => {
+export const validate = ({ password, confirmPassword }) => {
   const error = {}
 
   if (password !== confirmPassword) {
@@ -7,6 +7,6 @@ export const validate = ({password, confirmPassword}) => {
 
   return {
     message: error,
-    errorLength: Object.keys(error).length
+    errorLength: Object.keys(error).length,
   }
 }

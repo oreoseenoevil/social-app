@@ -5,15 +5,15 @@ import '@Components/Avatar/index.scss'
 export const Avatar = ({ src, size, active }) => {
   return (
     <Fragment>
-      {
-        src === '' ?
-          <FaRegUserCircle
-            className={`avatar ${size} ${active && 'active'}`}
-          /> :
-          <img src={src} alt="avatar"
-            className={`avatar ${size} ${active && 'active'}`}
-          />
-      }
+      {src === '' ? (
+        <FaRegUserCircle className={`avatar ${size} ${active && 'active'}`} />
+      ) : (
+        <img
+          src={src}
+          alt="avatar"
+          className={`avatar ${size} ${active && 'active'}`}
+        />
+      )}
     </Fragment>
   )
 }

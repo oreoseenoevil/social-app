@@ -7,7 +7,7 @@ export const login = data => async dispatch => {
   try {
     dispatch({
       type: ALERT,
-      payload: {loading: true}
+      payload: { loading: true }
     })
     const res = await postDataAPI('/auth/login', data)
 

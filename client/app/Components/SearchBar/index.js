@@ -44,14 +44,14 @@ export const SearchBar = ({ dark }) => {
   function useOutsideAlerter(ref) {
     useEffect(() => {
       /**
-         * Alert if clicked on outside of element
-         */
+       * Alert if clicked on outside of element
+       */
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           handleClose()
         }
       }
-  
+
       // Bind the event listener
       document.addEventListener('mousedown', handleClickOutside)
       return () => {
@@ -62,15 +62,8 @@ export const SearchBar = ({ dark }) => {
   }
 
   return (
-    <div
-      className="search-bar"
-      onClick={textAreaFocus}
-      ref={wrapperRef}
-    >
-      <form
-        className="search-form"
-        onSubmit={e => e.preventDefault()}
-      >
+    <div className="search-bar" onClick={textAreaFocus} ref={wrapperRef}>
+      <form className="search-form" onSubmit={e => e.preventDefault()}>
         <input
           type="text"
           ref={userInputRef}
@@ -78,39 +71,35 @@ export const SearchBar = ({ dark }) => {
           value={search}
           placeholder="Search"
           className={search && 'searching'}
-          onChange={e => setSearch(e.target.value.toLowerCase().replace(/ /g, ''))}
+          onChange={e =>
+            setSearch(e.target.value.toLowerCase().replace(/ /g, ''))
+          }
         />
-        {
-          !search ? <div className="search-icon">
+        {!search ? (
+          <div className="search-icon">
             <RiSearchLine className={`icon-search ${dark && 'dark'}`} />
-          </div> :
-            <div  
-              className="close-search"
-              onClick={handleClose}
-            >
-              <RiCloseLine
-                className={`close ${dark && 'dark'}`} 
-              />
-            </div>
-        }
+          </div>
+        ) : (
+          <div className="close-search" onClick={handleClose}>
+            <RiCloseLine className={`close ${dark && 'dark'}`} />
+          </div>
+        )}
       </form>
-      {
-        search && <div className={`users-result ${dark && 'dark'}`}>
-          {users.length === 0 ?
-            <span className="no-result">No results found.</span> :
+      {search && (
+        <div className={`users-result ${dark && 'dark'}`}>
+          {users.length === 0 ? (
+            <span className="no-result">No results found.</span>
+          ) : (
             <div className={`result-container ${dark && 'dark'}`}>
               {users.map(user => (
                 <div className="results" key={user._id}>
-                  <UserCard
-                    user={user}
-                    handleClose={handleClose}
-                  />
+                  <UserCard user={user} handleClose={handleClose} />
                 </div>
               ))}
             </div>
-          }
+          )}
         </div>
-      }
+      )}
     </div>
   )
 }

@@ -33,9 +33,9 @@ export const CardFooter = ({ post }) => {
     setIsLike(!isLike)
     setLoadLike(true)
     if (isLike) {
-      await dispatch(unlikePost({post, auth, socket}))
+      await dispatch(unlikePost({ post, auth, socket }))
     } else {
-      await dispatch(likePost({post, auth, socket}))
+      await dispatch(likePost({ post, auth, socket }))
     }
     setLoadLike(false)
   }
@@ -53,9 +53,9 @@ export const CardFooter = ({ post }) => {
     setSaved(!saved)
     setLoadSaved(true)
     if (saved) {
-      await dispatch(unsavedPost({post, auth}))
+      await dispatch(unsavedPost({ post, auth }))
     } else {
-      await dispatch(savedPost({post, auth}))
+      await dispatch(savedPost({ post, auth }))
     }
     setLoadSaved(false)
   }
@@ -66,17 +66,12 @@ export const CardFooter = ({ post }) => {
     <div className="card-footer">
       <div className="card-icons">
         <div className="group">
-          <LikeButton
+          <LikeButton size="1.5em" isLike={isLike} handleLike={handleLike} />
+          <FaRegComment
             size="1.5em"
-            isLike={isLike}
-            handleLike={handleLike}
-          />
-          <FaRegComment size="1.5em"
             onClick={() => history.push(`/post/${post._id}`)}
           />
-          <FiSend size="1.5em"
-            onClick={() => setIsShare(!isShare)}
-          />
+          <FiSend size="1.5em" onClick={() => setIsShare(!isShare)} />
         </div>
         <IconBookmark
           size="1.5em"

@@ -12,7 +12,10 @@ export const PageNotFound = () => {
     <div className="notfound">
       <h1>404 | Page not Found</h1>
       <p>This is not the page you&apos;re looking for.</p>
-      <button className={`back ${dark && 'dark'}`} onClick={() => history.push('/')}>
+      <button
+        className={`back ${dark && 'dark'}`}
+        onClick={() => history.push('/')}
+      >
         <VscArrowLeft className="arrow-left" />
         Go Back
       </button>

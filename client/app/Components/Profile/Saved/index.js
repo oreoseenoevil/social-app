@@ -42,13 +42,9 @@ export const SavedPosts = ({ auth, dispatch }) => {
   return (
     <div className="saved-posts">
       <PostThumb posts={posts} result={result} />
-      {
-        result < 9 * (page - 1) ? null
-          : <LoadMore
-            active={load}
-            handleLoadMore={handleLoadMore}
-          />
-      }
+      {result < 9 * (page - 1) ? null : (
+        <LoadMore active={load} handleLoadMore={handleLoadMore} />
+      )}
     </div>
   )
 }

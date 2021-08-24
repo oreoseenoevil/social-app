@@ -10,17 +10,16 @@ export const CardBody = ({ post }) => {
     <div className="card-body">
       <div className="card-body-content">
         <span className="content-text">
-          {
-            post.content.length < 60 ?
-              post.content : 
-              readMore ? post.content + ' ' : post.content.slice(0, 60) + '... '
-          }
-          {
-            post.content.length > 60 &&
-              <span className="readMore" onClick={() => setReadMore(!readMore)}>
-                {readMore ? 'less' : 'more'}
-              </span>
-          }
+          {post.content.length < 60
+            ? post.content
+            : readMore
+              ? post.content + ' '
+              : post.content.slice(0, 60) + '... '}
+          {post.content.length > 60 && (
+            <span className="readMore" onClick={() => setReadMore(!readMore)}>
+              {readMore ? 'less' : 'more'}
+            </span>
+          )}
         </span>
         <Carousel
           autoPlay={false}
@@ -36,12 +35,8 @@ export const CardBody = ({ post }) => {
             }
           }}
         >
-          {
-            post.images.length > 0 &&
-              post.images.map((image, i) => (
-                <Slider image={image} key={i} />
-              ))
-          }
+          {post.images.length > 0 &&
+            post.images.map((image, i) => <Slider image={image} key={i} />)}
         </Carousel>
       </div>
     </div>

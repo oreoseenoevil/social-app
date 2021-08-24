@@ -22,12 +22,13 @@ export const LayoutContextProvider = ({ children }) => {
     }
   }
 
-
   return (
-    <LayoutContext.Provider value={{
-      dark,
-      toggleDarkMode,
-    }}>
+    <LayoutContext.Provider
+      value={{
+        dark,
+        toggleDarkMode
+      }}
+    >
       {children}
     </LayoutContext.Provider>
   )

@@ -1,15 +1,18 @@
-# MERN Boilerplate
+# MERN Social App
 
 ## Description
 
-A MERN Starter Boilerplate:
+A MERN Social App:
 Features: Frontend and Backend Authentication (jwt)
+User Features:
+
+- Update Profile, Create, edit and delete post, like and unlike, comment, follow and unfollow user, photo snapshot and video, message, received notification and saved post.
 
 ## Clone this Repo
 
 ```
-$ git clone https://github.com/oreoseenoevil/mern-boilerplate.git
-$ cd mern-boilerplate
+$ git clone https://github.com/oreoseenoevil/social-app.git
+$ cd social-app
 ```
 
 ## Setup

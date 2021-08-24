@@ -8,7 +8,7 @@ import { VscLoading } from 'react-icons/vsc'
 import { BsGrid3X3 } from 'react-icons/bs'
 import { getProfileUsers } from '@Actions'
 
-export default function Profile () {
+export default function Profile() {
   const [tab, setTab] = useState('posts')
   const { id } = useParams()
   const { auth, profile } = useSelector(state => state)
@@ -16,42 +16,40 @@ export default function Profile () {
 
   useEffect(() => {
     if (profile.ids.every(item => item !== id)) {
-      dispatch(getProfileUsers({id, auth}))
+      dispatch(getProfileUsers({ id, auth }))
     }
   }, [id, auth, dispatch, profile.ids])
 
   return (
     <div className="user-profile">
-      <Info
-        id={id}
-        auth={auth}
-        profile={profile}
-        dispatch={dispatch}
-      />
-      {
-        auth.user._id === id &&
+      <Info id={id} auth={auth} profile={profile} dispatch={dispatch} />
+      {auth.user._id === id && (
         <div className="profile-tab">
           <span
             className={`button-tab ${tab === 'posts' && 'active'}`}
             onClick={() => setTab('posts')}
-          ><BsGrid3X3 /> Posts</span>
+          >
+            <BsGrid3X3 /> Posts
+          </span>
           <span
             className={`button-tab ${tab === 'saved' && 'active'}`}
             onClick={() => setTab('saved')}
-          ><FaRegBookmark /> Saved</span>
+          >
+            <FaRegBookmark /> Saved
+          </span>
         </div>
-      }
-      {
-        profile.loading ?
-          <VscLoading size="3em" className="loading-profile" /> :
-          <Navigation
-            tab={tab}
-            id={id}
-            auth={auth}
-            profile={profile}
-            dispatch={dispatch}
-          />
-      }
+      )}
+      {profile.loading ? (
+        <VscLoading size="3em" className="loading-profile" />
+      ) : (
+        <Navigation
+          tab={tab}
+          id={id}
+          auth={auth}
+          profile={profile}
+          dispatch={dispatch}
+        />
+      )}
     </div>
   )
 }

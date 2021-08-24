@@ -22,7 +22,10 @@ export default function Discover() {
 
   const handleLoadMore = async () => {
     setLoad(true)
-    const res = await getDataAPI(`/posts/discover?num=${discover.page * 9}`, auth.token)
+    const res = await getDataAPI(
+      `/posts/discover?num=${discover.page * 9}`,
+      auth.token
+    )
     dispatch({
       type: UPDATE_POST,
       payload: res.data
@@ -35,18 +38,11 @@ export default function Discover() {
   return (
     <div className="discover">
       <div className="discover-display">
-        <PostThumb
-          posts={discover.posts}
-          result={discover.result}
-        />
+        <PostThumb posts={discover.posts} result={discover.result} />
       </div>
-      {
-        result < 9 * (page - 1) ? null
-          : <LoadMore
-            active={load || loading}
-            handleLoadMore={handleLoadMore}
-          />
-      }
+      {result < 9 * (page - 1) ? null : (
+        <LoadMore active={load || loading} handleLoadMore={handleLoadMore} />
+      )}
     </div>
   )
 }

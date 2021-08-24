@@ -29,19 +29,13 @@ export const Posts = () => {
 
   return (
     <div className="posts-container">
-      {
-        posts.posts.map(post => (
-          <PostCard key={post._id} post={post} dark={dark} />
-        ))
-      }
+      {posts.posts.map(post => (
+        <PostCard key={post._id} post={post} dark={dark} />
+      ))}
 
-      {
-        result < 9 * (page - 1) ? null
-          : <LoadMore
-            active={load}
-            handleLoadMore={handleLoadMore}
-          />
-      }
+      {result < 9 * (page - 1) ? null : (
+        <LoadMore active={load} handleLoadMore={handleLoadMore} />
+      )}
     </div>
   )
 }

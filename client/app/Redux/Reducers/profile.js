@@ -1,7 +1,8 @@
 import { PROFILE_TYPES } from '@Actions'
 import { EditData } from '@Helpers'
 
-const { LOADING, GET_USER, FOLLOW, UNFOLLOW, GET_ID, GET_POSTS, UPDATE_POST } = PROFILE_TYPES
+const { LOADING, GET_USER, FOLLOW, UNFOLLOW, GET_ID, GET_POSTS, UPDATE_POST } =
+  PROFILE_TYPES
 
 const initialState = {
   ids: [],

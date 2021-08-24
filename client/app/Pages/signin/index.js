@@ -14,7 +14,13 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
 import { login } from '@Actions'
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@material-ui/core'
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput
+} from '@material-ui/core'
 
 import { useSelector } from 'react-redux'
 
@@ -33,7 +39,7 @@ function Copyright() {
   )
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
@@ -54,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit'
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   multilineColor: {
     color: 'inherit'
@@ -83,7 +89,6 @@ export default function SignIn() {
     password: ''
   }
 
-  
   const { alert, auth } = useSelector(state => state)
 
   useEffect(() => {
@@ -99,7 +104,7 @@ export default function SignIn() {
 
   const handleChange = e => {
     const { name, value } = e.target
-    setUserData({ ...userData, [name]:value })
+    setUserData({ ...userData, [name]: value })
   }
 
   const handleSubmit = async e => {
@@ -117,12 +122,17 @@ export default function SignIn() {
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit}>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
                   root: classes.multilineColor
                 }}
-              >Email</InputLabel>
+              >
+                Email
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-email"
                 type="email"
@@ -137,12 +147,17 @@ export default function SignIn() {
                 }}
               />
             </FormControl>
-            <FormControl className={clsx(classes.textField, classes.margin)} variant="outlined">
+            <FormControl
+              className={clsx(classes.textField, classes.margin)}
+              variant="outlined"
+            >
               <InputLabel
                 classes={{
                   root: classes.multilineColor
                 }}
-              >Password</InputLabel>
+              >
+                Password
+              </InputLabel>
               <OutlinedInput
                 id="standard-adornment-password"
                 type={showPassword ? 'text' : 'password'}
@@ -161,7 +176,15 @@ export default function SignIn() {
                       onClick={() => setShowPassword(!showPassword)}
                       edge="end"
                     >
-                      {showPassword ? <MdVisibility className={`visible ${dark && 'active'}`} /> : <MdVisibilityOff className={`visible ${dark && 'active'}`} />}
+                      {showPassword ? (
+                        <MdVisibility
+                          className={`visible ${dark && 'active'}`}
+                        />
+                      ) : (
+                        <MdVisibilityOff
+                          className={`visible ${dark && 'active'}`}
+                        />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -189,7 +212,8 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link variant="body2"
+                <Link
+                  variant="body2"
                   className={classes.button}
                   onClick={() => history.push('/signup')}
                 >
